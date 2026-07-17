@@ -4,13 +4,14 @@ global.setClip('收妹妹处兄妹')
 // 2. 关闭快手
 shizuku.cmd(['shell', 'am', 'force-stop', 'com.smile.gifmaker'])
 
-// 3. 打开快手
+// 3. 打开快手并等待
 shizuku.cmd(['shell', 'monkey', '-p', 'com.smile.gifmaker', '-c', 'android.intent.category.LAUNCHER', '1'])
+global.sleep(1000)
 
 // 4. 点击右上角搜索图标
 ai.点击('右上角搜索图标')
 
-// 5. 粘贴「收妹妹处兄妹」
+// 5. 粘贴「收妹妹处兄妹」并等待
 shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_PASTE'])
 
 // 6. 复制「我想收一些妹妹，你能当我妹妹吗」
@@ -57,12 +58,14 @@ for (; ;) {
                 // 6. 若发送失败，则关闭快手并退出程序（**整个流程结束**）
                 if (ai.检查('发送失败')) { shizuku.cmd(['shell', 'am', 'force-stop', 'com.smile.gifmaker']); global.exit() }
 
-                // 7. 按返回键（退出私信界面，回到用户主页）
+                // 7. 按返回键（退出私信界面，回到用户主页）并等待
                 shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
+                global.sleep(1000)
             }
 
-            // 2. 按返回键（退出用户主页，回到评论区）
+            // 2. 按返回键（退出用户主页，回到评论区）并等待
             shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
+            global.sleep(1000)
         })
 
         // 2. 若翻到底了，则**打破**`翻评论区`，否则向下滚动
@@ -79,13 +82,16 @@ for (; ;) {
                 let y2 = Math.floor(h * 0.4);
 
                 shizuku.cmd(['shell', `input swipe ${x} ${y1} ${x} ${y2} 1000`]);
+                global.sleep(1000)
             }
         }
     }
 
-    // 7. 按返回键（退出评论区，回到作品页）
+    // 7. 按返回键（退出评论区，回到作品页）并等待
     shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
+    global.sleep(1000)
 
-    // 8. 按返回键（退出作品页，回到搜索结果页）
+    // 8. 按返回键（退出作品页，回到搜索结果页）并等待
     shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
+    global.sleep(1000)
 }
