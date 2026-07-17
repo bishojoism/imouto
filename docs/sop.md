@@ -34,11 +34,17 @@
                                 4. 复制「我想收一些妹妹，你能当我妹妹吗」
                                 5. [粘贴](#paste)
                                 6. [点击右下角发送图标](#click-right-bottom-send-icon)
-                                7. 按返回键
+                                7. 若[发送失败](#send-failed)
+                                    - 则：
+                                        1. **打破**[翻评论区](#browse-comments)
+                                        2. **打破**[寻找作品](#kuai-search)
+                                8. 按返回键
                         4. 按返回键
-                        5. 若[翻到底了](#turned-to-the-bottom)
-                            - 则：**打破**[翻评论区](#browse-comments)
-                            - 否则：[向下滚动](#scroll-down)
+                        5. 若[寻找作品](#kuai-search)**继续**：
+                            - 则：
+                                1. 若[翻到底了](#turned-to-the-bottom)
+                                    - 则：**打破**[翻评论区](#browse-comments)
+                                    - 否则：[向下滚动](#scroll-down)
                     4. 按返回键
                 3. 按返回键
             4. 按返回键
