@@ -11,7 +11,7 @@ global.sleep(1000)
 // 4. 点击右上角搜索图标
 ai.点击('右上角搜索图标')
 
-// 5. 粘贴「收妹妹处兄妹」并等待
+// 5. 粘贴「收妹妹处兄妹」
 shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_PASTE'])
 
 // 6. 复制「我想收一些妹妹，你能当我妹妹吗」
@@ -68,7 +68,7 @@ for (; ;) {
             global.sleep(1000)
         })
 
-        // 2. 若翻到底了，则**打破**`翻评论区`，否则向下滚动
+        // 2. 若翻到底了，则**打破**`翻评论区`，否则向下滚动并等待
         if (ai.检查('翻到底了')) { break } else {
             let sizeStr = shizuku.cmd(['shell', 'wm', 'size']);
 
