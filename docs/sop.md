@@ -15,7 +15,7 @@
         1. [输入收妹妹搜索词](#type-require-sister-search-query)
             1. 复制「收妹妹处兄妹」
             2. [粘贴](#paste)
-        2. 不断[寻找作品](#kuai-search)
+        2. **不断**[寻找作品](#kuai-search)
             1. [点击右上角搜索按钮](#click-top-right-search-button)
             2. [点击第一条作品](#click-first-work)
             3. [在快手作品页](#at-kuai-work-page)
@@ -23,7 +23,7 @@
                 2. [在快手评论区](#at-kuai-comments)
                     1. [点击评论条数标签](#click-comments-length-label)
                     2. [点击按时间排序按钮](#click-sort-by-time-button)
-                    3. 不断[翻评论区](#browse-comments)
+                    3. **不断**[翻评论区](#browse-comments)
                         1. [等待评论区加载](#wait-comments-load)
                         <!-- TODO -->
                     4. 按返回键
@@ -93,7 +93,7 @@ function clickTopRightSearchIcon() {
 ### 在快手搜索页 {#at-kuai-search-page}
 
 1. 执行[输入收妹妹搜索词](#type-require-sister-search-query)工序
-2. 不断执行[寻找作品](#kuai-search)工序
+2. **不断**执行[寻找作品](#kuai-search)工序
 3. 按返回键
 
 ```js
@@ -191,7 +191,7 @@ function clickRightOpenCommentsIcon() {
 
 1. 执行[点击评论条数标签](#click-comments-length-label)工序
 2. 执行[点击按时间排序按钮](#click-sort-by-time-button)工序
-3. 不断执行[翻评论区](#browse-comments)工序
+3. **不断**执行[翻评论区](#browse-comments)工序
 4. 按返回键
 
 ```js
