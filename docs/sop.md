@@ -160,7 +160,7 @@ function clickRightOpenCommentsIcon() {
 }
 ```
 
-> 执行自[在快手作品页](#at-kuai-work-page)工序
+> - 执行自[在快手作品页](#at-kuai-work-page)工序
 
 ### 在快手评论区 {#at-kuai-comments}
 
@@ -172,7 +172,7 @@ function atKuaiComments(): SHOULD_BREAK | SHOULD_CONTINUE {
 }
 ```
 
-> 执行自[在快手作品页](#at-kuai-work-page)工序
+> - 执行自[在快手作品页](#at-kuai-work-page)工序
 
 ## 操作
 
