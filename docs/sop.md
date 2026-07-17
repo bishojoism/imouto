@@ -4,260 +4,126 @@
 
 装好快手的安卓手机一台。
 
-## 总览
+## 开始
 
-1. [关闭快手](#close-kuai)
-2. [打开快手](#open-kuai)
-3. [点击右上角搜索图标](#click-top-right-search-icon)
-4. 输入「收妹妹处兄妹」
-5. **不断**：
-    1. [点击右上角搜索按钮](#click-top-right-search-button)（再次点击即可起到刷新搜索结果的作用）
-    2. [点击第一条作品](#click-first-work)（离开搜索结果页，进入作品页）
-    3. [点击右侧打开评论区图标](#click-right-open-comments-icon)（离开作品页，进入评论区）
-    4. [点击评论条数标签](#click-comments-length-label)
-    5. [点击按时间排序按钮](#click-sort-by-time-button)
-    6. **不断**`翻评论区`：
-        1. [等待评论区加载](#wait-comments-load)
-        2. [点击评论要哥哥的用户头像](#click-comment-require-brother-user-avatar)（离开评论区，进入用户主页）
-        3. 若[还没关注](#not-follow)：
-            1. [点击关注按钮](#click-follow-button)
-            2. [点击发私信按钮](#click-send-message-button)（离开用户主页，进入私信界面）
-            3. [点击下方消息输入框](#click-bottom-message-input-aria)
-            4. 输入「我想收一些妹妹，你能当我妹妹吗」
-            5. [点击右下角发送图标](#click-right-bottom-send-icon)
-            6. 若[发送失败](#send-failed)：[关闭快手](#close-kuai)并[退出程序](#exit-program)（**整个流程结束**）
+1. 复制「收妹妹处兄妹」
+2. 关闭快手
+3. 打开快手
+4. 点击右上角搜索图标
+5. 粘贴「收妹妹处兄妹」
+6. 复制「我想收一些妹妹，你能当我妹妹吗」
+7. **不断**
+    1. 点击右上角搜索按钮（再次点击即可起到刷新搜索结果的作用）
+    2. 点击第一条作品（离开搜索结果页，进入作品页）
+    3. 点击右侧评论区图标（离开作品页，进入评论区）
+    4. 点击评论条数标签
+    5. 点击按最新排序按钮
+    6. **不断**`翻评论区`
+        1. 点击评论要哥哥的用户头像（离开评论区，进入用户主页）
+        2. 若还没关注
+            1. 点击关注按钮
+            2. 点击发私信按钮（离开用户主页，进入私信界面）
+            3. 点击底部消息输入框
+            4. 粘贴「我想收一些妹妹，你能当我妹妹吗」
+            5. 点击右下角发送图标
+            6. 若发送失败，则关闭快手并退出程序（**整个流程结束**）
             7. 按返回键（退出私信界面，回到用户主页）
-        4. 按返回键（退出用户主页，回到评论区）
-        5. 若[翻到底了](#turned-to-the-bottom)，则**打破**`翻评论区`，否则[向下滚动](#scroll-down)
+        3. 按返回键（退出用户主页，回到评论区）
+        4. 若翻到底了，则**打破**`翻评论区`，否则向下滚动
     7. 按返回键（退出评论区，回到作品页）
     8. 按返回键（退出作品页，回到搜索结果页）
 
-## 开始
-
-1. 执行[拿到手机](#reboot-kuai)工序
-2. 执行[在快手首页](#at-kuai-home-page)工序
-3. 按返回键
-4. 按返回键
-
 ```js
-rebootKuai()
-atKuaiHomePage()
-back()
-back()
-```
+// 1. 复制「收妹妹处兄妹」
+global.setClip('收妹妹处兄妹')
 
-## 工序
+// 2. 关闭快手
+shizuku.cmd(['shell', 'am', 'force-stop', 'com.smile.gifmaker'])
 
-### 拿到手机 {#reboot-kuai}
+// 3. 打开快手
+shizuku.cmd(['shell', 'monkey', '-p', 'com.smile.gifmaker', '-c', 'android.intent.category.LAUNCHER', '1'])
 
-1. 执行[关闭快手](#close-kuai)操作
-2. 执行[打开快手](#open-kuai)操作
+// 4. 点击右上角搜索图标
+clickTopRightSearchIcon()
 
-```js
-function rebootKuai() {
-    shizuku.cmd(closeKuai)
-    shizuku.cmd(openKuai)
-}
-```
+// 5. 粘贴「收妹妹处兄妹」
+shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_PASTE'])
 
-> - 执行自[开始](#开始)工序
+// 6. 复制「我想收一些妹妹，你能当我妹妹吗」
+global.setClip('我想收一些妹妹，你能当我妹妹吗')
 
-### 在快手首页 {#at-kuai-home-page}
+// 7. **不断**
+for (;;) {
+    // 1. 点击右上角搜索按钮（再次点击即可起到刷新搜索结果的作用）
+    clickRightTopSearchButton()
 
-1. 执行[点击右上角搜索图标](#click-top-right-search-icon)工序
-2. 执行[在快手搜索页](#at-kuai-search-page)工序
-3. 按返回键
-
-```js
-function atKuaiHomePage() {
-    clickTopRightSearchIcon()
-    atKuaiSearchPage()
-    back()
-}
-```
-
-> - 执行自[开始](#开始)工序
-
-### 点击右上角搜索图标 {#click-top-right-search-icon}
-
-```js
-function clickTopRightSearchIcon() {
-    // TODO
-}
-```
-
-> - 执行自[在快手首页](#at-kuai-home-page)工序
-
-### 在快手搜索页 {#at-kuai-search-page}
-
-1. 执行[输入收妹妹搜索词](#type-require-sister-search-query)工序
-2. **不断**执行[寻找作品](#kuai-search)工序
-3. 按返回键
-
-```js
-let KUAI_SEARCH_SHOULD_CONTINUE = true
-function atKuaiSearchPage() {
-    typeRequireSisterSearchQuery()
-    do {
-        kuaiSearch()
-    } while (KUAI_SEARCH_SHOULD_CONTINUE)
-    back()
-}
-```
-
-> - 执行自[在快手首页](#at-kuai-home-page)工序
-
-### 输入收妹妹搜索词 {#type-require-sister-search-query}
-
-1. 复制「收妹妹处兄妹」
-2. 执行[粘贴](#paste)操作
-
-```js
-function typeRequireSisterSearchQuery() {
-    setClip('收妹妹处兄妹')
-    paste()
-}
-```
-
-> - 执行自[在快手搜索页](#at-kuai-search-page)工序
-
-### 寻找作品 {#kuai-search}
-
-1. 执行[点击右上角搜索按钮](#click-top-right-search-button)工序
-2. 执行[点击第一条作品](#click-first-work)工序
-3. 执行[在快手作品页](#at-kuai-work-page)工序
-4. 按返回键
-
-```js
-function kuaiSearch()  {
-    clickTopRightClickButton()
+    // 2. 点击第一条作品（离开搜索结果页，进入作品页）
     clickFirstWork()
-    atKuaiWorkPage()
-    back()
-}
-```
 
-> - 执行自[在快手搜索页](#at-kuai-search-page)工序
+    // 3. 点击右侧评论区图标（离开作品页，进入评论区）
+    clickRightCommentsIcon()
 
-### 点击右上角搜索按钮 {#click-top-right-search-button}
-
-```js
-function clickTopRightSearchButton() {
-    // TODO
-}
-```
-
-> - 执行自[寻找作品](#kuai-search)工序
-
-### 点击第一条作品 {#click-first-work}
-
-```js
-function clickFirstWork() {
-    // TODO
-}
-```
-
-> - 执行自[寻找作品](#kuai-search)工序
-
-### 在快手作品页 {#at-kuai-work-page}
-
-1. 执行[点击右侧打开评论区图标](#click-right-open-comments-icon)工序
-2. 执行[在快手评论区](#at-kuai-comments)工序
-3. 按返回键
-
-```js
-function atKuaiWorkPage() {
-    clickRightOpenCommentsIcon()
-    atKuaiComments()
-    back()
-}
-```
-
-> - 执行自[寻找作品](#kuai-search)工序
-
-### 点击右侧打开评论区图标 {#click-right-open-comments-icon}
-
-```js
-function clickRightOpenCommentsIcon() {
-    // TODO
-}
-```
-
-> - 执行自[在快手作品页](#at-kuai-work-page)工序
-
-### 在快手评论区 {#at-kuai-comments}
-
-1. 执行[点击评论条数标签](#click-comments-length-label)工序
-2. 执行[点击按时间排序按钮](#click-sort-by-time-button)工序
-3. **不断**执行[翻评论区](#browse-comments)工序
-4. 按返回键
-
-```js
-let BROWSE_COMMENTS_SHOULD_CONTINUE = true
-function atKuaiComments() {
+    // 4. 点击评论条数标签
     clickCommentsLengthLabel()
-    clickSortByTimeButton()
-    do {
-        browseComments()
-    } while (BROWSE_COMMENTS_SHOULD_CONTINUE)
-    back()
+
+    // 5. 点击按最新排序按钮
+    clickSortByNewestButton()
+
+    // 6. **不断**`翻评论区`
+    for (;;) {
+        // 1. 点击评论要哥哥的用户头像（离开评论区，进入用户主页）
+        clickCommentRequireBrotherUserAvatar()
+
+        // 2. 若还没关注
+        if (checkNotFollow()) {
+            // 1. 点击关注按钮
+            clickFollowButton()
+
+            // 2. 点击发私信按钮（离开用户主页，进入私信界面）
+            clickSendMessageButton()
+
+            // 3. 点击底部消息输入框
+            clickBottomMessageInputArea()
+
+            // 4. 粘贴「我想收一些妹妹，你能当我妹妹吗」
+            shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_PASTE'])
+
+            // 5. 点击右下角发送图标
+            clickRightBottomSendIcon()
+
+            // 6. 若发送失败，则关闭快手并退出程序（**整个流程结束**）
+            if (checkSendFailed()) {shizuku.cmd(['shell', 'am', 'force-stop', 'com.smile.gifmaker']); global.exit()}
+
+            // 7. 按返回键（退出私信界面，回到用户主页）
+            shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
+        }
+        
+        // 3. 按返回键（退出用户主页，回到评论区）
+        shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
+
+        // 4. 若翻到底了，则**打破**`翻评论区`，否则向下滚动
+        if (checkAtBottom()) {break} else {
+            let sizeStr = shizuku.cmd(['shell', 'wm', 'size']);
+
+            let match = sizeStr.match(/(\d+)x(\d+)/);
+            if (match) {
+                let w = parseInt(match[1]);
+                let h = parseInt(match[2]);
+
+                let x = Math.floor(w / 2);
+                let y1 = Math.floor(h * 0.6);
+                let y2 = Math.floor(h * 0.4);
+
+                shizuku.cmd(['shell', `input swipe ${x} ${y1} ${x} ${y2} 1000`]);
+            }
+        }
+    }
+    
+    // 7. 按返回键（退出评论区，回到作品页）
+    shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
+
+    // 8. 按返回键（退出作品页，回到搜索结果页）
+    shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
 }
+
 ```
-
-> - 执行自[在快手作品页](#at-kuai-work-page)工序
-
-### 点击评论条数标签 {#click-comments-length-label}
-
-```js
-function clickCommentsLengthLabel() {
-    // TODO
-}
-```
-
-> - 执行自[在快手评论区](#at-kuai-comments)工序
-
-### 点击按时间排序按钮 {#click-sort-by-time-button}
-
-```js
-function clickSortByTimeButton() {
-    // TODO
-}
-```
-
-> - 执行自[在快手评论区](#at-kuai-comments)工序
-
-### 翻评论区 {#browse-comments}
-
-```js
-function browseComments() {
-    // TODO
-}
-```
-
-> - 执行自[在快手评论区](#at-kuai-comments)工序
-
-## 操作
-
-### 关闭快手 {#close-kuai}
-
-```js
-const closeKuai = ['shell', 'am', 'force-stop', 'com.smile.gifmaker']
-```
-
-> - 执行自[拿到手机](#reboot-kuai)工序
-
-### 打开快手 {#open-kuai}
-
-```js
-const openKuai = ['shell', 'monkey', '-p', 'com.smile.gifmaker', '-c', 'android.intent.category.LAUNCHER', '1']
-```
-
-> - 执行自[拿到手机](#reboot-kuai)工序
-
-### 粘贴 {#paste}
-
-```js
-const paste = ['shell', 'input', 'keyevent', 'KEYCODE_PASTE']
-```
-
-> - 执行自[输入收妹妹搜索词](#type-require-sister-search-query)工序
