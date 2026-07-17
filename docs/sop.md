@@ -4,6 +4,35 @@
 
 装好快手的安卓手机一台。
 
+## 总览
+
+1. [重启快手](#reboot-kuai)
+    1. [关闭快手](#close-kuai)
+    2. [打开快手](#open-kuai)
+2. [在快手首页](#at-kuai-home-page)
+    1. [点击右上角搜索图标](#click-top-right-search-icon)
+    2. [在快手搜索页](#at-kuai-search-page)
+        1. [输入收妹妹搜索词](#type-require-sister-search-query)
+            1. 复制「收妹妹处兄妹」
+            2. [粘贴](#paste)
+        2. 不断[快手搜索](#kuai-search)直到[应该结束](#should-break)
+            1. [点击右上角搜索按钮](#click-top-right-search-button)
+            2. [点击第一条作品](#click-first-work)
+            3. [在快手作品页](#at-kuai-work-page)决定[快手搜索]究竟[应该结束](#should-break)还是[应该继续](#should-continue)
+                1. [点击右侧打开评论区图标](#click-right-open-comments-icon)
+                2. [在快手评论区](#at-kuai-comments)决定[快手搜索]究竟[应该结束](#should-break)还是[应该继续](#should-continue)
+                    1. [点击评论条数标签](#click-comments-length-label)
+                    2. [点击按时间排序按钮](#click-sort-by-time-button)
+                    3. 不断[翻评论区]直到[应该结束](#should-break)
+                        1. [等待评论区加载](#wait-comments-load)
+                        <!-- TODO -->
+                3. 按返回键
+            4. 按返回键
+        3. 按返回键
+    3. 按返回键
+3. 按返回键
+4. 按返回键
+
 ## 开始
 
 1. 执行[重启快手](#reboot-kuai)工序
