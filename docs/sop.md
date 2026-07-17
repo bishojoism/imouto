@@ -164,7 +164,7 @@ function clickFirstWork() {
 ### 在快手作品页 {#at-kuai-work-page}
 
 1. 执行[点击右侧打开评论区图标](#click-right-open-comments-icon)工序
-2. 执行[在快手评论区](#at-kuai-comments)工序，将得到的答复临时记录为`x`
+2. 执行[在快手评论区](#at-kuai-comments)工序
 3. 按返回键
 
 ```js
