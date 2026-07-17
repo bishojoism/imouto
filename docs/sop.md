@@ -9,7 +9,7 @@
 1. [关闭快手](#close-kuai)
 2. [打开快手](#open-kuai)
 3. [点击右上角搜索图标](#click-top-right-search-icon)
-4. 复制「收妹妹处兄妹」并粘贴
+4. 输入「收妹妹处兄妹」
 5. **不断**：
     1. [点击右上角搜索按钮](#click-top-right-search-button)（再次点击即可起到刷新搜索结果的作用）
     2. [点击第一条作品](#click-first-work)（离开搜索结果页，进入作品页）
@@ -23,7 +23,7 @@
             1. [点击关注按钮](#click-follow-button)
             2. [点击发私信按钮](#click-send-message-button)（离开用户主页，进入私信界面）
             3. [点击下方消息输入框](#click-bottom-message-input-aria)
-            4. 复制「我想收一些妹妹，你能当我妹妹吗」并粘贴
+            4. 输入「我想收一些妹妹，你能当我妹妹吗」
             5. [点击右下角发送图标](#click-right-bottom-send-icon)
             6. 若[发送失败](#send-failed)：[关闭快手](#close-kuai)并[退出程序](#exit-program)（**整个流程结束**）
             7. 按返回键（退出私信界面，回到用户主页）
