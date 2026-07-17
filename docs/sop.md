@@ -25,7 +25,20 @@
                     2. [点击按时间排序按钮](#click-sort-by-time-button)
                     3. **不断**[翻评论区](#browse-comments)
                         1. [等待评论区加载](#wait-comments-load)
-                        <!-- TODO -->
+                        2. [点击评论要哥哥的用户头像](#click-comment-require-brother-user-avatar)
+                        3. 若[还没关注](#not-follow)
+                            - 则：
+                                1. [点击关注按钮](#click-follow-button)
+                                2. [点击发私信按钮](#click-send-message-button)
+                                3. [点击下方输入消息框](#click-bottom-input-message-field)
+                                4. 复制「我想收一些妹妹，你能当我妹妹吗」
+                                5. [粘贴](#paste)
+                                6. [点击右下角发送图标](#click-right-bottom-send-icon)
+                                7. 按返回键
+                        4. 按返回键
+                        5. 若[翻到底了](#turned-to-the-bottom)
+                            - 则：**打破**[翻评论区](#browse-comments)
+                            - 否则：[向下滚动](#scroll-down)
                     4. 按返回键
                 3. 按返回键
             4. 按返回键
