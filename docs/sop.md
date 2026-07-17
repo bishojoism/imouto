@@ -118,8 +118,30 @@ function clickFirstWork() {
 
 ### 在快手作品页 {#at-kuai-work-page}
 
+1. 执行[点击右侧打开评论区图标](#click-right-open-comments-icon)工序
+2. 执行[在快手评论区](#at-kuai-comments)工序
+3. 按返回键
+
 ```js
 function atKuaiWorkPage() {
+    clickRightOpenCommentsIcon()
+    atKuaiComments()
+    back()
+}
+```
+
+### 点击右侧打开评论区图标 {#click-right-open-comments-icon}
+
+```js
+function clickRightOpenCommentsIcon() {
+    // TODO
+}
+```
+
+### 在快手评论区 {#at-kuai-comments}
+
+```js
+function atKuaiComments() {
 
 }
 ```
@@ -149,11 +171,11 @@ const paste = ['shell', 'input', 'keyevent', 'KEYCODE_PASTE']
 ### 应该结束 {#should-break}
 
 ```js
-const SHOULD_BREAK: '应该结束' = '应该结束'
+const SHOULD_BREAK: 'SHOULD_BREAK' = 'SHOULD_BREAK'
 ```
 
 ### 应该继续 {#should-continue}
 
 ```js
-const SHOULD_CONTINUE: '应该继续' = '应该继续'
+const SHOULD_CONTINUE: 'SHOULD_CONTINUE' = 'SHOULD_CONTINUE'
 ```
