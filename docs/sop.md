@@ -6,7 +6,7 @@
 
 ## 总览
 
-1. [重启快手](#reboot-kuai)
+1. [拿到手机](#reboot-kuai)
     1. [关闭快手](#close-kuai)
     2. [打开快手](#open-kuai)
 2. [在快手首页](#at-kuai-home-page)
@@ -36,7 +36,7 @@
 
 ## 开始
 
-1. 执行[重启快手](#reboot-kuai)工序
+1. 执行[拿到手机](#reboot-kuai)工序
 2. 执行[在快手首页](#at-kuai-home-page)工序
 3. 按返回键
 4. 按返回键
@@ -50,7 +50,7 @@ back()
 
 ## 工序
 
-### 重启快手 {#reboot-kuai}
+### 拿到手机 {#reboot-kuai}
 
 1. 执行[关闭快手](#close-kuai)操作
 2. 执行[打开快手](#open-kuai)操作
@@ -246,7 +246,7 @@ function browseComments() {
 const closeKuai = ['shell', 'am', 'force-stop', 'com.smile.gifmaker']
 ```
 
-> - 执行自[重启快手](#reboot-kuai)工序
+> - 执行自[拿到手机](#reboot-kuai)工序
 
 ### 打开快手 {#open-kuai}
 
@@ -254,7 +254,7 @@ const closeKuai = ['shell', 'am', 'force-stop', 'com.smile.gifmaker']
 const openKuai = ['shell', 'monkey', '-p', 'com.smile.gifmaker', '-c', 'android.intent.category.LAUNCHER', '1']
 ```
 
-> - 执行自[重启快手](#reboot-kuai)工序
+> - 执行自[拿到手机](#reboot-kuai)工序
 
 ### 粘贴 {#paste}
 
