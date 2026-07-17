@@ -15,15 +15,15 @@
         1. [输入收妹妹搜索词](#type-require-sister-search-query)
             1. 复制「收妹妹处兄妹」
             2. [粘贴](#paste)
-        2. 不断[快手搜索](#kuai-search)直到[应该结束](#should-break)
+        2. 不断[寻找作品](#kuai-search)
             1. [点击右上角搜索按钮](#click-top-right-search-button)
             2. [点击第一条作品](#click-first-work)
-            3. [在快手作品页](#at-kuai-work-page)决定[快手搜索]究竟[应该结束](#should-break)还是[应该继续](#should-continue)
+            3. [在快手作品页](#at-kuai-work-page)
                 1. [点击右侧打开评论区图标](#click-right-open-comments-icon)
-                2. [在快手评论区](#at-kuai-comments)决定[快手搜索]究竟[应该结束](#should-break)还是[应该继续](#should-continue)
+                2. [在快手评论区](#at-kuai-comments)
                     1. [点击评论条数标签](#click-comments-length-label)
                     2. [点击按时间排序按钮](#click-sort-by-time-button)
-                    3. 不断[翻评论区]直到[应该结束](#should-break)
+                    3. 不断[翻评论区](#brose-comments)
                         1. [等待评论区加载](#wait-comments-load)
                         <!-- TODO -->
                 3. 按返回键
@@ -92,7 +92,7 @@ function clickTopRightSearchIcon() {
 ### 在快手搜索页 {#at-kuai-search-page}
 
 1. 执行[输入收妹妹搜索词](#type-require-sister-search-query)工序
-2. 循环执行[快手搜索](#kuai-search)工序直到得到[应该结束](#should-break)答复
+2. 循环执行[寻找作品](#kuai-search)工序直到得到[应该结束](#should-break)答复
 3. 按返回键
 
 ```js
@@ -119,7 +119,7 @@ function typeRequireSisterSearchQuery() {
 
 > - 执行自[在快手搜索页](#at-kuai-search-page)工序
 
-### 快手搜索 {#kuai-search}
+### 寻找作品 {#kuai-search}
 
 - 答复：为[应该结束](#should-break)或[应该继续](#should-continue)
 
@@ -149,7 +149,7 @@ function clickTopRightSearchButton() {
 }
 ```
 
-> - 执行自[快手搜索](#kuai-search)工序
+> - 执行自[寻找作品](#kuai-search)工序
 
 ### 点击第一条作品 {#click-first-work}
 
@@ -159,7 +159,7 @@ function clickFirstWork() {
 }
 ```
 
-> - 执行自[快手搜索](#kuai-search)工序
+> - 执行自[寻找作品](#kuai-search)工序
 
 ### 在快手作品页 {#at-kuai-work-page}
 
@@ -179,7 +179,7 @@ function atKuaiWorkPage(): SHOULD_BREAK | SHOULD_CONTINUE {
 }
 ```
 
-> - 执行自[快手搜索](#kuai-search)工序
+> - 执行自[寻找作品](#kuai-search)工序
 
 ### 点击右侧打开评论区图标 {#click-right-open-comments-icon}
 
@@ -211,7 +211,7 @@ function atKuaiComments(): SHOULD_BREAK | SHOULD_CONTINUE {
 const closeKuai = ['shell', 'am', 'force-stop', 'com.smile.gifmaker']
 ```
 
-> - [重启快手](#reboot-kuai)
+> - 执行自[重启快手](#reboot-kuai)工序
 
 ### 打开快手 {#open-kuai}
 
@@ -219,13 +219,15 @@ const closeKuai = ['shell', 'am', 'force-stop', 'com.smile.gifmaker']
 const openKuai = ['shell', 'monkey', '-p', 'com.smile.gifmaker', '-c', 'android.intent.category.LAUNCHER', '1']
 ```
 
-> - [重启快手](#reboot-kuai)
+> - 执行自[重启快手](#reboot-kuai)工序
 
 ### 粘贴 {#paste}
 
 ```js
 const paste = ['shell', 'input', 'keyevent', 'KEYCODE_PASTE']
 ```
+
+> - 执行自[输入收妹妹搜索词](#type-require-sister-search-query)工序
 
 ## 答复
 
@@ -236,8 +238,8 @@ const SHOULD_BREAK: 'SHOULD_BREAK' = 'SHOULD_BREAK'
 ```
 
 > - 提交至[在快手搜索页](#at-kuai-search-page)工序
-> - 提交至与提交自[快手搜索](#kuai-search)工序
-> - 提交至与提交自[在快手搜索页](#at-kuai-search-page)工序
+> - 提交至与提交自[寻找作品](#kuai-search)工序
+> - 提交至与提交自[在快手作品页](#at-kuai-work-page)工序
 > - 提交至与提交自[在快手评论区](#at-kuai-comments)工序
 
 ### 应该继续 {#should-continue}
@@ -247,6 +249,6 @@ const SHOULD_CONTINUE: 'SHOULD_CONTINUE' = 'SHOULD_CONTINUE'
 ```
 
 > - 提交至[在快手搜索页](#at-kuai-search-page)工序
-> - 提交至与提交自[快手搜索](#kuai-search)工序
-> - 提交至与提交自[在快手搜索页](#at-kuai-search-page)工序
+> - 提交至与提交自[寻找作品](#kuai-search)工序
+> - 提交至与提交自[在快手作品页](#at-kuai-work-page)工序
 > - 提交至与提交自[在快手评论区](#at-kuai-comments)工序
