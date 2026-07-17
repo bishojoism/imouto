@@ -23,9 +23,10 @@
                 2. [在快手评论区](#at-kuai-comments)
                     1. [点击评论条数标签](#click-comments-length-label)
                     2. [点击按时间排序按钮](#click-sort-by-time-button)
-                    3. 不断[翻评论区](#brose-comments)
+                    3. 不断[翻评论区](#browse-comments)
                         1. [等待评论区加载](#wait-comments-load)
                         <!-- TODO -->
+                    4. 按返回键
                 3. 按返回键
             4. 按返回键
         3. 按返回键
@@ -92,13 +93,16 @@ function clickTopRightSearchIcon() {
 ### 在快手搜索页 {#at-kuai-search-page}
 
 1. 执行[输入收妹妹搜索词](#type-require-sister-search-query)工序
-2. 循环执行[寻找作品](#kuai-search)工序直到得到[应该结束](#should-break)答复
+2. 不断执行[寻找作品](#kuai-search)工序
 3. 按返回键
 
 ```js
+let KUAI_SEARCH_SHOULD_CONTINUE = true
 function atKuaiSearchPage() {
     typeRequireSisterSearchQuery()
-    for (;;) if (kuaiSearch() === SHOULD_BREAK) break
+    do {
+        kuaiSearch()
+    } while (KUAI_SEARCH_SHOULD_CONTINUE)
     back()
 }
 ```
@@ -121,21 +125,17 @@ function typeRequireSisterSearchQuery() {
 
 ### 寻找作品 {#kuai-search}
 
-- 答复：为[应该结束](#should-break)或[应该继续](#should-continue)
-
 1. 执行[点击右上角搜索按钮](#click-top-right-search-button)工序
 2. 执行[点击第一条作品](#click-first-work)工序
-3. 执行[在快手作品页](#at-kuai-work-page)工序，将得到的答复临时记录为`x`
+3. 执行[在快手作品页](#at-kuai-work-page)工序
 4. 按返回键
-5. 提交临时记录`x`作为答复
 
 ```js
-function kuaiSearch(): SHOULD_BREAK | SHOULD_CONTINUE  {
+function kuaiSearch()  {
     clickTopRightClickButton()
     clickFirstWork()
-    const x = atKuaiWorkPage()
+    atKuaiWorkPage()
     back()
-    return x
 }
 ```
 
@@ -163,19 +163,15 @@ function clickFirstWork() {
 
 ### 在快手作品页 {#at-kuai-work-page}
 
-- 答复：为[应该结束](#should-break)或[应该继续](#should-continue)
-
 1. 执行[点击右侧打开评论区图标](#click-right-open-comments-icon)工序
 2. 执行[在快手评论区](#at-kuai-comments)工序，将得到的答复临时记录为`x`
 3. 按返回键
-4. 提交临时记录`x`作为答复
 
 ```js
-function atKuaiWorkPage(): SHOULD_BREAK | SHOULD_CONTINUE {
+function atKuaiWorkPage() {
     clickRightOpenCommentsIcon()
-    const x = atKuaiComments()
+    atKuaiComments()
     back()
-    return x
 }
 ```
 
@@ -193,15 +189,54 @@ function clickRightOpenCommentsIcon() {
 
 ### 在快手评论区 {#at-kuai-comments}
 
-- 答复：为[应该结束](#should-break)或[应该继续](#should-continue)
+1. 执行[点击评论条数标签](#click-comments-length-label)工序
+2. 执行[点击按时间排序按钮](#click-sort-by-time-button)工序
+3. 不断执行[翻评论区](#browse-comments)工序
+4. 按返回键
 
 ```js
-function atKuaiComments(): SHOULD_BREAK | SHOULD_CONTINUE {
-    // TODO
+let BROWSE_COMMENTS_SHOULD_CONTINUE = true
+function atKuaiComments() {
+    clickCommentsLengthLabel()
+    clickSortByTimeButton()
+    do {
+        browseComments()
+    } while (BROWSE_COMMENTS_SHOULD_CONTINUE)
+    back()
 }
 ```
 
 > - 执行自[在快手作品页](#at-kuai-work-page)工序
+
+### 点击评论条数标签 {#click-comments-length-label}
+
+```js
+function clickCommentsLengthLabel() {
+    // TODO
+}
+```
+
+> - 执行自[在快手评论区](#at-kuai-comments)工序
+
+### 点击按时间排序按钮 {#click-sort-by-time-button}
+
+```js
+function clickSortByTimeButton() {
+    // TODO
+}
+```
+
+> - 执行自[在快手评论区](#at-kuai-comments)工序
+
+### 翻评论区 {#browse-comments}
+
+```js
+function browseComments() {
+    // TODO
+}
+```
+
+> - 执行自[在快手评论区](#at-kuai-comments)工序
 
 ## 操作
 
@@ -228,27 +263,3 @@ const paste = ['shell', 'input', 'keyevent', 'KEYCODE_PASTE']
 ```
 
 > - 执行自[输入收妹妹搜索词](#type-require-sister-search-query)工序
-
-## 答复
-
-### 应该结束 {#should-break}
-
-```js
-const SHOULD_BREAK: 'SHOULD_BREAK' = 'SHOULD_BREAK'
-```
-
-> - 提交至[在快手搜索页](#at-kuai-search-page)工序
-> - 提交至与提交自[寻找作品](#kuai-search)工序
-> - 提交至与提交自[在快手作品页](#at-kuai-work-page)工序
-> - 提交至与提交自[在快手评论区](#at-kuai-comments)工序
-
-### 应该继续 {#should-continue}
-
-```js
-const SHOULD_CONTINUE: 'SHOULD_CONTINUE' = 'SHOULD_CONTINUE'
-```
-
-> - 提交至[在快手搜索页](#at-kuai-search-page)工序
-> - 提交至与提交自[寻找作品](#kuai-search)工序
-> - 提交至与提交自[在快手作品页](#at-kuai-work-page)工序
-> - 提交至与提交自[在快手评论区](#at-kuai-comments)工序
