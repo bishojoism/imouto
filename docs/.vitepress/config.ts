@@ -26,8 +26,8 @@ export default defineConfig({
                         link: '/操作员/应用',
                     },
                     {
-                        text: '对话',
-                        link: '/操作员/对话',
+                        text: '手机',
+                        link: '/操作员/手机',
                     },
                 ]
             },
