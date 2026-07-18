@@ -213,7 +213,7 @@ function 有则点击(what, which) {
             const [x, y] = point
             shizuku.cmd(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
             global.sleep(1000)
-            return
+            return true
         } catch (e) {
             err = e
         }
