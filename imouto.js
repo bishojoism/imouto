@@ -225,7 +225,7 @@ function _有判断(xml, 手动, 操作) {
     </vertical>, 手动, () => {
         global.shizuku(`am force-stop ${JSON.stringify(包名)}`)
         global.shizuku(`monkey -p ${JSON.stringify(包名)} -c android.intent.category.LAUNCHER 1`)
-        global.sleep(800)
+        global.sleep(1000)
     })
 }
 
@@ -240,7 +240,7 @@ function _有判断(xml, 手动, 操作) {
         </horizontal>
     </vertical>, 手动, () => {
         global.shizuku(`input keyevent KEYCODE_BACK`)
-        global.sleep(800)
+        global.sleep(1000)
     })
 }
 
@@ -255,7 +255,7 @@ function _有判断(xml, 手动, 操作) {
         </horizontal>
     </vertical>, 手动, () => {
         global.shizuku(`input swipe ${device.width * 0.5} ${device.height * 0.75} ${device.width * 0.5} ${device.height * 0.25} 2000`)
-        global.sleep(800)
+        global.sleep(1000)
     })
 }
 
@@ -300,7 +300,7 @@ function _有判断(xml, 手动, 操作) {
         })
         log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
-        global.sleep(800)
+        global.sleep(1000)
     })
 }
 
@@ -340,7 +340,7 @@ function _有判断(xml, 手动, 操作) {
         const [x, y] = 返回
         log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
-        global.sleep(800)
+        global.sleep(1000)
         return true
     })
 }
@@ -372,7 +372,7 @@ function _有判断(xml, 手动, 操作) {
         })
         log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
-        global.sleep(800)
+        global.sleep(1000)
 
         const path = files.path('截图.png')
         global.shizuku(`screencap -p ${JSON.stringify(path)}`)
@@ -411,10 +411,10 @@ function _有判断(xml, 手动, 操作) {
         })
         log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
-        global.sleep(800)
+        global.sleep(1000)
 
         global.shizuku(`input keyevent KEYCODE_PASTE`)
-        global.sleep(800)
+        global.sleep(1000)
     })
 }
 
