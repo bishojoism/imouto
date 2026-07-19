@@ -84,18 +84,18 @@ function _浮动(w) {
             <vertical>
                 <text id="拖动">✥</text>
                 <text>{`请您：进入「${应用名}」主页。`}</text>
-                <button id="尝试自动操作" text="尝试自动操作" />
+                <button id="自动操作" text="自动操作" />
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
+        w.自动操作.click(() => {
+            w.自动操作.enabled = false
             threads.start(() => {
                 操作()
                 ui.run(() => {
-                    w.尝试自动操作.enabled = true
+                    w.自动操作.enabled = true
                 })
             })
         })
@@ -117,18 +117,18 @@ function _浮动(w) {
             <vertical>
                 <text id="拖动">✥</text>
                 <text>{`请您：返回「${页名}」。`}</text>
-                <button id="尝试自动操作" text="尝试自动操作" />
+                <button id="自动操作" text="自动操作" />
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
+        w.自动操作.click(() => {
+            w.自动操作.enabled = false
             threads.start(() => {
                 操作()
                 ui.run(() => {
-                    w.尝试自动操作.enabled = true
+                    w.自动操作.enabled = true
                 })
             })
         })
@@ -150,18 +150,18 @@ function _浮动(w) {
             <vertical>
                 <text id="拖动">✥</text>
                 <text>{`请您：向下滚动。`}</text>
-                <button id="尝试自动操作" text="尝试自动操作" />
+                <button id="自动操作" text="自动操作" />
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
+        w.自动操作.click(() => {
+            w.自动操作.enabled = false
             threads.start(() => {
                 操作()
                 ui.run(() => {
-                    w.尝试自动操作.enabled = true
+                    w.自动操作.enabled = true
                 })
             })
         })
@@ -230,14 +230,14 @@ function _浮动(w) {
                     <button id="是" text="是" />
                     <button id="否" text="否" />
                 </horizontal>
-                <button id="尝试自动操作" text="尝试自动操作" />
+                <button id="自动操作" text="自动操作" />
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
+        w.自动操作.click(() => {
+            w.自动操作.enabled = false
             threads.start(() => {
                 结果 = 操作()
                 if (结果) {
@@ -248,7 +248,7 @@ function _浮动(w) {
                     w.是.enabled = true
                 }
                 ui.run(() => {
-                    w.尝试自动操作.enabled = true
+                    w.自动操作.enabled = true
                     w.下一步.enabled = true
                 })
             })
@@ -342,18 +342,18 @@ function _浮动(w) {
             <vertical>
                 <text id="拖动">✥</text>
                 <text>{`请您：点击「${元素}」`}。</text>
-                <button id="尝试自动操作" text="尝试自动操作" />
+                <button id="自动操作" text="自动操作" />
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
+        w.自动操作.click(() => {
+            w.自动操作.enabled = false
             threads.start(() => {
                 操作()
                 ui.run(() => {
-                    w.尝试自动操作.enabled = true
+                    w.自动操作.enabled = true
                 })
             })
         })
@@ -446,14 +446,14 @@ function _浮动(w) {
                     <button id="是" text="是" />
                     <button id="否" text="否" />
                 </horizontal>
-                <button id="尝试自动操作" text="尝试自动操作" />
+                <button id="自动操作" text="自动操作" />
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
+        w.自动操作.click(() => {
+            w.自动操作.enabled = false
             threads.start(() => {
                 结果 = 操作()
                 if (结果) {
@@ -464,7 +464,7 @@ function _浮动(w) {
                     w.是.enabled = true
                 }
                 ui.run(() => {
-                    w.尝试自动操作.enabled = true
+                    w.自动操作.enabled = true
                     w.下一步.enabled = true
                 })
             })
@@ -569,14 +569,14 @@ function _浮动(w) {
                     <button id="是" text="是" />
                     <button id="否" text="否" />
                 </horizontal>
-                <button id="尝试自动操作" text="尝试自动操作" />
+                <button id="自动操作" text="自动操作" />
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
+        w.自动操作.click(() => {
+            w.自动操作.enabled = false
             threads.start(() => {
                 结果 = 操作()
                 if (结果) {
@@ -587,7 +587,7 @@ function _浮动(w) {
                     w.是.enabled = true
                 }
                 ui.run(() => {
-                    w.尝试自动操作.enabled = true
+                    w.自动操作.enabled = true
                     w.下一步.enabled = true
                 })
             })
@@ -684,18 +684,18 @@ function _浮动(w) {
             <vertical>
                 <text id="拖动">✥</text>
                 <text>{`请您：点击「${元素}」`}。</text>
-                <button id="尝试自动操作" text="尝试自动操作" />
+                <button id="自动操作" text="自动操作" />
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
+        w.自动操作.click(() => {
+            w.自动操作.enabled = false
             threads.start(() => {
                 操作()
                 ui.run(() => {
-                    w.尝试自动操作.enabled = true
+                    w.自动操作.enabled = true
                 })
             })
         })
