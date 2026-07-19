@@ -4,7 +4,7 @@ const 能力 = {}
     if (手动) {
         const w = floaty.window(
             <vertical>
-                <text id="拖动">拖动</text>
+                <text id="拖动">✥</text>
                 <button id="完成" text="完成" />
             </vertical>
         )
