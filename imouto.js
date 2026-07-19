@@ -183,7 +183,7 @@ function _有判断(xml, 手动, 操作) {
     if (手动) {
         _浮动(floaty.window(
             <vertical>
-                <text id="拖动">✥</text>
+                <text id="拖动" textSize="40sp">✥</text>
                 <horizontal>
                     <button id="下一步" text="完成" />
                     <button id="跳出" text="跳出" />
@@ -198,7 +198,7 @@ function _有判断(xml, 手动, 操作) {
 能力.安装注册登录 = (应用名) => {
     _浮动(floaty.window(
         <vertical>
-            <text id="拖动">✥</text>
+            <text id="拖动" textSize="40sp">✥</text>
             <text>{`请您：安装、注册、登录「${应用名}」。`}</text>
             <horizontal>
                 <button id="下一步" text="下一步" />
@@ -210,7 +210,7 @@ function _有判断(xml, 手动, 操作) {
 
 能力.进入主页 = (手动, 应用名, 包名) => {
     _没判断(<vertical>
-        <text id="拖动">✥</text>
+        <text id="拖动" textSize="40sp">✥</text>
         <text>{`请您：进入「${应用名}」主页。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
@@ -226,7 +226,7 @@ function _有判断(xml, 手动, 操作) {
 
 能力.回到上一页 = (手动, 页名) => {
     _没判断(<vertical>
-        <text id="拖动">✥</text>
+        <text id="拖动" textSize="40sp">✥</text>
         <text>{`请您：返回「${页名}」。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
@@ -241,7 +241,7 @@ function _有判断(xml, 手动, 操作) {
 
 能力.向下滚动 = (手动) => {
     _没判断(<vertical>
-        <text id="拖动">✥</text>
+        <text id="拖动" textSize="40sp">✥</text>
         <text>{`请您：向下滚动。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
@@ -256,7 +256,7 @@ function _有判断(xml, 手动, 操作) {
 
 能力.检查 = (手动, 内容) => {
     return _有判断(<vertical>
-        <text id="拖动">✥</text>
+        <text id="拖动" textSize="40sp">✥</text>
         <text>{`请问：是否「${内容}」？`}</text>
         <horizontal>
             <button id="是" text="是" />
@@ -274,7 +274,7 @@ function _有判断(xml, 手动, 操作) {
 
 能力.点击 = (手动, 元素) => {
     _没判断(<vertical>
-        <text id="拖动">✥</text>
+        <text id="拖动" textSize="40sp">✥</text>
         <text>{`请您：点击「${元素}」。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
@@ -300,7 +300,7 @@ function _有判断(xml, 手动, 操作) {
 
 能力.检查若是则先点击 = (手动, 内容, 元素) => {
     return _有判断(<vertical>
-        <text id="拖动">✥</text>
+        <text id="拖动" textSize="40sp">✥</text>
         <text>{`请问：是否「${内容}」？若是，则请您先：点击「${元素}」`}</text>
         <horizontal>
             <button id="是" text="是" />
@@ -341,7 +341,7 @@ function _有判断(xml, 手动, 操作) {
 
 能力.点击之后看见 = (手动, 元素, 文本) => {
     return _有判断(<vertical>
-        <text id="拖动">✥</text>
+        <text id="拖动" textSize="40sp">✥</text>
         <text>{`请您：点击「${元素}」。然后立刻判断：是否看见「${文本}」这几个字？`}</text>
         <horizontal>
             <button id="是" text="是" />
@@ -382,7 +382,7 @@ function _有判断(xml, 手动, 操作) {
 
 能力.点击之后输入 = (手动, 元素, 文本) => {
     _没判断(<vertical>
-        <text id="拖动">✥</text>
+        <text id="拖动" textSize="40sp">✥</text>
         <text>{`请您：点击「${元素}」。然后输入「${文本}」。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
