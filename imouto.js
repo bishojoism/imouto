@@ -50,7 +50,7 @@ function _浮动(w) {
 
 function _视觉(text, schema) {
     const path = files.path('截图.png')
-    global.shizuku(`sh screencap -p ${JSON.stringify(path)}`)
+    global.shizuku(`screencap -p ${JSON.stringify(path)}`)
     const raw = images.read(path)
     if (!raw) {
         throw new Error('截图失败')
@@ -115,7 +115,7 @@ function _视觉(text, schema) {
 
 function _自动操作(w, 动作) {
     w.自动操作.click(() => {
-        w.自动操作.enabled = false
+        w.root.attr('visibility', 'gone')
         threads.start(() => {
             try {
                 动作()
@@ -123,7 +123,7 @@ function _自动操作(w, 动作) {
                 toastLog(e.message)
             }
             ui.run(() => {
-                w.自动操作.enabled = true
+                w.root.attr('visibility', 'visible')
             })
         })
     })
@@ -187,7 +187,7 @@ function _有判断(xml, 手动, 操作) {
 能力.完成 = (手动) => {
     if (手动) {
         _浮动(floaty.window(
-            <vertical bg="white" padding="24">
+            <vertical id="root" bg="white" padding="24">
                 <text id="拖动" textSize="40">✥</text>
                 <horizontal>
                     <button id="下一步" text="完成" />
@@ -202,7 +202,7 @@ function _有判断(xml, 手动, 操作) {
 
 能力.安装注册登录 = (应用名) => {
     _浮动(floaty.window(
-        <vertical bg="white" padding="24">
+        <vertical id="root" bg="white" padding="24">
             <text id="拖动" textSize="40">✥</text>
             <text>{`请您：安装、注册、登录「${应用名}」。`}</text>
             <horizontal>
@@ -214,7 +214,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.进入主页 = (手动, 应用名, 包名) => {
-    _没判断(<vertical bg="white" padding="24">
+    _没判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：进入「${应用名}」主页。`}</text>
         <button id="自动操作" text="自动操作" />
@@ -223,14 +223,14 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        global.shizuku(`sh am force-stop ${JSON.stringify(包名)}`)
-        global.shizuku(`sh monkey -p ${JSON.stringify(包名)} -c android.intent.category.LAUNCHER 1`)
+        global.shizuku(`am force-stop ${JSON.stringify(包名)}`)
+        global.shizuku(`monkey -p ${JSON.stringify(包名)} -c android.intent.category.LAUNCHER 1`)
         global.sleep(800)
     })
 }
 
 能力.回到上一页 = (手动, 页名) => {
-    _没判断(<vertical bg="white" padding="24">
+    _没判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：返回「${页名}」。`}</text>
         <button id="自动操作" text="自动操作" />
@@ -245,7 +245,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.向下滚动 = (手动) => {
-    _没判断(<vertical bg="white" padding="24">
+    _没判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：向下滚动。`}</text>
         <button id="自动操作" text="自动操作" />
@@ -260,7 +260,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.检查 = (手动, 内容) => {
-    return _有判断(<vertical bg="white" padding="24">
+    return _有判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请问：是否「${内容}」？`}</text>
         <horizontal>
@@ -278,7 +278,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.点击 = (手动, 元素) => {
-    _没判断(<vertical bg="white" padding="24">
+    _没判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。`}</text>
         <button id="自动操作" text="自动操作" />
@@ -304,7 +304,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.检查若是则先点击 = (手动, 内容, 元素) => {
-    return _有判断(<vertical bg="white" padding="24">
+    return _有判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请问：是否「${内容}」？若是，则请您先：点击「${元素}」`}</text>
         <horizontal>
@@ -345,7 +345,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.点击之后看见 = (手动, 元素, 文本) => {
-    return _有判断(<vertical bg="white" padding="24">
+    return _有判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。然后立刻判断：是否看见「${文本}」这几个字？`}</text>
         <horizontal>
@@ -386,7 +386,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.点击之后输入 = (手动, 元素, 文本) => {
-    _没判断(<vertical bg="white" padding="24">
+    _没判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。然后输入「${文本}」。`}</text>
         <button id="自动操作" text="自动操作" />
