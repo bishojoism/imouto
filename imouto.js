@@ -28,13 +28,14 @@ const 能力 = {}
         })
 
         let flag = true
-        while (flag) {
-            global.sleep(80)
-        }
 
         w.完成.click(() => {
             flag = false
         })
+
+        while (flag) {
+            global.sleep(80)
+        }
     }
 
     throw '完成'
@@ -96,11 +97,11 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            ui.尝试自动操作.disabled = true
+            w.尝试自动操作.disabled = true
             threads.run(() => {
                 操作()
                 ui.run(() => {
-                    ui.尝试自动操作.disabled = false
+                    w.尝试自动操作.disabled = false
                 })
             })
         })
@@ -154,11 +155,11 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            ui.尝试自动操作.disabled = true
+            w.尝试自动操作.disabled = true
             threads.run(() => {
                 操作()
                 ui.run(() => {
-                    ui.尝试自动操作.disabled = false
+                    w.尝试自动操作.disabled = false
                 })
             })
         })
@@ -212,11 +213,11 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            ui.尝试自动操作.disabled = true
+            w.尝试自动操作.disabled = true
             threads.run(() => {
                 操作()
                 ui.run(() => {
-                    ui.尝试自动操作.disabled = false
+                    w.尝试自动操作.disabled = false
                 })
             })
         })
@@ -317,7 +318,7 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            ui.尝试自动操作.disabled = true
+            w.尝试自动操作.disabled = true
             threads.run(() => {
                 结果 = 操作()
                 if (结果) {
@@ -328,8 +329,8 @@ const 能力 = {}
                     w.是.disabled = false
                 }
                 ui.run(() => {
-                    ui.尝试自动操作.disabled = false
-                    ui.下一步.disabled = false
+                    w.尝试自动操作.disabled = false
+                    w.下一步.disabled = false
                 })
             })
         })
@@ -338,13 +339,13 @@ const 能力 = {}
             结果 = true
             w.是.disabled = true
             w.否.disabled = false
-            ui.下一步.disabled = false
+            w.下一步.disabled = false
         })
         w.否.click(() => {
             结果 = false
             w.否.disabled = true
             w.是.disabled = false
-            ui.下一步.disabled = false
+            w.下一步.disabled = false
         })
 
         let x = 0, y = 0, wx, wy
@@ -450,11 +451,11 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            ui.尝试自动操作.disabled = true
+            w.尝试自动操作.disabled = true
             threads.run(() => {
                 操作()
                 ui.run(() => {
-                    ui.尝试自动操作.disabled = false
+                    w.尝试自动操作.disabled = false
                 })
             })
         })
@@ -579,7 +580,7 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            ui.尝试自动操作.disabled = true
+            w.尝试自动操作.disabled = true
             threads.run(() => {
                 结果 = 操作()
                 if (结果) {
@@ -590,8 +591,8 @@ const 能力 = {}
                     w.是.disabled = false
                 }
                 ui.run(() => {
-                    ui.尝试自动操作.disabled = false
-                    ui.下一步.disabled = false
+                    w.尝试自动操作.disabled = false
+                    w.下一步.disabled = false
                 })
             })
         })
@@ -600,13 +601,13 @@ const 能力 = {}
             结果 = true
             w.是.disabled = true
             w.否.disabled = false
-            ui.下一步.disabled = false
+            w.下一步.disabled = false
         })
         w.否.click(() => {
             结果 = false
             w.否.disabled = true
             w.是.disabled = false
-            ui.下一步.disabled = false
+            w.下一步.disabled = false
         })
 
         let x = 0, y = 0, wx, wy
@@ -721,7 +722,7 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            ui.尝试自动操作.disabled = true
+            w.尝试自动操作.disabled = true
             threads.run(() => {
                 结果 = 操作()
                 if (结果) {
@@ -732,8 +733,8 @@ const 能力 = {}
                     w.是.disabled = false
                 }
                 ui.run(() => {
-                    ui.尝试自动操作.disabled = false
-                    ui.下一步.disabled = false
+                    w.尝试自动操作.disabled = false
+                    w.下一步.disabled = false
                 })
             })
         })
@@ -742,13 +743,13 @@ const 能力 = {}
             结果 = true
             w.是.disabled = true
             w.否.disabled = false
-            ui.下一步.disabled = false
+            w.下一步.disabled = false
         })
         w.否.click(() => {
             结果 = false
             w.否.disabled = true
             w.是.disabled = false
-            ui.下一步.disabled = false
+            w.下一步.disabled = false
         })
 
         let x = 0, y = 0, wx, wy
@@ -857,11 +858,11 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            ui.尝试自动操作.disabled = true
+            w.尝试自动操作.disabled = true
             threads.run(() => {
                 操作()
                 ui.run(() => {
-                    ui.尝试自动操作.disabled = false
+                    w.尝试自动操作.disabled = false
                 })
             })
         })
