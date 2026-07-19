@@ -254,7 +254,7 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        global.shizuku(`input swipe ${device.width * 0.5} ${device.height * 0.6} ${device.width * 0.5} ${device.height * 0.4, 1000}`)
+        global.shizuku(`input swipe ${device.width * 0.5} ${device.height * 0.6} ${device.width * 0.5} ${device.height * 0.4, 1000} 1600`)
         global.sleep(800)
     })
 }
