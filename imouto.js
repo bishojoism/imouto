@@ -36,6 +36,8 @@ const 能力 = {}
         while (flag) {
             global.sleep(80)
         }
+
+        w.close()
     }
 
     throw new Error('完成')
@@ -77,6 +79,8 @@ const 能力 = {}
     while (flag) {
         global.sleep(80)
     }
+
+    w.close()
 }
 
 能力.进入主页 = (手动, 应用名, 包名) => {
@@ -98,7 +102,7 @@ const 能力 = {}
 
         w.尝试自动操作.click(() => {
             w.尝试自动操作.disabled = true
-            threads.run(() => {
+            threads.start(() => {
                 操作()
                 ui.run(() => {
                     w.尝试自动操作.disabled = false
@@ -133,6 +137,8 @@ const 能力 = {}
         while (flag) {
             global.sleep(80)
         }
+
+        w.close()
     } else {
         操作()
     }
@@ -156,7 +162,7 @@ const 能力 = {}
 
         w.尝试自动操作.click(() => {
             w.尝试自动操作.disabled = true
-            threads.run(() => {
+            threads.start(() => {
                 操作()
                 ui.run(() => {
                     w.尝试自动操作.disabled = false
@@ -191,6 +197,8 @@ const 能力 = {}
         while (flag) {
             global.sleep(80)
         }
+
+        w.close()
     } else {
         操作()
     }
@@ -214,7 +222,7 @@ const 能力 = {}
 
         w.尝试自动操作.click(() => {
             w.尝试自动操作.disabled = true
-            threads.run(() => {
+            threads.start(() => {
                 操作()
                 ui.run(() => {
                     w.尝试自动操作.disabled = false
@@ -249,6 +257,8 @@ const 能力 = {}
         while (flag) {
             global.sleep(80)
         }
+
+        w.close()
     } else {
         操作()
     }
@@ -319,7 +329,7 @@ const 能力 = {}
 
         w.尝试自动操作.click(() => {
             w.尝试自动操作.disabled = true
-            threads.run(() => {
+            threads.start(() => {
                 结果 = 操作()
                 if (结果) {
                     w.是.disabled = true
@@ -375,6 +385,8 @@ const 能力 = {}
         while (flag) {
             global.sleep(80)
         }
+
+        w.close()
     } else {
         结果 = 操作()
     }
@@ -452,7 +464,7 @@ const 能力 = {}
 
         w.尝试自动操作.click(() => {
             w.尝试自动操作.disabled = true
-            threads.run(() => {
+            threads.start(() => {
                 操作()
                 ui.run(() => {
                     w.尝试自动操作.disabled = false
@@ -487,6 +499,8 @@ const 能力 = {}
         while (flag) {
             global.sleep(80)
         }
+
+        w.close()
     } else {
         操作()
     }
@@ -581,7 +595,7 @@ const 能力 = {}
 
         w.尝试自动操作.click(() => {
             w.尝试自动操作.disabled = true
-            threads.run(() => {
+            threads.start(() => {
                 结果 = 操作()
                 if (结果) {
                     w.是.disabled = true
@@ -637,6 +651,8 @@ const 能力 = {}
         while (flag) {
             global.sleep(80)
         }
+
+        w.close()
     } else {
         结果 = 操作()
     }
@@ -723,7 +739,7 @@ const 能力 = {}
 
         w.尝试自动操作.click(() => {
             w.尝试自动操作.disabled = true
-            threads.run(() => {
+            threads.start(() => {
                 结果 = 操作()
                 if (结果) {
                     w.是.disabled = true
@@ -779,6 +795,8 @@ const 能力 = {}
         while (flag) {
             global.sleep(80)
         }
+
+        w.close()
     } else {
         结果 = 操作()
     }
@@ -859,7 +877,7 @@ const 能力 = {}
 
         w.尝试自动操作.click(() => {
             w.尝试自动操作.disabled = true
-            threads.run(() => {
+            threads.start(() => {
                 操作()
                 ui.run(() => {
                     w.尝试自动操作.disabled = false
@@ -894,6 +912,8 @@ const 能力 = {}
         while (flag) {
             global.sleep(80)
         }
+
+        w.close()
     } else {
         操作()
     }
@@ -958,3 +978,5 @@ const 脚本 = {}
         }
     }
 }
+
+脚本.快手收妹妹(true)
