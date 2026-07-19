@@ -308,7 +308,7 @@ function _有判断(xml, 手动, 操作) {
             })
             rx = Math.floor(x * device.width / 1000)
             ry = Math.floor(y * device.height / 1000)
-            记忆.put([rx, ry])
+            记忆.put(key, [rx, ry])
         }
         log(`${rx} ${ry}`)
         global.shizuku(`input tap ${rx} ${rx}`)
@@ -390,7 +390,7 @@ function _有判断(xml, 手动, 操作) {
             })
             rx = Math.floor(x * device.width / 1000)
             ry = Math.floor(y * device.height / 1000)
-            记忆.put([rx, ry])
+            记忆.put(key, [rx, ry])
         }
         log(`${rx} ${ry}`)
         global.shizuku(`input tap ${rx} ${rx}`)
@@ -439,7 +439,7 @@ function _有判断(xml, 手动, 操作) {
             })
             rx = Math.floor(x * device.width / 1000)
             ry = Math.floor(y * device.height / 1000)
-            记忆.put([rx, ry])
+            记忆.put(key, [rx, ry])
         }
         log(`${rx} ${ry}`)
         global.shizuku(`input tap ${rx} ${rx}`)
