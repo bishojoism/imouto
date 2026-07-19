@@ -73,7 +73,7 @@ const 能力 = {}
     w.下一步.click(() => {
         flag = false
     })
-    
+
     while (flag) {
         global.sleep(80)
     }
@@ -125,11 +125,11 @@ const 能力 = {}
         })
 
         let flag = true
-    
+
         w.下一步.click(() => {
             flag = false
         })
-        
+
         while (flag) {
             global.sleep(80)
         }
@@ -183,11 +183,11 @@ const 能力 = {}
         })
 
         let flag = true
-    
+
         w.下一步.click(() => {
             flag = false
         })
-        
+
         while (flag) {
             global.sleep(80)
         }
@@ -241,11 +241,11 @@ const 能力 = {}
         })
 
         let flag = true
-    
+
         w.下一步.click(() => {
             flag = false
         })
-        
+
         while (flag) {
             global.sleep(80)
         }
@@ -371,7 +371,7 @@ const 能力 = {}
         w.下一步.click(() => {
             flag = false
         })
-        
+
         while (flag) {
             global.sleep(80)
         }
@@ -479,11 +479,11 @@ const 能力 = {}
         })
 
         let flag = true
-    
+
         w.下一步.click(() => {
             flag = false
         })
-        
+
         while (flag) {
             global.sleep(80)
         }
@@ -629,11 +629,11 @@ const 能力 = {}
         })
 
         let flag = true
-    
+
         w.下一步.click(() => {
             flag = false
         })
-        
+
         while (flag) {
             global.sleep(80)
         }
@@ -771,11 +771,11 @@ const 能力 = {}
         })
 
         let flag = true
-    
+
         w.下一步.click(() => {
             flag = false
         })
-        
+
         while (flag) {
             global.sleep(80)
         }
@@ -886,15 +886,72 @@ const 能力 = {}
         })
 
         let flag = true
-    
+
         w.下一步.click(() => {
             flag = false
         })
-        
+
         while (flag) {
             global.sleep(80)
         }
     } else {
         操作()
+    }
+}
+
+const 脚本 = {}
+
+脚本.准备快手 = () => {
+    能力.安装注册登录('快手')
+}
+
+脚本.快手收妹妹 = (手动) => {
+    const 包名 = 'com.smile.gifmaker'
+    第1步:
+    能力.进入主页(手动, '快手', 包名)
+    第2步:
+    能力.点击之后输入(手动, '右上角搜索图标', '收妹妹处兄妹')
+    第3步:
+    for (; ;) {
+        能力.点击(手动, '右上角搜索按钮')
+        第4步:
+        能力.点击(手动, '第一条作品')
+        第5步:
+        能力.点击(手动, '右侧评论区图标')
+        第6步:
+        能力.点击(手动, '评论条数标签')
+        第7步:
+        能力.点击(手动, '按最新排序按钮')
+        第8步:
+        for (; ;) {
+            if (能力.检查若是则先点击(手动, '有评论要哥哥的', '用户头像')) {
+                第9步:
+                if (能力.检查(手动, '未关注')) {
+                    第10步:
+                    能力.点击(手动, '关注按钮')
+                    第11步:
+                    能力.点击(手动, '发私信按钮')
+                    第12步:
+                    能力.点击之后输入('底部消息输入框', '我想收一些妹妹，你能当我妹妹吗')
+                    第13步:
+                    if (能力.点击之后看见(手动, '右下角发送图标', '上限')) {
+                        能力.完成(手动)
+                    }
+                    第14步:
+                    能力.回到上一页(手动, '用户主页')
+                }
+                第15步:
+                能力.回到上一页(手动, '评论区')
+            }
+            第16步:
+            if (能力.检查(手动, '翻到底了或没有一天内的评论了')) {
+                能力.回到上一页(手动, '作品页')
+                能力.回到上一页(手动, '搜索结果页')
+                continue 第3步
+            } else {
+                能力.向下滚动()
+                continue 第8步
+            }
+        }
     }
 }
