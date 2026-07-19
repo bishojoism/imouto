@@ -108,6 +108,24 @@ function _视觉(text, schema) {
     }
 }
 
+function _自动操作(w, 动作) {
+    w.自动操作.click(() => {
+        w.自动操作.enabled = false
+        threads.start(() => {
+            try {
+                动作()
+            } catch (e) {
+                toastLog(e.message)
+            }
+            ui.run(() => {
+                w.自动操作.enabled = true
+            })
+        })
+    })
+
+    _浮动(w)
+}
+
 能力.完成 = (手动) => {
     if (手动) {
         const w = floaty.window(
@@ -155,21 +173,9 @@ function _视觉(text, schema) {
             </vertical>
         )
 
-        w.自动操作.click(() => {
-            w.自动操作.enabled = false
-            threads.start(() => {
-                try {
-                    操作()
-                } catch (e) {
-                    toastLog(e.message)
-                }
-                ui.run(() => {
-                    w.自动操作.enabled = true
-                })
-            })
+        _自动操作(w, () => {
+            操作()
         })
-
-        _浮动(w)
     } else {
         操作()
     }
@@ -192,21 +198,9 @@ function _视觉(text, schema) {
             </vertical>
         )
 
-        w.自动操作.click(() => {
-            w.自动操作.enabled = false
-            threads.start(() => {
-                try {
-                    操作()
-                } catch (e) {
-                    toastLog(e.message)
-                }
-                ui.run(() => {
-                    w.自动操作.enabled = true
-                })
-            })
+        _自动操作(w, () => {
+            操作()
         })
-
-        _浮动(w)
     } else {
         操作()
     }
@@ -229,21 +223,9 @@ function _视觉(text, schema) {
             </vertical>
         )
 
-        w.自动操作.click(() => {
-            w.自动操作.enabled = false
-            threads.start(() => {
-                try {
-                    操作()
-                } catch (e) {
-                    toastLog(e.message)
-                }
-                ui.run(() => {
-                    w.自动操作.enabled = true
-                })
-            })
+        _自动操作(w, () => {
+            操作()
         })
-
-        _浮动(w)
     } else {
         操作()
     }
@@ -270,30 +252,6 @@ function _视觉(text, schema) {
             </vertical>
         )
 
-        w.自动操作.click(() => {
-            w.自动操作.enabled = false
-            threads.start(() => {
-                try {
-                    结果 = 操作()
-                    ui.run(() => {
-                        if (结果) {
-                            w.是.enabled = false
-                            w.否.enabled = true
-                        } else {
-                            w.否.enabled = false
-                            w.是.enabled = true
-                        }
-                        w.下一步.enabled = true
-                    })
-                } catch (e) {
-                    toastLog(e.message)
-                }
-                ui.run(() => {
-                    w.自动操作.enabled = true
-                })
-            })
-        })
-
         w.是.click(() => {
             结果 = true
             w.是.enabled = false
@@ -306,12 +264,23 @@ function _视觉(text, schema) {
             w.是.enabled = true
             w.下一步.enabled = true
         })
-
         ui.run(() => {
             w.下一步.enabled = false
         })
 
-        _浮动(w)
+        _自动操作(w, () => {
+            结果 = 操作()
+            ui.run(() => {
+                if (结果) {
+                    w.是.enabled = false
+                    w.否.enabled = true
+                } else {
+                    w.否.enabled = false
+                    w.是.enabled = true
+                }
+                w.下一步.enabled = true
+            })
+        })
     } else {
         结果 = 操作()
     }
@@ -347,21 +316,9 @@ function _视觉(text, schema) {
             </vertical>
         )
 
-        w.自动操作.click(() => {
-            w.自动操作.enabled = false
-            threads.start(() => {
-                try {
-                    操作()
-                } catch (e) {
-                    toastLog(e.message)
-                }
-                ui.run(() => {
-                    w.自动操作.enabled = true
-                })
-            })
+        _自动操作(w, () => {
+            操作()
         })
-
-        _浮动(w)
     } else {
         操作()
     }
@@ -411,30 +368,6 @@ function _视觉(text, schema) {
             </vertical>
         )
 
-        w.自动操作.click(() => {
-            w.自动操作.enabled = false
-            threads.start(() => {
-                try {
-                    结果 = 操作()
-                    ui.run(() => {
-                        if (结果) {
-                            w.是.enabled = false
-                            w.否.enabled = true
-                        } else {
-                            w.否.enabled = false
-                            w.是.enabled = true
-                        }
-                        w.下一步.enabled = true
-                    })
-                } catch (e) {
-                    toastLog(e.message)
-                }
-                ui.run(() => {
-                    w.自动操作.enabled = true
-                })
-            })
-        })
-
         w.是.click(() => {
             结果 = true
             w.是.enabled = false
@@ -447,12 +380,23 @@ function _视觉(text, schema) {
             w.是.enabled = true
             w.下一步.enabled = true
         })
-
         ui.run(() => {
             w.下一步.enabled = false
         })
 
-        _浮动(w)
+        _自动操作(w, () => {
+            结果 = 操作()
+            ui.run(() => {
+                if (结果) {
+                    w.是.enabled = false
+                    w.否.enabled = true
+                } else {
+                    w.否.enabled = false
+                    w.是.enabled = true
+                }
+                w.下一步.enabled = true
+            })
+        })
     } else {
         结果 = 操作()
     }
@@ -504,30 +448,6 @@ function _视觉(text, schema) {
             </vertical>
         )
 
-        w.自动操作.click(() => {
-            w.自动操作.enabled = false
-            threads.start(() => {
-                try {
-                    结果 = 操作()
-                    ui.run(() => {
-                        if (结果) {
-                            w.是.enabled = false
-                            w.否.enabled = true
-                        } else {
-                            w.否.enabled = false
-                            w.是.enabled = true
-                        }
-                        w.下一步.enabled = true
-                    })
-                } catch (e) {
-                    toastLog(e.message)
-                }
-                ui.run(() => {
-                    w.自动操作.enabled = true
-                })
-            })
-        })
-
         w.是.click(() => {
             结果 = true
             w.是.enabled = false
@@ -540,12 +460,23 @@ function _视觉(text, schema) {
             w.是.enabled = true
             w.下一步.enabled = true
         })
-
         ui.run(() => {
             w.下一步.enabled = false
         })
 
-        _浮动(w)
+        _自动操作(w, () => {
+            结果 = 操作()
+            ui.run(() => {
+                if (结果) {
+                    w.是.enabled = false
+                    w.否.enabled = true
+                } else {
+                    w.否.enabled = false
+                    w.是.enabled = true
+                }
+                w.下一步.enabled = true
+            })
+        })
     } else {
         结果 = 操作()
     }
@@ -585,21 +516,9 @@ function _视觉(text, schema) {
             </vertical>
         )
 
-        w.自动操作.click(() => {
-            w.自动操作.enabled = false
-            threads.start(() => {
-                try {
-                    操作()
-                } catch (e) {
-                    toastLog(e.message)
-                }
-                ui.run(() => {
-                    w.自动操作.enabled = true
-                })
-            })
+        _自动操作(w, () => {
+            操作()
         })
-
-        _浮动(w)
     } else {
         操作()
     }
