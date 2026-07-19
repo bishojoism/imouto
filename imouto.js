@@ -196,16 +196,18 @@ function _浮动(w) {
                     messages: [
                         {
                             role: 'user',
-                            content: {
-                                type: 'image_url',
-                                image_url: {
-                                    url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
+                            content: [
+                                {
+                                    type: 'image_url',
+                                    image_url: {
+                                        url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    text: `请问：是否「${内容}」？`
                                 }
-                            }
-                        },
-                        {
-                            role: 'user',
-                            content: `请问：是否「${内容}」？`
+                            ]
                         }
                     ],
                     response_format: {
@@ -309,16 +311,18 @@ function _浮动(w) {
                     messages: [
                         {
                             role: 'user',
-                            content: {
-                                type: 'image_url',
-                                image_url: {
-                                    url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
+                            content: [
+                                {
+                                    type: 'image_url',
+                                    image_url: {
+                                        url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    text: `请问：「${元素}」坐标？`
                                 }
-                            }
-                        },
-                        {
-                            role: 'user',
-                            content: `请问：「${元素}」坐标？`
+                            ]
                         }
                     ],
                     response_format: {
@@ -397,21 +401,19 @@ function _浮动(w) {
                     model: MODEL,
                     messages: [
                         {
-                            role: 'system',
-                            content: '你是界面操作员。'
-                        },
-                        {
                             role: 'user',
-                            content: {
-                                type: 'image_url',
-                                image_url: {
-                                    url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
+                            content: [
+                                {
+                                    type: 'image_url',
+                                    image_url: {
+                                        url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    text: `请问：是否「${内容}」？若是，请问：「${元素}」坐标？若否，请输出null。`
                                 }
-                            }
-                        },
-                        {
-                            role: 'user',
-                            content: `根据屏幕检查${内容}是正确还是错误，若正确则定位屏幕上的${元素}，若错误则输出null。`
+                            ]
                         }
                     ],
                     response_format: {
@@ -434,7 +436,7 @@ function _浮动(w) {
                                     },
                                     {
                                         type: 'null',
-                                        description: '错误'
+                                        description: '否'
                                     },
                                 ],
                             }
@@ -535,16 +537,18 @@ function _浮动(w) {
                     messages: [
                         {
                             role: 'user',
-                            content: {
-                                type: 'image_url',
-                                image_url: {
-                                    url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
+                            content: [
+                                {
+                                    type: 'image_url',
+                                    image_url: {
+                                        url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    text: `请问：「${元素}」坐标？`
                                 }
-                            }
-                        },
-                        {
-                            role: 'user',
-                            content: `请问：「${元素}」坐标？`
+                            ]
                         }
                     ],
                     response_format: {
@@ -573,6 +577,7 @@ function _浮动(w) {
                 const [x, y] = JSON.parse(response.body.json().choices[0].message.content)
                 global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
                 global.sleep(800)
+                global.shizuku(['shell', 'screencap', '-p', path])
                 const texts = ocr.recognizeText(path)
                 for (let i = 0; i < texts.length; i++) {
                     if (texts[i].indexOf(文本) !== -1) {
@@ -664,16 +669,18 @@ function _浮动(w) {
                     messages: [
                         {
                             role: 'user',
-                            content: {
-                                type: 'image_url',
-                                image_url: {
-                                    url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
+                            content: [
+                                {
+                                    type: 'image_url',
+                                    image_url: {
+                                        url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
+                                    }
+                                },
+                                {
+                                    type: 'text',
+                                    text: `请问：「${元素}」坐标？`
                                 }
-                            }
-                        },
-                        {
-                            role: 'user',
-                            content: `请问：「${元素}」坐标？`
+                            ]
                         }
                     ],
                     response_format: {
@@ -717,7 +724,7 @@ function _浮动(w) {
         const w = floaty.window(
             <vertical>
                 <text id="拖动">✥</text>
-                <text>{`请您：点击「${元素}」`}。</text>
+                <text>{`请您：点击「${元素}」。`}</text>
                 <button id="自动操作" text="自动操作" />
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
