@@ -21,9 +21,14 @@ function _浮动(w) {
         return true
     })
 
-    let flag = true
+    let flag = true, skipped = false
 
     w.下一步.click(() => {
+        flag = false
+    })
+
+    w.跳过.click(() => {
+        skipped = true
         flag = false
     })
 
@@ -32,6 +37,10 @@ function _浮动(w) {
     }
 
     w.close()
+
+    if (skipped) {
+        throw new Error('跳过')
+    }
 }
 
 能力.完成 = (手动) => {
@@ -40,6 +49,7 @@ function _浮动(w) {
             <vertical>
                 <text id="拖动">✥</text>
                 <button id="下一步" text="完成" />
+                <button id="跳过" text="跳过" />
             </vertical>
         )
 
@@ -55,6 +65,7 @@ function _浮动(w) {
             <text id="拖动">✥</text>
             <text>{`请您：安装、注册、登录「${应用名}」。`}</text>
             <button id="下一步" text="下一步" />
+            <button id="跳过" text="跳过" />
         </vertical>
     )
 
@@ -75,6 +86,7 @@ function _浮动(w) {
                 <text>{`请您：进入「${应用名}」主页。`}</text>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
+                <button id="跳过" text="跳过" />
             </vertical>
         )
 
@@ -107,6 +119,7 @@ function _浮动(w) {
                 <text>{`请您：返回「${页名}」。`}</text>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
+                <button id="跳过" text="跳过" />
             </vertical>
         )
 
@@ -139,6 +152,7 @@ function _浮动(w) {
                 <text>{`请您：向下滚动。`}</text>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
+                <button id="跳过" text="跳过" />
             </vertical>
         )
 
@@ -218,6 +232,7 @@ function _浮动(w) {
                 </horizontal>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
+                <button id="跳过" text="跳过" />
             </vertical>
         )
 
@@ -329,6 +344,7 @@ function _浮动(w) {
                 <text>{`请您：点击「${元素}」`}。</text>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
+                <button id="跳过" text="跳过" />
             </vertical>
         )
 
@@ -432,6 +448,7 @@ function _浮动(w) {
                 </horizontal>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
+                <button id="跳过" text="跳过" />
             </vertical>
         )
 
@@ -530,7 +547,9 @@ function _浮动(w) {
                 global.sleep(800)
                 const texts = ocr.recognizeText(path)
                 for (let i = 0; i < texts.length; i++) {
-                    if (texts[i].indexOf(文本) !== -1) return true
+                    if (texts[i].indexOf(文本) !== -1) {
+                        return true
+                    }
                 }
                 return false
             } catch (e) {
@@ -552,6 +571,7 @@ function _浮动(w) {
                 </horizontal>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
+                <button id="跳过" text="跳过" />
             </vertical>
         )
 
@@ -666,6 +686,7 @@ function _浮动(w) {
                 <text>{`请您：点击「${元素}」`}。</text>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
+                <button id="跳过" text="跳过" />
             </vertical>
         )
 
@@ -695,49 +716,33 @@ const 脚本 = {}
 }
 
 脚本.快手收妹妹 = (手动) => {
-    第1步:
     能力.进入主页(手动, '快手', 'com.smile.gifmaker')
-    第2步:
     能力.点击之后输入(手动, '右上角搜索图标', '收妹妹处兄妹')
-    第3步:
-    for (; ;) {
+    翻作品: for (; ;) {
         能力.点击(手动, '右上角搜索按钮')
-        第4步:
         能力.点击(手动, '第一条作品')
-        第5步:
         能力.点击(手动, '右侧评论区图标')
-        第6步:
         能力.点击(手动, '评论条数标签')
-        第7步:
         能力.点击(手动, '按最新排序按钮')
-        第8步:
-        for (; ;) {
+        翻评论区: for (; ;) {
             if (能力.检查若是则先点击(手动, '有评论要哥哥的', '用户头像')) {
-                第9步:
                 if (能力.检查若是则先点击(手动, '未关注', '关注按钮')) {
-                    第10步:
                     能力.点击(手动, '发私信按钮')
-                    第11步:
                     能力.点击之后输入('底部消息输入框', '我想收一些妹妹，你能当我妹妹吗')
-                    第12步:
                     if (能力.点击之后看见(手动, '右下角发送图标', '上限')) {
-                        第13步:
                         能力.完成(手动)
                     }
-                    第14步:
                     能力.回到上一页(手动, '用户主页')
                 }
-                第15步:
                 能力.回到上一页(手动, '评论区')
             }
-            第16步:
             if (能力.检查(手动, '翻到底了或没有一天内的评论了')) {
                 能力.回到上一页(手动, '作品页')
                 能力.回到上一页(手动, '搜索结果页')
-                continue 第3步
+                continue 翻作品
             } else {
                 能力.向下滚动(手动)
-                continue 第8步
+                continue 翻评论区
             }
         }
     }
