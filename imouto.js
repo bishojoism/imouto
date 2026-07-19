@@ -509,21 +509,15 @@ ui.layout(
             </horizontal>
             <vertical id="平台" visibility="gone">
                 <text textSize="30sp">### 快手</text>
-                <vertical>
-                    <text textSize="25sp">#### 准备</text>
-                    <text textSize="20sp">{`本日∞/∞ 本周∞/∞`}</text>
-                    <horizontal>
-                        <button id="准备快手" text="手动" />
-                    </horizontal>
-                </vertical>
-                <vertical>
-                    <text textSize="25sp">#### 收妹妹</text>
-                    <text textSize="20sp">{`本日∞/∞ 本周∞/∞`}</text>
-                    <horizontal>
-                        <button id="快手收妹妹手动" text="手动" />
-                        <button id="快手收妹妹自动" text="自动" />
-                    </horizontal>
-                </vertical>
+                <horizontal>
+                    <text textSize="25sp">准备：</text>
+                    <button id="准备快手" text="手动" />
+                </horizontal>
+                <horizontal>
+                    <text textSize="25sp">收妹妹：</text>
+                    <button id="快手收妹妹手动" text="手动" />
+                    <button id="快手收妹妹自动" text="自动" />
+                </horizontal>
             </vertical>
         </vertical>
     </vertical>
@@ -550,16 +544,19 @@ ui.收起展开平台.click(() => {
 })
 
 ui.Shizuku.click(() => {
+    ui.Shizuku.enabled = false
     threads.start(() => {
         try {
             toastLog(global.shizuku('sh -c "echo 成功"').result.split('\n')[0])
         } catch (e) {
             toastLog(e.message)
         }
+        ui.run(() => ui.Shizuku.enabled = true)
     })
 })
 
 ui.视觉模型.click(() => {
+    ui.视觉模型.enabled = false
     API_KEY = ui.API_KEY.getText()
     BASE_URL = ui.BASE_URL.getText()
     MODEL = ui.MODEL.getText()
@@ -606,6 +603,7 @@ ui.视觉模型.click(() => {
         } catch (e) {
             toastLog(e.message)
         }
+        ui.run(() => ui.视觉模型.enabled = true)
     })
 })
 
