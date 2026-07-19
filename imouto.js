@@ -47,6 +47,9 @@ function _视觉(text, schema) {
     const path = files.path('截图.png')
     global.shizuku(['shell', 'screencap', '-p', path])
     const raw = images.read(path)
+    if (!raw) {
+        throw new Error('截图失败')
+    }
     try {
         const resized = images.resize(raw, [1000, 1000])
         try {
