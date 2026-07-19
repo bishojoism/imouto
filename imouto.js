@@ -45,7 +45,7 @@ function _浮动(w) {
 
 function _视觉(text, schema) {
     const path = files.path('截图.png')
-    global.shizuku(['shell', 'screencap', '-p', path])
+    global.shizuku(`sh screencap -p ${JSON.stringify(path)}`)
     const raw = images.read(path)
     if (!raw) {
         throw new Error('截图失败')
@@ -218,8 +218,8 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        global.shizuku(['shell', 'am', 'force-stop', 包名])
-        global.shizuku(['shell', 'monkey', '-p', 包名, '-c', 'android.intent.category.LAUNCHER', '1'])
+        global.shizuku(`sh am force-stop ${JSON.stringify(包名)}`)
+        global.shizuku(`sh monkey -p ${包名} -c android.intent.category.LAUNCHER 1`)
         global.sleep(800)
     })
 }
@@ -234,7 +234,7 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        global.shizuku(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
+        global.shizuku(`sh input keyevent KEYCODE_BACK`)
         global.sleep(800)
     })
 }
@@ -249,7 +249,7 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        global.shizuku(['shell', 'input', 'swipe', device.width * 0.5, device.height * 0.6, device.width * 0.5, device.height * 0.4, 1000])
+        global.shizuku(`sh input swipe ${device.width * 0.5} ${device.height * 0.6} ${device.width * 0.5} ${device.height * 0.4, 1000}`)
         global.sleep(800)
     })
 }
@@ -293,7 +293,7 @@ function _有判断(xml, 手动, 操作) {
             minItems: 2,
             maxItems: 2,
         })
-        global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+        global.shizuku(`sh input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
     })
 }
@@ -333,7 +333,7 @@ function _有判断(xml, 手动, 操作) {
         })
         if (!返回) return false
         const [x, y] = 返回
-        global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+        global.shizuku(`sh input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
         return true
     })
@@ -365,11 +365,11 @@ function _有判断(xml, 手动, 操作) {
             maxItems: 2,
         })
 
-        global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+        global.shizuku(`sh input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
 
         const path = files.path('截图.png')
-        global.shizuku(['shell', 'screencap', '-p', path])
+        global.shizuku(`sh screencap -p ${JSON.stringify(path)}`)
         const texts = ocr.recognizeText(path)
         for (let i = 0; i < texts.length; i++) {
             if (texts[i].indexOf(文本) !== -1) {
@@ -401,11 +401,11 @@ function _有判断(xml, 手动, 操作) {
             minItems: 2,
             maxItems: 2,
         })
-        global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+        global.shizuku(`sh input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
 
         global.setClip(文本)
-        global.shizuku(['shell', 'input', 'keyevent', 'KEYCODE_PASTE'])
+        global.shizuku(`sh input keyevent KEYCODE_PASTE`)
         global.sleep(800)
     })
 }
@@ -459,12 +459,12 @@ function 执行(程序, 回调) {
             switch (e.message) {
                 case '跳出': {
                     global.toastLog('用户跳出脚本')
-                    回调()
+                    ui.run(回调)
                     break
                 }
                 case '完成': {
                     global.toastLog('用户完成脚本')
-                    回调()
+                    ui.run(回调)
                     break
                 }
                 default: {
@@ -475,12 +475,96 @@ function 执行(程序, 回调) {
     })
 }
 
-执行(() => {
-    脚本.准备快手()
-}, () => {
-    执行(() => {
-        脚本.快手收妹妹(true)
-    }, () => {
+ui.layout(
+    <vertical>
+        <text textSize="40sp"># 赛博家庭SOP</text>
+        <vertical>
+            <horizontal>
+                <text textSize="35sp">## 配置</text>
+                <button id="收起展开配置" text="展开" />
+            </horizontal>
+            <vertical id="配置" visibility="gone">
+                <vertical>
+                    <text textSize="30sp">Shizuku</text>
+                    <button id="Shizuku" text="检查" />
+                </vertical>
+                <vertical>
+                    <text textSize="30sp">视觉模型</text>
+                    <input id="API_KEY" hint="API_KEY" />
+                    <input id="BASE_URL" hint="BASE_URL" />
+                    <input id="MODEL" hint="MODEL" />
+                    <button id="视觉模型" text="检查" />
+                </vertical>
+            </vertical>
+        </vertical>
+        <vertical>
+            <horizontal>
+                <text textSize="35sp">## 平台</text>
+                <button id="收起展开平台" text="展开" />
+            </horizontal>
+            <vertical id="平台" visibility="gone">
+                <text textSize="30sp">### 快手</text>
+                <vertical>
+                    <text textSize="25sp">#### 准备</text>
+                    <text textSize="20sp">{`本日∞/∞ 本周∞/∞`}</text>
+                    <horizontal>
+                        <button id="准备快手" text="手动" />
+                    </horizontal>
+                </vertical>
+                <vertical>
+                    <text textSize="25sp">#### 收妹妹</text>
+                    <text textSize="20sp">{`本日∞/∞ 本周∞/∞`}</text>
+                    <horizontal>
+                        <button id="快手收妹妹手动" text="手动" />
+                        <button id="快手收妹妹自动" text="自动" />
+                    </horizontal>
+                </vertical>
+            </vertical>
+        </vertical>
+    </vertical>
+)
 
+ui.收起展开配置.click(() => {
+    if (ui.收起展开配置.getText() === '展开') {
+        ui.配置.attr('visibility', 'visible')
+        ui.收起展开配置.setText('收起')
+    } else {
+        ui.配置.attr('visibility', 'gone')
+        ui.收起展开配置.setText('展开')
+    }
+})
+
+ui.收起展开平台.click(() => {
+    if (ui.收起展开平台.getText() === '展开') {
+        ui.平台.attr('visibility', 'visible')
+        ui.收起展开平台.setText('收起')
+    } else {
+        ui.平台.attr('visibility', 'gone')
+        ui.收起展开平台.setText('展开')
+    }
+})
+
+ui.Shizuku.click(() => {
+    threads.start(() => {
+        try {
+            toastLog(global.shizuku('sh -c "echo 成功"').result.split('\n')[0])
+        } catch (e) {
+            toastLog(e.message)
+        }
     })
+})
+
+ui.准备快手.click(() => {
+    ui.准备快手.enabled = false
+    执行(() => 脚本.准备快手(), () => ui.准备快手.enabled = true)
+})
+
+ui.快手收妹妹手动.click(() => {
+    ui.快手收妹妹手动.enabled = false
+    执行(() => 脚本.快手收妹妹(true), () => ui.快手收妹妹手动.enabled = true)
+})
+
+ui.快手收妹妹手动.click(() => {
+    ui.快手收妹妹手动.enabled = false
+    执行(() => 脚本.快手收妹妹(false), () => ui.快手收妹妹手动.enabled = true)
 })
