@@ -187,8 +187,8 @@ function _有判断(xml, 手动, 操作) {
 能力.完成 = (手动) => {
     if (手动) {
         _浮动(floaty.window(
-            <vertical>
-                <text id="拖动" textSize="40sp">✥</text>
+            <vertical bg="white" padding="24">
+                <text id="拖动" textSize="40">✥</text>
                 <horizontal>
                     <button id="下一步" text="完成" />
                     <button id="跳出" text="跳出" />
@@ -202,8 +202,8 @@ function _有判断(xml, 手动, 操作) {
 
 能力.安装注册登录 = (应用名) => {
     _浮动(floaty.window(
-        <vertical>
-            <text id="拖动" textSize="40sp">✥</text>
+        <vertical bg="white" padding="24">
+            <text id="拖动" textSize="40">✥</text>
             <text>{`请您：安装、注册、登录「${应用名}」。`}</text>
             <horizontal>
                 <button id="下一步" text="下一步" />
@@ -214,8 +214,8 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.进入主页 = (手动, 应用名, 包名) => {
-    _没判断(<vertical>
-        <text id="拖动" textSize="40sp">✥</text>
+    _没判断(<vertical bg="white" padding="24">
+        <text id="拖动" textSize="40">✥</text>
         <text>{`请您：进入「${应用名}」主页。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
@@ -230,8 +230,8 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.回到上一页 = (手动, 页名) => {
-    _没判断(<vertical>
-        <text id="拖动" textSize="40sp">✥</text>
+    _没判断(<vertical bg="white" padding="24">
+        <text id="拖动" textSize="40">✥</text>
         <text>{`请您：返回「${页名}」。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
@@ -245,8 +245,8 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.向下滚动 = (手动) => {
-    _没判断(<vertical>
-        <text id="拖动" textSize="40sp">✥</text>
+    _没判断(<vertical bg="white" padding="24">
+        <text id="拖动" textSize="40">✥</text>
         <text>{`请您：向下滚动。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
@@ -260,8 +260,8 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.检查 = (手动, 内容) => {
-    return _有判断(<vertical>
-        <text id="拖动" textSize="40sp">✥</text>
+    return _有判断(<vertical bg="white" padding="24">
+        <text id="拖动" textSize="40">✥</text>
         <text>{`请问：是否「${内容}」？`}</text>
         <horizontal>
             <button id="是" text="是" />
@@ -278,8 +278,8 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.点击 = (手动, 元素) => {
-    _没判断(<vertical>
-        <text id="拖动" textSize="40sp">✥</text>
+    _没判断(<vertical bg="white" padding="24">
+        <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
@@ -304,8 +304,8 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.检查若是则先点击 = (手动, 内容, 元素) => {
-    return _有判断(<vertical>
-        <text id="拖动" textSize="40sp">✥</text>
+    return _有判断(<vertical bg="white" padding="24">
+        <text id="拖动" textSize="40">✥</text>
         <text>{`请问：是否「${内容}」？若是，则请您先：点击「${元素}」`}</text>
         <horizontal>
             <button id="是" text="是" />
@@ -345,8 +345,8 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.点击之后看见 = (手动, 元素, 文本) => {
-    return _有判断(<vertical>
-        <text id="拖动" textSize="40sp">✥</text>
+    return _有判断(<vertical bg="white" padding="24">
+        <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。然后立刻判断：是否看见「${文本}」这几个字？`}</text>
         <horizontal>
             <button id="是" text="是" />
@@ -386,8 +386,8 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.点击之后输入 = (手动, 元素, 文本) => {
-    _没判断(<vertical>
-        <text id="拖动" textSize="40sp">✥</text>
+    _没判断(<vertical bg="white" padding="24">
+        <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。然后输入「${文本}」。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
@@ -482,19 +482,19 @@ function 执行(程序, 回调) {
 
 ui.layout(
     <vertical>
-        <text textSize="40sp"># 赛博家庭SOP</text>
+        <text textSize="40"># 赛博家庭SOP</text>
         <vertical>
             <horizontal>
-                <text textSize="35sp">## 配置</text>
+                <text textSize="35">## 配置</text>
                 <button id="收起展开配置" text="展开" />
             </horizontal>
             <vertical id="配置" visibility="gone">
                 <vertical>
-                    <text textSize="30sp">Shizuku</text>
+                    <text textSize="30">Shizuku</text>
                     <button id="Shizuku" text="检查" />
                 </vertical>
                 <vertical>
-                    <text textSize="30sp">视觉模型</text>
+                    <text textSize="30">视觉模型</text>
                     <input id="API_KEY" hint="API_KEY" text={API_KEY} />
                     <input id="BASE_URL" hint="BASE_URL" text={BASE_URL} />
                     <input id="MODEL" hint="MODEL" text={MODEL} />
@@ -504,17 +504,17 @@ ui.layout(
         </vertical>
         <vertical>
             <horizontal>
-                <text textSize="35sp">## 平台</text>
+                <text textSize="35">## 平台</text>
                 <button id="收起展开平台" text="展开" />
             </horizontal>
             <vertical id="平台" visibility="gone">
-                <text textSize="30sp">### 快手</text>
+                <text textSize="30">### 快手</text>
                 <horizontal>
-                    <text textSize="25sp">准备：</text>
+                    <text textSize="25">准备：</text>
                     <button id="准备快手" text="手动" />
                 </horizontal>
                 <horizontal>
-                    <text textSize="25sp">收妹妹：</text>
+                    <text textSize="25">收妹妹：</text>
                     <button id="快手收妹妹手动" text="手动" />
                     <button id="快手收妹妹自动" text="自动" />
                 </horizontal>
@@ -617,7 +617,7 @@ ui.快手收妹妹手动.click(() => {
     执行(() => 脚本.快手收妹妹(true), () => ui.快手收妹妹手动.enabled = true)
 })
 
-ui.快手收妹妹手动.click(() => {
-    ui.快手收妹妹手动.enabled = false
-    执行(() => 脚本.快手收妹妹(false), () => ui.快手收妹妹手动.enabled = true)
+ui.快手收妹妹自动.click(() => {
+    ui.快手收妹妹自动.enabled = false
+    执行(() => 脚本.快手收妹妹(false), () => ui.快手收妹妹自动.enabled = true)
 })
