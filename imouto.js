@@ -1,5 +1,25 @@
 const 能力 = {}
 
+function _拖动(w) {
+    let x = 0, y = 0, wx, wy
+    w.拖动.setOnTouchListener((_, event) => {
+        switch (event.getAction()) {
+            case event.ACTION_DOWN: {
+                x = event.getRawX()
+                y = event.getRawY()
+                wx = w.getX()
+                wy = w.getY()
+                break
+            }
+            case event.ACTION_MOVE: {
+                w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
+                break
+            }
+        }
+        return true
+    })
+}
+
 能力.完成 = (手动) => {
     if (手动) {
         const w = floaty.window(
@@ -9,23 +29,7 @@ const 能力 = {}
             </vertical>
         )
 
-        let x = 0, y = 0, wx, wy
-        w.拖动.setOnTouchListener((_, event) => {
-            switch (event.getAction()) {
-                case event.ACTION_DOWN: {
-                    x = event.getRawX()
-                    y = event.getRawY()
-                    wx = w.getX()
-                    wy = w.getY()
-                    break
-                }
-                case event.ACTION_MOVE: {
-                    w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
-                    break
-                }
-            }
-            return true
-        })
+        _拖动(w)
 
         let flag = true
 
@@ -52,23 +56,7 @@ const 能力 = {}
         </vertical>
     )
 
-    let x = 0, y = 0, wx, wy
-    w.拖动.setOnTouchListener((_, event) => {
-        switch (event.getAction()) {
-            case event.ACTION_DOWN: {
-                x = event.getRawX()
-                y = event.getRawY()
-                wx = w.getX()
-                wy = w.getY()
-                break
-            }
-            case event.ACTION_MOVE: {
-                w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
-                break
-            }
-        }
-        return true
-    })
+    _拖动(w)
 
     let flag = true
 
@@ -110,23 +98,7 @@ const 能力 = {}
             })
         })
 
-        let x = 0, y = 0, wx, wy
-        w.拖动.setOnTouchListener((_, event) => {
-            switch (event.getAction()) {
-                case event.ACTION_DOWN: {
-                    x = event.getRawX()
-                    y = event.getRawY()
-                    wx = w.getX()
-                    wy = w.getY()
-                    break
-                }
-                case event.ACTION_MOVE: {
-                    w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
-                    break
-                }
-            }
-            return true
-        })
+        _拖动(w)
 
         let flag = true
 
@@ -170,23 +142,7 @@ const 能力 = {}
             })
         })
 
-        let x = 0, y = 0, wx, wy
-        w.拖动.setOnTouchListener((_, event) => {
-            switch (event.getAction()) {
-                case event.ACTION_DOWN: {
-                    x = event.getRawX()
-                    y = event.getRawY()
-                    wx = w.getX()
-                    wy = w.getY()
-                    break
-                }
-                case event.ACTION_MOVE: {
-                    w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
-                    break
-                }
-            }
-            return true
-        })
+        _拖动(w)
 
         let flag = true
 
@@ -230,23 +186,7 @@ const 能力 = {}
             })
         })
 
-        let x = 0, y = 0, wx, wy
-        w.拖动.setOnTouchListener((_, event) => {
-            switch (event.getAction()) {
-                case event.ACTION_DOWN: {
-                    x = event.getRawX()
-                    y = event.getRawY()
-                    wx = w.getX()
-                    wy = w.getY()
-                    break
-                }
-                case event.ACTION_MOVE: {
-                    w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
-                    break
-                }
-            }
-            return true
-        })
+        _拖动(w)
 
         let flag = true
 
@@ -358,23 +298,7 @@ const 能力 = {}
             w.下一步.enabled = true
         })
 
-        let x = 0, y = 0, wx, wy
-        w.拖动.setOnTouchListener((_, event) => {
-            switch (event.getAction()) {
-                case event.ACTION_DOWN: {
-                    x = event.getRawX()
-                    y = event.getRawY()
-                    wx = w.getX()
-                    wy = w.getY()
-                    break
-                }
-                case event.ACTION_MOVE: {
-                    w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
-                    break
-                }
-            }
-            return true
-        })
+        _拖动(w)
 
         let flag = true
 
@@ -475,23 +399,7 @@ const 能力 = {}
             })
         })
 
-        let x = 0, y = 0, wx, wy
-        w.拖动.setOnTouchListener((_, event) => {
-            switch (event.getAction()) {
-                case event.ACTION_DOWN: {
-                    x = event.getRawX()
-                    y = event.getRawY()
-                    wx = w.getX()
-                    wy = w.getY()
-                    break
-                }
-                case event.ACTION_MOVE: {
-                    w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
-                    break
-                }
-            }
-            return true
-        })
+        _拖动(w)
 
         let flag = true
 
@@ -627,23 +535,7 @@ const 能力 = {}
             w.下一步.enabled = true
         })
 
-        let x = 0, y = 0, wx, wy
-        w.拖动.setOnTouchListener((_, event) => {
-            switch (event.getAction()) {
-                case event.ACTION_DOWN: {
-                    x = event.getRawX()
-                    y = event.getRawY()
-                    wx = w.getX()
-                    wy = w.getY()
-                    break
-                }
-                case event.ACTION_MOVE: {
-                    w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
-                    break
-                }
-            }
-            return true
-        })
+        _拖动(w)
 
         let flag = true
 
@@ -774,23 +666,7 @@ const 能力 = {}
             w.下一步.enabled = true
         })
 
-        let x = 0, y = 0, wx, wy
-        w.拖动.setOnTouchListener((_, event) => {
-            switch (event.getAction()) {
-                case event.ACTION_DOWN: {
-                    x = event.getRawX()
-                    y = event.getRawY()
-                    wx = w.getX()
-                    wy = w.getY()
-                    break
-                }
-                case event.ACTION_MOVE: {
-                    w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
-                    break
-                }
-            }
-            return true
-        })
+        _拖动(w)
 
         let flag = true
 
@@ -894,23 +770,7 @@ const 能力 = {}
             })
         })
 
-        let x = 0, y = 0, wx, wy
-        w.拖动.setOnTouchListener((_, event) => {
-            switch (event.getAction()) {
-                case event.ACTION_DOWN: {
-                    x = event.getRawX()
-                    y = event.getRawY()
-                    wx = w.getX()
-                    wy = w.getY()
-                    break
-                }
-                case event.ACTION_MOVE: {
-                    w.setPosition(wx + event.getRawX() - x, wy + event.getRawY() - y)
-                    break
-                }
-            }
-            return true
-        })
+        _拖动(w)
 
         let flag = true
 
