@@ -272,14 +272,14 @@ function _视觉(text, schema) {
             threads.start(() => {
                 try {
                     结果 = 操作()
-                    if (结果) {
-                        w.是.enabled = false
-                        w.否.enabled = true
-                    } else {
-                        w.否.enabled = false
-                        w.是.enabled = true
-                    }
                     ui.run(() => {
+                        if (结果) {
+                            w.是.enabled = false
+                            w.否.enabled = true
+                        } else {
+                            w.否.enabled = false
+                            w.是.enabled = true
+                        }
                         w.下一步.enabled = true
                     })
                 } catch (e) {
@@ -337,7 +337,7 @@ function _视觉(text, schema) {
         const w = floaty.window(
             <vertical>
                 <text id="拖动">✥</text>
-                <text>{`请您：点击「${元素}」`}。</text>
+                <text>{`请您：点击「${元素}」。`}</text>
                 <button id="自动操作" text="自动操作" />
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
@@ -413,14 +413,14 @@ function _视觉(text, schema) {
             threads.start(() => {
                 try {
                     结果 = 操作()
-                    if (结果) {
-                        w.是.enabled = false
-                        w.否.enabled = true
-                    } else {
-                        w.否.enabled = false
-                        w.是.enabled = true
-                    }
                     ui.run(() => {
+                        if (结果) {
+                            w.是.enabled = false
+                            w.否.enabled = true
+                        } else {
+                            w.否.enabled = false
+                            w.是.enabled = true
+                        }
                         w.下一步.enabled = true
                     })
                 } catch (e) {
@@ -511,14 +511,14 @@ function _视觉(text, schema) {
             threads.start(() => {
                 try {
                     结果 = 操作()
-                    if (结果) {
-                        w.是.enabled = false
-                        w.否.enabled = true
-                    } else {
-                        w.否.enabled = false
-                        w.是.enabled = true
-                    }
                     ui.run(() => {
+                        if (结果) {
+                            w.是.enabled = false
+                            w.否.enabled = true
+                        } else {
+                            w.否.enabled = false
+                            w.是.enabled = true
+                        }
                         w.下一步.enabled = true
                     })
                 } catch (e) {
