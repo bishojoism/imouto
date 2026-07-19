@@ -1,6 +1,6 @@
 const 能力 = {}
 
-function _拖动(w) {
+function _浮动(w) {
     let x = 0, y = 0, wx, wy
     w.拖动.setOnTouchListener((_, event) => {
         switch (event.getAction()) {
@@ -18,6 +18,18 @@ function _拖动(w) {
         }
         return true
     })
+
+    let flag = true
+
+    w.下一步.click(() => {
+        flag = false
+    })
+
+    while (flag) {
+        global.sleep(80)
+    }
+
+    w.close()
 }
 
 能力.完成 = (手动) => {
@@ -25,23 +37,11 @@ function _拖动(w) {
         const w = floaty.window(
             <vertical>
                 <text id="拖动">✥</text>
-                <button id="完成" text="完成" />
+                <button id="下一步" text="完成" />
             </vertical>
         )
 
-        _拖动(w)
-
-        let flag = true
-
-        w.完成.click(() => {
-            flag = false
-        })
-
-        while (flag) {
-            global.sleep(80)
-        }
-
-        w.close()
+        _浮动(w)
     }
 
     throw new Error('完成')
@@ -56,19 +56,7 @@ function _拖动(w) {
         </vertical>
     )
 
-    _拖动(w)
-
-    let flag = true
-
-    w.下一步.click(() => {
-        flag = false
-    })
-
-    while (flag) {
-        global.sleep(80)
-    }
-
-    w.close()
+    _浮动(w)
 }
 
 能力.进入主页 = (手动, 应用名, 包名) => {
@@ -98,19 +86,7 @@ function _拖动(w) {
             })
         })
 
-        _拖动(w)
-
-        let flag = true
-
-        w.下一步.click(() => {
-            flag = false
-        })
-
-        while (flag) {
-            global.sleep(80)
-        }
-
-        w.close()
+        _浮动(w)
     } else {
         操作()
     }
@@ -142,19 +118,7 @@ function _拖动(w) {
             })
         })
 
-        _拖动(w)
-
-        let flag = true
-
-        w.下一步.click(() => {
-            flag = false
-        })
-
-        while (flag) {
-            global.sleep(80)
-        }
-
-        w.close()
+        _浮动(w)
     } else {
         操作()
     }
@@ -186,19 +150,7 @@ function _拖动(w) {
             })
         })
 
-        _拖动(w)
-
-        let flag = true
-
-        w.下一步.click(() => {
-            flag = false
-        })
-
-        while (flag) {
-            global.sleep(80)
-        }
-
-        w.close()
+        _浮动(w)
     } else {
         操作()
     }
@@ -298,22 +250,11 @@ function _拖动(w) {
             w.下一步.enabled = true
         })
 
-        _拖动(w)
-
-        let flag = true
-
         ui.run(() => {
             w.下一步.enabled = false
         })
-        w.下一步.click(() => {
-            flag = false
-        })
 
-        while (flag) {
-            global.sleep(80)
-        }
-
-        w.close()
+        _浮动(w)
     } else {
         结果 = 操作()
     }
@@ -399,19 +340,7 @@ function _拖动(w) {
             })
         })
 
-        _拖动(w)
-
-        let flag = true
-
-        w.下一步.click(() => {
-            flag = false
-        })
-
-        while (flag) {
-            global.sleep(80)
-        }
-
-        w.close()
+        _浮动(w)
     } else {
         操作()
     }
@@ -535,22 +464,11 @@ function _拖动(w) {
             w.下一步.enabled = true
         })
 
-        _拖动(w)
-
-        let flag = true
-
         ui.run(() => {
             w.下一步.enabled = false
         })
-        w.下一步.click(() => {
-            flag = false
-        })
 
-        while (flag) {
-            global.sleep(80)
-        }
-
-        w.close()
+        _浮动(w)
     } else {
         结果 = 操作()
     }
@@ -666,22 +584,11 @@ function _拖动(w) {
             w.下一步.enabled = true
         })
 
-        _拖动(w)
-
-        let flag = true
-
         ui.run(() => {
             w.下一步.enabled = false
         })
-        w.下一步.click(() => {
-            flag = false
-        })
 
-        while (flag) {
-            global.sleep(80)
-        }
-
-        w.close()
+        _浮动(w)
     } else {
         结果 = 操作()
     }
@@ -770,19 +677,7 @@ function _拖动(w) {
             })
         })
 
-        _拖动(w)
-
-        let flag = true
-
-        w.下一步.click(() => {
-            flag = false
-        })
-
-        while (flag) {
-            global.sleep(80)
-        }
-
-        w.close()
+        _浮动(w)
     } else {
         操作()
     }
