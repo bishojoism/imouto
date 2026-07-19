@@ -27,7 +27,7 @@ function _浮动(w) {
         flag = false
     })
 
-    w.跳过.click(() => {
+    w.跳出.click(() => {
         skipped = true
         flag = false
     })
@@ -39,7 +39,7 @@ function _浮动(w) {
     w.close()
 
     if (skipped) {
-        throw new Error('跳过')
+        throw new Error('跳出')
     }
 }
 
@@ -49,7 +49,7 @@ function _浮动(w) {
             <vertical>
                 <text id="拖动">✥</text>
                 <button id="下一步" text="完成" />
-                <button id="跳过" text="跳过" />
+                <button id="跳出" text="跳出" />
             </vertical>
         )
 
@@ -65,7 +65,7 @@ function _浮动(w) {
             <text id="拖动">✥</text>
             <text>{`请您：安装、注册、登录「${应用名}」。`}</text>
             <button id="下一步" text="下一步" />
-            <button id="跳过" text="跳过" />
+            <button id="跳出" text="跳出" />
         </vertical>
     )
 
@@ -86,7 +86,7 @@ function _浮动(w) {
                 <text>{`请您：进入「${应用名}」主页。`}</text>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
-                <button id="跳过" text="跳过" />
+                <button id="跳出" text="跳出" />
             </vertical>
         )
 
@@ -119,7 +119,7 @@ function _浮动(w) {
                 <text>{`请您：返回「${页名}」。`}</text>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
-                <button id="跳过" text="跳过" />
+                <button id="跳出" text="跳出" />
             </vertical>
         )
 
@@ -152,7 +152,7 @@ function _浮动(w) {
                 <text>{`请您：向下滚动。`}</text>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
-                <button id="跳过" text="跳过" />
+                <button id="跳出" text="跳出" />
             </vertical>
         )
 
@@ -232,7 +232,7 @@ function _浮动(w) {
                 </horizontal>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
-                <button id="跳过" text="跳过" />
+                <button id="跳出" text="跳出" />
             </vertical>
         )
 
@@ -344,7 +344,7 @@ function _浮动(w) {
                 <text>{`请您：点击「${元素}」`}。</text>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
-                <button id="跳过" text="跳过" />
+                <button id="跳出" text="跳出" />
             </vertical>
         )
 
@@ -448,7 +448,7 @@ function _浮动(w) {
                 </horizontal>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
-                <button id="跳过" text="跳过" />
+                <button id="跳出" text="跳出" />
             </vertical>
         )
 
@@ -571,7 +571,7 @@ function _浮动(w) {
                 </horizontal>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
-                <button id="跳过" text="跳过" />
+                <button id="跳出" text="跳出" />
             </vertical>
         )
 
@@ -686,7 +686,7 @@ function _浮动(w) {
                 <text>{`请您：点击「${元素}」`}。</text>
                 <button id="尝试自动操作" text="尝试自动操作" />
                 <button id="下一步" text="下一步" />
-                <button id="跳过" text="跳过" />
+                <button id="跳出" text="跳出" />
             </vertical>
         )
 
