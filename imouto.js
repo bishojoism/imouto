@@ -357,7 +357,7 @@ function _有判断(xml, 手动, 操作) {
     })
 }
 
-能力.点击之后看见 = (手动, 元素, 文本) => {
+能力.点击之后看见 = (手动, 元素, 文本, 页面) => {
     return _有判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。然后立刻判断：是否看见「${文本}」这几个字？`}</text>
@@ -408,7 +408,7 @@ function _有判断(xml, 手动, 操作) {
     })
 }
 
-能力.点击之后输入 = (手动, 元素, 文本) => {
+能力.点击之后输入 = (手动, 元素, 文本, 页面) => {
     _没判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。然后输入「${文本}」。`}</text>
