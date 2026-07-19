@@ -184,8 +184,10 @@ function _有判断(xml, 手动, 操作) {
         _浮动(floaty.window(
             <vertical>
                 <text id="拖动">✥</text>
-                <button id="下一步" text="完成" />
-                <button id="跳出" text="跳出" />
+                <horizontal>
+                    <button id="下一步" text="完成" />
+                    <button id="跳出" text="跳出" />
+                </horizontal>
             </vertical>
         ))
     }
@@ -198,8 +200,10 @@ function _有判断(xml, 手动, 操作) {
         <vertical>
             <text id="拖动">✥</text>
             <text>{`请您：安装、注册、登录「${应用名}」。`}</text>
-            <button id="下一步" text="下一步" />
-            <button id="跳出" text="跳出" />
+            <horizontal>
+                <button id="下一步" text="下一步" />
+                <button id="跳出" text="跳出" />
+            </horizontal>
         </vertical>
     ))
 }
@@ -209,8 +213,10 @@ function _有判断(xml, 手动, 操作) {
         <text id="拖动">✥</text>
         <text>{`请您：进入「${应用名}」主页。`}</text>
         <button id="自动操作" text="自动操作" />
-        <button id="下一步" text="下一步" />
-        <button id="跳出" text="跳出" />
+        <horizontal>
+            <button id="下一步" text="下一步" />
+            <button id="跳出" text="跳出" />
+        </horizontal>
     </vertical>, 手动, () => {
         global.shizuku(['shell', 'am', 'force-stop', 包名])
         global.shizuku(['shell', 'monkey', '-p', 包名, '-c', 'android.intent.category.LAUNCHER', '1'])
@@ -223,8 +229,10 @@ function _有判断(xml, 手动, 操作) {
         <text id="拖动">✥</text>
         <text>{`请您：返回「${页名}」。`}</text>
         <button id="自动操作" text="自动操作" />
-        <button id="下一步" text="下一步" />
-        <button id="跳出" text="跳出" />
+        <horizontal>
+            <button id="下一步" text="下一步" />
+            <button id="跳出" text="跳出" />
+        </horizontal>
     </vertical>, 手动, () => {
         global.shizuku(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
         global.sleep(800)
@@ -236,8 +244,10 @@ function _有判断(xml, 手动, 操作) {
         <text id="拖动">✥</text>
         <text>{`请您：向下滚动。`}</text>
         <button id="自动操作" text="自动操作" />
-        <button id="下一步" text="下一步" />
-        <button id="跳出" text="跳出" />
+        <horizontal>
+            <button id="下一步" text="下一步" />
+            <button id="跳出" text="跳出" />
+        </horizontal>
     </vertical>, 手动, () => {
         global.shizuku(['shell', 'input', 'swipe', device.width * 0.5, device.height * 0.6, device.width * 0.5, device.height * 0.4, 1000])
         global.sleep(800)
@@ -253,8 +263,10 @@ function _有判断(xml, 手动, 操作) {
             <button id="否" text="否" />
         </horizontal>
         <button id="自动操作" text="自动操作" />
-        <button id="下一步" text="下一步" />
-        <button id="跳出" text="跳出" />
+        <horizontal>
+            <button id="下一步" text="下一步" />
+            <button id="跳出" text="跳出" />
+        </horizontal>
     </vertical>, 手动, () => {
         return _视觉(`请问：是否「${内容}」？`, { type: 'boolean' })
     })
@@ -265,8 +277,10 @@ function _有判断(xml, 手动, 操作) {
         <text id="拖动">✥</text>
         <text>{`请您：点击「${元素}」。`}</text>
         <button id="自动操作" text="自动操作" />
-        <button id="下一步" text="下一步" />
-        <button id="跳出" text="跳出" />
+        <horizontal>
+            <button id="下一步" text="下一步" />
+            <button id="跳出" text="跳出" />
+        </horizontal>
     </vertical>, 手动, () => {
         const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
             type: 'array',
@@ -293,8 +307,10 @@ function _有判断(xml, 手动, 操作) {
             <button id="否" text="否" />
         </horizontal>
         <button id="自动操作" text="自动操作" />
-        <button id="下一步" text="下一步" />
-        <button id="跳出" text="跳出" />
+        <horizontal>
+            <button id="下一步" text="下一步" />
+            <button id="跳出" text="跳出" />
+        </horizontal>
     </vertical>, 手动, () => {
         const 返回 = _视觉(`请问：是否「${内容}」？若是，请问：「${元素}」坐标？若否，请输出null。`, {
             anyOf: [
@@ -332,8 +348,10 @@ function _有判断(xml, 手动, 操作) {
             <button id="否" text="否" />
         </horizontal>
         <button id="自动操作" text="自动操作" />
-        <button id="下一步" text="下一步" />
-        <button id="跳出" text="跳出" />
+        <horizontal>
+            <button id="下一步" text="下一步" />
+            <button id="跳出" text="跳出" />
+        </horizontal>
     </vertical>, 手动, () => {
         const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
             type: 'array',
@@ -367,8 +385,10 @@ function _有判断(xml, 手动, 操作) {
         <text id="拖动">✥</text>
         <text>{`请您：点击「${元素}」。然后输入「${文本}」。`}</text>
         <button id="自动操作" text="自动操作" />
-        <button id="下一步" text="下一步" />
-        <button id="跳出" text="跳出" />
+        <horizontal>
+            <button id="下一步" text="下一步" />
+            <button id="跳出" text="跳出" />
+        </horizontal>
     </vertical>, 手动, () => {
         const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
             type: 'array',
