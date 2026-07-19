@@ -311,7 +311,7 @@ function _有判断(xml, 手动, 操作) {
             记忆.put(key, [rx, ry])
         }
         log(`${rx} ${ry}`)
-        global.shizuku(`input tap ${rx} ${rx}`)
+        global.shizuku(`input tap ${rx} ${ry}`)
         global.sleep(1000)
     })
 }
@@ -393,7 +393,7 @@ function _有判断(xml, 手动, 操作) {
             记忆.put(key, [rx, ry])
         }
         log(`${rx} ${ry}`)
-        global.shizuku(`input tap ${rx} ${rx}`)
+        global.shizuku(`input tap ${rx} ${ry}`)
         global.sleep(1000)
 
         const path = files.path('截图.png')
@@ -442,7 +442,7 @@ function _有判断(xml, 手动, 操作) {
             记忆.put(key, [rx, ry])
         }
         log(`${rx} ${ry}`)
-        global.shizuku(`input tap ${rx} ${rx}`)
+        global.shizuku(`input tap ${rx} ${ry}`)
         global.sleep(1000)
 
         global.shizuku(`input keyevent KEYCODE_PASTE`)
@@ -542,6 +542,7 @@ ui.layout(
             <horizontal>
                 <text textSize="35">## 平台</text>
                 <button id="收起展开平台" text="展开" />
+                <button id="失忆" text="失忆" />
             </horizontal>
             <vertical id="平台" visibility="gone">
                 <text textSize="30">### 快手</text>
@@ -577,6 +578,10 @@ ui.收起展开平台.click(() => {
         ui.平台.attr('visibility', 'gone')
         ui.收起展开平台.setText('展开')
     }
+})
+
+ui.失忆.click(() => {
+    记忆.clear()
 })
 
 ui.Shizuku.click(() => {
