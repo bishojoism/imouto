@@ -239,7 +239,7 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        global.shizuku(`sh input keyevent KEYCODE_BACK`)
+        global.shizuku(`input keyevent KEYCODE_BACK`)
         global.sleep(800)
     })
 }
@@ -254,7 +254,7 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        global.shizuku(`sh input swipe ${device.width * 0.5} ${device.height * 0.6} ${device.width * 0.5} ${device.height * 0.4, 1000}`)
+        global.shizuku(`input swipe ${device.width * 0.5} ${device.height * 0.6} ${device.width * 0.5} ${device.height * 0.4, 1000}`)
         global.sleep(800)
     })
 }
@@ -298,7 +298,7 @@ function _有判断(xml, 手动, 操作) {
             minItems: 2,
             maxItems: 2,
         })
-        global.shizuku(`sh input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
+        global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
     })
 }
@@ -338,7 +338,7 @@ function _有判断(xml, 手动, 操作) {
         })
         if (!返回) return false
         const [x, y] = 返回
-        global.shizuku(`sh input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
+        global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
         return true
     })
@@ -370,11 +370,11 @@ function _有判断(xml, 手动, 操作) {
             maxItems: 2,
         })
 
-        global.shizuku(`sh input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
+        global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
 
         const path = files.path('截图.png')
-        global.shizuku(`sh screencap -p ${JSON.stringify(path)}`)
+        global.shizuku(`screencap -p ${JSON.stringify(path)}`)
         const texts = ocr.recognizeText(path)
         for (let i = 0; i < texts.length; i++) {
             if (texts[i].indexOf(文本) !== -1) {
@@ -406,11 +406,11 @@ function _有判断(xml, 手动, 操作) {
             minItems: 2,
             maxItems: 2,
         })
-        global.shizuku(`sh input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
+        global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
 
         global.setClip(文本)
-        global.shizuku(`sh input keyevent KEYCODE_PASTE`)
+        global.shizuku(`input keyevent KEYCODE_PASTE`)
         global.sleep(800)
     })
 }
