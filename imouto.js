@@ -304,6 +304,35 @@ function _有判断(xml, 手动, 操作) {
     })
 }
 
+能力.点击两次 = (手动, 元素) => {
+    _没判断(<vertical id="root" bg="white" padding="24">
+        <text id="拖动" textSize="40">✥</text>
+        <text>{`请您：点击两次「${元素}」。`}</text>
+        <button id="自动操作" text="自动操作" />
+        <horizontal>
+            <button id="下一步" text="下一步" />
+            <button id="跳出" text="跳出" />
+        </horizontal>
+    </vertical>, 手动, () => {
+        const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
+            type: 'array',
+            description: '[x, y]',
+            items: {
+                type: 'number',
+                minimum: 0,
+                maximum: 1000,
+            },
+            minItems: 2,
+            maxItems: 2,
+        })
+        log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
+        global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
+        global.sleep(1000)
+        global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
+        global.sleep(1000)
+    })
+}
+
 能力.检查若是则先点击 = (手动, 内容, 元素) => {
     return _有判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
@@ -428,8 +457,8 @@ const 脚本 = {}
 脚本.快手收妹妹 = (手动) => {
     能力.进入主页(手动, '快手', 'com.smile.gifmaker')
     能力.点击之后输入(手动, '右上角搜索图标', '收妹妹处兄妹')
+    能力.点击(手动, '右上角搜索按钮')
     翻作品: for (; ;) {
-        能力.点击(手动, '右上角搜索按钮')
         能力.点击(手动, '第一条作品')
         能力.点击(手动, '右侧评论区图标')
         能力.点击(手动, '评论条数标签')
@@ -449,6 +478,7 @@ const 脚本 = {}
             if (能力.检查(手动, '翻到底了或没有一天内的评论了')) {
                 能力.回到上一页(手动, '作品页')
                 能力.回到上一页(手动, '搜索结果页')
+                能力.连点两次(手动, '右上角搜索按钮')
                 continue 翻作品
             } else {
                 能力.向下滚动(手动)
