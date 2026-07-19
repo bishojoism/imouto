@@ -74,13 +74,9 @@ function _浮动(w) {
 
 能力.进入主页 = (手动, 应用名, 包名) => {
     const 操作 = () => {
-        try {
-            global.shizuku(['shell', 'am', 'force-stop', 包名])
-            global.shizuku(['shell', 'monkey', '-p', 包名, '-c', 'android.intent.category.LAUNCHER', '1'])
-            global.sleep(800)
-        } catch (e) {
-            toastLog(e.message)
-        }
+        global.shizuku(['shell', 'am', 'force-stop', 包名])
+        global.shizuku(['shell', 'monkey', '-p', 包名, '-c', 'android.intent.category.LAUNCHER', '1'])
+        global.sleep(800)
     }
 
     if (手动) {
@@ -97,7 +93,11 @@ function _浮动(w) {
         w.自动操作.click(() => {
             w.自动操作.enabled = false
             threads.start(() => {
-                操作()
+                try {
+                    操作()
+                } catch (e) {
+                    toastLog(e.message)
+                }
                 ui.run(() => {
                     w.自动操作.enabled = true
                 })
@@ -112,12 +112,8 @@ function _浮动(w) {
 
 能力.回到上一页 = (手动, 页名) => {
     const 操作 = () => {
-        try {
-            global.shizuku(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
-            global.sleep(800)
-        } catch (e) {
-            toastLog(e.message)
-        }
+        global.shizuku(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
+        global.sleep(800)
     }
 
     if (手动) {
@@ -134,7 +130,11 @@ function _浮动(w) {
         w.自动操作.click(() => {
             w.自动操作.enabled = false
             threads.start(() => {
-                操作()
+                try {
+                    操作()
+                } catch (e) {
+                    toastLog(e.message)
+                }
                 ui.run(() => {
                     w.自动操作.enabled = true
                 })
@@ -149,12 +149,8 @@ function _浮动(w) {
 
 能力.向下滚动 = (手动) => {
     const 操作 = () => {
-        try {
-            global.shizuku(['shell', 'input', 'swipe', device.width * 0.5, device.height * 0.6, device.width * 0.5, device.height * 0.4, 1000])
-            global.sleep(800)
-        } catch (e) {
-            toastLog(e.message)
-        }
+        global.shizuku(['shell', 'input', 'swipe', device.width * 0.5, device.height * 0.6, device.width * 0.5, device.height * 0.4, 1000])
+        global.sleep(800)
     }
 
     if (手动) {
@@ -171,7 +167,11 @@ function _浮动(w) {
         w.自动操作.click(() => {
             w.自动操作.enabled = false
             threads.start(() => {
-                操作()
+                try {
+                    操作()
+                } catch (e) {
+                    toastLog(e.message)
+                }
                 ui.run(() => {
                     w.自动操作.enabled = true
                 })
@@ -186,54 +186,50 @@ function _浮动(w) {
 
 能力.检查 = (手动, 内容) => {
     const 操作 = () => {
-        try {
-            const path = files.path('截图.png')
-            global.shizuku(['shell', 'screencap', '-p', path])
-            let err
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = http.postJson(`${BASE_URL}/chat/completions`, {
-                        model: MODEL,
-                        messages: [
-                            {
-                                role: 'user',
-                                content: {
-                                    type: 'image_url',
-                                    image_url: {
-                                        url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
-                                    }
-                                }
-                            },
-                            {
-                                role: 'user',
-                                content: `请问：是否「${内容}」？`
-                            }
-                        ],
-                        response_format: {
-                            type: 'json_schema',
-                            json_schema: {
-                                name: 'bool',
-                                strict: true,
-                                schema: {
-                                    type: 'boolean',
-                                    description: '结果',
+        const path = files.path('截图.png')
+        global.shizuku(['shell', 'screencap', '-p', path])
+        let err
+        for (let i = 0; i < 5; i++) {
+            try {
+                const response = http.postJson(`${BASE_URL}/chat/completions`, {
+                    model: MODEL,
+                    messages: [
+                        {
+                            role: 'user',
+                            content: {
+                                type: 'image_url',
+                                image_url: {
+                                    url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
                                 }
                             }
+                        },
+                        {
+                            role: 'user',
+                            content: `请问：是否「${内容}」？`
                         }
-                    }, {
-                        headers: {
-                            'Authorization': `Bearer ${API_KEY}`
+                    ],
+                    response_format: {
+                        type: 'json_schema',
+                        json_schema: {
+                            name: 'bool',
+                            strict: true,
+                            schema: {
+                                type: 'boolean',
+                                description: '结果',
+                            }
                         }
-                    })
-                    return JSON.parse(response.body.json().choices[0].message.content)
-                } catch (e) {
-                    err = e
-                }
+                    }
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`
+                    }
+                })
+                return JSON.parse(response.body.json().choices[0].message.content)
+            } catch (e) {
+                err = e
             }
-            throw err
-        } catch (e) {
-            toastLog(e.message)
         }
+        throw err
     }
 
     let 结果
@@ -255,17 +251,23 @@ function _浮动(w) {
         w.自动操作.click(() => {
             w.自动操作.enabled = false
             threads.start(() => {
-                结果 = 操作()
-                if (结果) {
-                    w.是.enabled = false
-                    w.否.enabled = true
-                } else {
-                    w.否.enabled = false
-                    w.是.enabled = true
+                try {
+                    结果 = 操作()
+                    if (结果) {
+                        w.是.enabled = false
+                        w.否.enabled = true
+                    } else {
+                        w.否.enabled = false
+                        w.是.enabled = true
+                    }
+                    ui.run(() => {
+                        w.下一步.enabled = true
+                    })
+                } catch (e) {
+                    toastLog(e.message)
                 }
                 ui.run(() => {
                     w.自动操作.enabled = true
-                    w.下一步.enabled = true
                 })
             })
         })
@@ -297,64 +299,60 @@ function _浮动(w) {
 
 能力.点击 = (手动, 元素) => {
     const 操作 = () => {
-        try {
-            const path = files.path('截图.png')
-            global.shizuku(['shell', 'screencap', '-p', path])
-            let err
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = http.postJson(`${BASE_URL}/chat/completions`, {
-                        model: MODEL,
-                        messages: [
-                            {
-                                role: 'user',
-                                content: {
-                                    type: 'image_url',
-                                    image_url: {
-                                        url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
-                                    }
-                                }
-                            },
-                            {
-                                role: 'user',
-                                content: `请问：「${元素}」坐标？`
-                            }
-                        ],
-                        response_format: {
-                            type: 'json_schema',
-                            json_schema: {
-                                name: 'point',
-                                strict: true,
-                                schema: {
-                                    type: 'array',
-                                    description: '坐标[x, y]',
-                                    items: {
-                                        type: 'number',
-                                        minimum: 0,
-                                        maximum: 1000,
-                                    },
-                                    minItems: 2,
-                                    maxItems: 2,
+        const path = files.path('截图.png')
+        global.shizuku(['shell', 'screencap', '-p', path])
+        let err
+        for (let i = 0; i < 5; i++) {
+            try {
+                const response = http.postJson(`${BASE_URL}/chat/completions`, {
+                    model: MODEL,
+                    messages: [
+                        {
+                            role: 'user',
+                            content: {
+                                type: 'image_url',
+                                image_url: {
+                                    url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
                                 }
                             }
+                        },
+                        {
+                            role: 'user',
+                            content: `请问：「${元素}」坐标？`
                         }
-                    }, {
-                        headers: {
-                            'Authorization': `Bearer ${API_KEY}`
+                    ],
+                    response_format: {
+                        type: 'json_schema',
+                        json_schema: {
+                            name: 'point',
+                            strict: true,
+                            schema: {
+                                type: 'array',
+                                description: '坐标[x, y]',
+                                items: {
+                                    type: 'number',
+                                    minimum: 0,
+                                    maximum: 1000,
+                                },
+                                minItems: 2,
+                                maxItems: 2,
+                            }
                         }
-                    })
-                    const [x, y] = JSON.parse(response.body.json().choices[0].message.content)
-                    global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
-                    global.sleep(800)
-                    return
-                } catch (e) {
-                    err = e
-                }
+                    }
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`
+                    }
+                })
+                const [x, y] = JSON.parse(response.body.json().choices[0].message.content)
+                global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+                global.sleep(800)
+                return
+            } catch (e) {
+                err = e
             }
-            throw err
-        } catch (e) {
-            toastLog(e.message)
         }
+        throw err
     }
 
     if (手动) {
@@ -371,7 +369,11 @@ function _浮动(w) {
         w.自动操作.click(() => {
             w.自动操作.enabled = false
             threads.start(() => {
-                操作()
+                try {
+                    操作()
+                } catch (e) {
+                    toastLog(e.message)
+                }
                 ui.run(() => {
                     w.自动操作.enabled = true
                 })
@@ -386,78 +388,74 @@ function _浮动(w) {
 
 能力.检查若是则先点击 = (手动, 内容, 元素) => {
     const 操作 = () => {
-        try {
-            const path = files.path('截图.png')
-            global.shizuku(['shell', 'screencap', '-p', path])
-            let err
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = http.postJson(`${BASE_URL}/chat/completions`, {
-                        model: MODEL,
-                        messages: [
-                            {
-                                role: 'system',
-                                content: '你是界面操作员。'
-                            },
-                            {
-                                role: 'user',
-                                content: {
-                                    type: 'image_url',
-                                    image_url: {
-                                        url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
-                                    }
-                                }
-                            },
-                            {
-                                role: 'user',
-                                content: `根据屏幕检查${内容}是正确还是错误，若正确则定位屏幕上的${元素}，若错误则输出null。`
-                            }
-                        ],
-                        response_format: {
-                            type: 'json_schema',
-                            json_schema: {
-                                name: 'point',
-                                strict: true,
-                                schema: {
-                                    anyOf: [
-                                        {
-                                            type: 'array',
-                                            description: '坐标[x, y]',
-                                            items: {
-                                                type: 'number',
-                                                minimum: 0,
-                                                maximum: 1000,
-                                            },
-                                            minItems: 2,
-                                            maxItems: 2,
-                                        },
-                                        {
-                                            type: 'null',
-                                            description: '错误'
-                                        },
-                                    ],
+        const path = files.path('截图.png')
+        global.shizuku(['shell', 'screencap', '-p', path])
+        let err
+        for (let i = 0; i < 5; i++) {
+            try {
+                const response = http.postJson(`${BASE_URL}/chat/completions`, {
+                    model: MODEL,
+                    messages: [
+                        {
+                            role: 'system',
+                            content: '你是界面操作员。'
+                        },
+                        {
+                            role: 'user',
+                            content: {
+                                type: 'image_url',
+                                image_url: {
+                                    url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
                                 }
                             }
+                        },
+                        {
+                            role: 'user',
+                            content: `根据屏幕检查${内容}是正确还是错误，若正确则定位屏幕上的${元素}，若错误则输出null。`
                         }
-                    }, {
-                        headers: {
-                            'Authorization': `Bearer ${API_KEY}`
+                    ],
+                    response_format: {
+                        type: 'json_schema',
+                        json_schema: {
+                            name: 'point',
+                            strict: true,
+                            schema: {
+                                anyOf: [
+                                    {
+                                        type: 'array',
+                                        description: '坐标[x, y]',
+                                        items: {
+                                            type: 'number',
+                                            minimum: 0,
+                                            maximum: 1000,
+                                        },
+                                        minItems: 2,
+                                        maxItems: 2,
+                                    },
+                                    {
+                                        type: 'null',
+                                        description: '错误'
+                                    },
+                                ],
+                            }
                         }
-                    })
-                    const point = JSON.parse(response.body.json().choices[0].message.content)
-                    if (!point) return false
-                    const [x, y] = point
-                    global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
-                    global.sleep(800)
-                    return true
-                } catch (e) {
-                    err = e
-                }
+                    }
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`
+                    }
+                })
+                const point = JSON.parse(response.body.json().choices[0].message.content)
+                if (!point) return false
+                const [x, y] = point
+                global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+                global.sleep(800)
+                return true
+            } catch (e) {
+                err = e
             }
-            throw err
-        } catch (e) {
-            toastLog(e.message)
         }
+        throw err
     }
 
     let 结果
@@ -479,17 +477,23 @@ function _浮动(w) {
         w.自动操作.click(() => {
             w.自动操作.enabled = false
             threads.start(() => {
-                结果 = 操作()
-                if (结果) {
-                    w.是.enabled = false
-                    w.否.enabled = true
-                } else {
-                    w.否.enabled = false
-                    w.是.enabled = true
+                try {
+                    结果 = 操作()
+                    if (结果) {
+                        w.是.enabled = false
+                        w.否.enabled = true
+                    } else {
+                        w.否.enabled = false
+                        w.是.enabled = true
+                    }
+                    ui.run(() => {
+                        w.下一步.enabled = true
+                    })
+                } catch (e) {
+                    toastLog(e.message)
                 }
                 ui.run(() => {
                     w.自动操作.enabled = true
-                    w.下一步.enabled = true
                 })
             })
         })
@@ -521,70 +525,66 @@ function _浮动(w) {
 
 能力.点击之后看见 = (手动, 元素, 文本) => {
     const 操作 = () => {
-        try {
-            const path = files.path('截图.png')
-            global.shizuku(['shell', 'screencap', '-p', path])
-            let err
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = http.postJson(`${BASE_URL}/chat/completions`, {
-                        model: MODEL,
-                        messages: [
-                            {
-                                role: 'user',
-                                content: {
-                                    type: 'image_url',
-                                    image_url: {
-                                        url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
-                                    }
-                                }
-                            },
-                            {
-                                role: 'user',
-                                content: `请问：「${元素}」坐标？`
-                            }
-                        ],
-                        response_format: {
-                            type: 'json_schema',
-                            json_schema: {
-                                name: 'point',
-                                strict: true,
-                                schema: {
-                                    type: 'array',
-                                    description: '坐标[x, y]',
-                                    items: {
-                                        type: 'number',
-                                        minimum: 0,
-                                        maximum: 1000,
-                                    },
-                                    minItems: 2,
-                                    maxItems: 2,
+        const path = files.path('截图.png')
+        global.shizuku(['shell', 'screencap', '-p', path])
+        let err
+        for (let i = 0; i < 5; i++) {
+            try {
+                const response = http.postJson(`${BASE_URL}/chat/completions`, {
+                    model: MODEL,
+                    messages: [
+                        {
+                            role: 'user',
+                            content: {
+                                type: 'image_url',
+                                image_url: {
+                                    url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
                                 }
                             }
+                        },
+                        {
+                            role: 'user',
+                            content: `请问：「${元素}」坐标？`
                         }
-                    }, {
-                        headers: {
-                            'Authorization': `Bearer ${API_KEY}`
-                        }
-                    })
-                    const [x, y] = JSON.parse(response.body.json().choices[0].message.content)
-                    global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
-                    global.sleep(800)
-                    const texts = ocr.recognizeText(path)
-                    for (let i = 0; i < texts.length; i++) {
-                        if (texts[i].indexOf(文本) !== -1) {
-                            return true
+                    ],
+                    response_format: {
+                        type: 'json_schema',
+                        json_schema: {
+                            name: 'point',
+                            strict: true,
+                            schema: {
+                                type: 'array',
+                                description: '坐标[x, y]',
+                                items: {
+                                    type: 'number',
+                                    minimum: 0,
+                                    maximum: 1000,
+                                },
+                                minItems: 2,
+                                maxItems: 2,
+                            }
                         }
                     }
-                    return false
-                } catch (e) {
-                    err = e
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`
+                    }
+                })
+                const [x, y] = JSON.parse(response.body.json().choices[0].message.content)
+                global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+                global.sleep(800)
+                const texts = ocr.recognizeText(path)
+                for (let i = 0; i < texts.length; i++) {
+                    if (texts[i].indexOf(文本) !== -1) {
+                        return true
+                    }
                 }
+                return false
+            } catch (e) {
+                err = e
             }
-            throw err
-        } catch (e) {
-            toastLog(e.message)
         }
+        throw err
     }
 
     let 结果
@@ -606,17 +606,23 @@ function _浮动(w) {
         w.自动操作.click(() => {
             w.自动操作.enabled = false
             threads.start(() => {
-                结果 = 操作()
-                if (结果) {
-                    w.是.enabled = false
-                    w.否.enabled = true
-                } else {
-                    w.否.enabled = false
-                    w.是.enabled = true
+                try {
+                    结果 = 操作()
+                    if (结果) {
+                        w.是.enabled = false
+                        w.否.enabled = true
+                    } else {
+                        w.否.enabled = false
+                        w.是.enabled = true
+                    }
+                    ui.run(() => {
+                        w.下一步.enabled = true
+                    })
+                } catch (e) {
+                    toastLog(e.message)
                 }
                 ui.run(() => {
                     w.自动操作.enabled = true
-                    w.下一步.enabled = true
                 })
             })
         })
@@ -648,67 +654,63 @@ function _浮动(w) {
 
 能力.点击之后输入 = (手动, 元素, 文本) => {
     const 操作 = () => {
-        try {
-            const path = files.path('截图.png')
-            global.shizuku(['shell', 'screencap', '-p', path])
-            let err
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = http.postJson(`${BASE_URL}/chat/completions`, {
-                        model: MODEL,
-                        messages: [
-                            {
-                                role: 'user',
-                                content: {
-                                    type: 'image_url',
-                                    image_url: {
-                                        url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
-                                    }
-                                }
-                            },
-                            {
-                                role: 'user',
-                                content: `请问：「${元素}」坐标？`
-                            }
-                        ],
-                        response_format: {
-                            type: 'json_schema',
-                            json_schema: {
-                                name: 'point',
-                                strict: true,
-                                schema: {
-                                    type: 'array',
-                                    description: '坐标[x, y]',
-                                    items: {
-                                        type: 'number',
-                                        minimum: 0,
-                                        maximum: 1000,
-                                    },
-                                    minItems: 2,
-                                    maxItems: 2,
+        const path = files.path('截图.png')
+        global.shizuku(['shell', 'screencap', '-p', path])
+        let err
+        for (let i = 0; i < 5; i++) {
+            try {
+                const response = http.postJson(`${BASE_URL}/chat/completions`, {
+                    model: MODEL,
+                    messages: [
+                        {
+                            role: 'user',
+                            content: {
+                                type: 'image_url',
+                                image_url: {
+                                    url: `data:image/jpeg;base64,${images.toBase64(images.resize(images.read(path), [1000, 1000]), 'jpeg', 95)}`
                                 }
                             }
+                        },
+                        {
+                            role: 'user',
+                            content: `请问：「${元素}」坐标？`
                         }
-                    }, {
-                        headers: {
-                            'Authorization': `Bearer ${API_KEY}`
+                    ],
+                    response_format: {
+                        type: 'json_schema',
+                        json_schema: {
+                            name: 'point',
+                            strict: true,
+                            schema: {
+                                type: 'array',
+                                description: '坐标[x, y]',
+                                items: {
+                                    type: 'number',
+                                    minimum: 0,
+                                    maximum: 1000,
+                                },
+                                minItems: 2,
+                                maxItems: 2,
+                            }
                         }
-                    })
-                    const [x, y] = JSON.parse(response.body.json().choices[0].message.content)
-                    global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
-                    global.sleep(800)
-                    global.setClip(文本)
-                    global.shizuku(['shell', 'input', 'keyevent', 'KEYCODE_PASTE'])
-                    global.sleep(800)
-                    return
-                } catch (e) {
-                    err = e
-                }
+                    }
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`
+                    }
+                })
+                const [x, y] = JSON.parse(response.body.json().choices[0].message.content)
+                global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+                global.sleep(800)
+                global.setClip(文本)
+                global.shizuku(['shell', 'input', 'keyevent', 'KEYCODE_PASTE'])
+                global.sleep(800)
+                return
+            } catch (e) {
+                err = e
             }
-            throw err
-        } catch (e) {
-            toastLog(e.message)
         }
+        throw err
     }
 
     if (手动) {
@@ -725,7 +727,11 @@ function _浮动(w) {
         w.自动操作.click(() => {
             w.自动操作.enabled = false
             threads.start(() => {
-                操作()
+                try {
+                    操作()
+                } catch (e) {
+                    toastLog(e.message)
+                }
                 ui.run(() => {
                     w.自动操作.enabled = true
                 })
