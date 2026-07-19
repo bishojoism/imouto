@@ -342,7 +342,7 @@ function _有判断(xml, 手动, 操作) {
 能力.点击之后看见 = (手动, 元素, 文本) => {
     return _有判断(<vertical>
         <text id="拖动">✥</text>
-        <text>{`请您：点击「${元素}」。然后立刻判断：是否看见「${文本}」？`}</text>
+        <text>{`请您：点击「${元素}」。然后立刻判断：是否看见「${文本}」这几个字？`}</text>
         <horizontal>
             <button id="是" text="是" />
             <button id="否" text="否" />
