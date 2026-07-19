@@ -496,8 +496,8 @@ ui.layout(
                 <vertical>
                     <text textSize="30sp">视觉模型</text>
                     <input id="API_KEY" hint="API_KEY" text={API_KEY} />
-                    <input id="BASE_URL" hint="BASE_URL" />
-                    <input id="MODEL" hint="MODEL" />
+                    <input id="BASE_URL" hint="BASE_URL" text={BASE_URL} />
+                    <input id="MODEL" hint="MODEL" text={MODEL} />
                     <button id="视觉模型" text="保存并检查" />
                 </vertical>
             </vertical>
