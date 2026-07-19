@@ -74,7 +74,7 @@ function _视觉(text, schema) {
                         messages: [
                             {
                                 role: 'system',
-                                content: `必须输出JSON：${JSON.stringify(j)}`
+                                content: `必须输出JSON（禁止用代码块包裹）：${JSON.stringify(j)}`
                             },
                             {
                                 role: 'user',
@@ -97,7 +97,9 @@ function _视觉(text, schema) {
                             'Authorization': `Bearer ${API_KEY}`
                         }
                     })
-                    return JSON.parse(response.body.json().choices[0].message.content).结果
+                    const json = response.body.json()
+                    log(JSON.stringify(json))
+                    return JSON.parse(json.choices[0].message.content).结果
                 } catch (e) {
                     err = e
                 }
@@ -581,7 +583,7 @@ ui.视觉模型.click(() => {
                 messages: [
                     {
                         role: 'system',
-                        content: `必须输出JSON：${JSON.stringify(j)}`
+                        content: `必须输出JSON（禁止用代码块包裹）：${JSON.stringify(j)}`
                     },
                     {
                         role: 'user',
