@@ -709,10 +709,8 @@ function _浮动(w) {
 const 脚本 = {}
 
 脚本.准备快手 = () => {
-    第1步:
     能力.安装注册登录('快手')
-    第2步:
-    能力.完成()
+    能力.完成(true)
 }
 
 脚本.快手收妹妹 = (手动) => {
@@ -748,6 +746,37 @@ const 脚本 = {}
     }
 }
 
-threads.start(() => {
-    脚本.快手收妹妹(true)
+function 执行(程序, 回调) {
+    threads.start(() => {
+        try {
+            程序()
+            throw new Error('开发者忘记加完成这一步了')
+        } catch (e) {
+            switch (e.message) {
+                case '跳出': {
+                    global.toastLog('用户跳出脚本')
+                    回调()
+                    break
+                }
+                case '完成': {
+                    global.toastLog('用户完成脚本')
+                    回调()
+                    break
+                }
+                default: {
+                    throw e
+                }
+            }
+        }
+    })
+}
+
+执行(() => {
+    脚本.准备快手()
+}, () => {
+    执行(() => {
+        脚本.快手收妹妹(true)
+    }, () => {
+        
+    })
 })
