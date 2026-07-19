@@ -369,7 +369,6 @@ function _有判断(xml, 手动, 操作) {
             minItems: 2,
             maxItems: 2,
         })
-
         global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
 
@@ -395,6 +394,8 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
+        global.setClip(文本)
+
         const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
             type: 'array',
             description: '坐标[x, y]',
@@ -409,7 +410,6 @@ function _有判断(xml, 手动, 操作) {
         global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
 
-        global.setClip(文本)
         global.shizuku(`input keyevent KEYCODE_PASTE`)
         global.sleep(800)
     })
