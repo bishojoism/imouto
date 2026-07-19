@@ -602,7 +602,7 @@ ui.视觉模型.click(() => {
                     'Authorization': `Bearer ${API_KEY}`
                 }
             })
-            return JSON.parse(response.body.json().choices[0].message.content).结果
+            toastLog(JSON.parse(response.body.json().choices[0].message.content).结果)
         } catch (e) {
             toastLog(e.message)
         }
