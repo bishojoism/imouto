@@ -38,7 +38,7 @@ const 能力 = {}
         }
     }
 
-    throw '完成'
+    throw new Error('完成')
 }
 
 能力.安装注册登录 = (应用名) => {
