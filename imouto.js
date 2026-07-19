@@ -32,6 +32,43 @@ function _浮动(w) {
     w.close()
 }
 
+function _是否(w) {
+    w.尝试自动操作.click(() => {
+        w.尝试自动操作.enabled = false
+        threads.start(() => {
+            结果 = 操作()
+            if (结果) {
+                w.是.enabled = false
+                w.否.enabled = true
+            } else {
+                w.否.enabled = false
+                w.是.enabled = true
+            }
+            ui.run(() => {
+                w.尝试自动操作.enabled = true
+                w.下一步.enabled = true
+            })
+        })
+    })
+
+    w.是.click(() => {
+        结果 = true
+        w.是.enabled = false
+        w.否.enabled = true
+        w.下一步.enabled = true
+    })
+    w.否.click(() => {
+        结果 = false
+        w.否.enabled = false
+        w.是.enabled = true
+        w.下一步.enabled = true
+    })
+
+    ui.run(() => {
+        w.下一步.enabled = false
+    })
+}
+
 能力.完成 = (手动) => {
     if (手动) {
         const w = floaty.window(
@@ -219,41 +256,7 @@ function _浮动(w) {
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
-            threads.start(() => {
-                结果 = 操作()
-                if (结果) {
-                    w.是.enabled = false
-                    w.否.enabled = true
-                } else {
-                    w.否.enabled = false
-                    w.是.enabled = true
-                }
-                ui.run(() => {
-                    w.尝试自动操作.enabled = true
-                    w.下一步.enabled = true
-                })
-            })
-        })
-
-        w.是.click(() => {
-            结果 = true
-            w.是.enabled = false
-            w.否.enabled = true
-            w.下一步.enabled = true
-        })
-        w.否.click(() => {
-            结果 = false
-            w.否.enabled = false
-            w.是.enabled = true
-            w.下一步.enabled = true
-        })
-
-        ui.run(() => {
-            w.下一步.enabled = false
-        })
-
+        _是否(w)
         _浮动(w)
     } else {
         结果 = 操作()
@@ -433,41 +436,7 @@ function _浮动(w) {
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
-            threads.start(() => {
-                结果 = 操作()
-                if (结果) {
-                    w.是.enabled = false
-                    w.否.enabled = true
-                } else {
-                    w.否.enabled = false
-                    w.是.enabled = true
-                }
-                ui.run(() => {
-                    w.尝试自动操作.enabled = true
-                    w.下一步.enabled = true
-                })
-            })
-        })
-
-        w.是.click(() => {
-            结果 = true
-            w.是.enabled = false
-            w.否.enabled = true
-            w.下一步.enabled = true
-        })
-        w.否.click(() => {
-            结果 = false
-            w.否.enabled = false
-            w.是.enabled = true
-            w.下一步.enabled = true
-        })
-
-        ui.run(() => {
-            w.下一步.enabled = false
-        })
-
+        _是否(w)
         _浮动(w)
     } else {
         结果 = 操作()
@@ -553,41 +522,7 @@ function _浮动(w) {
             </vertical>
         )
 
-        w.尝试自动操作.click(() => {
-            w.尝试自动操作.enabled = false
-            threads.start(() => {
-                结果 = 操作()
-                if (结果) {
-                    w.是.enabled = false
-                    w.否.enabled = true
-                } else {
-                    w.否.enabled = false
-                    w.是.enabled = true
-                }
-                ui.run(() => {
-                    w.尝试自动操作.enabled = true
-                    w.下一步.enabled = true
-                })
-            })
-        })
-
-        w.是.click(() => {
-            结果 = true
-            w.是.enabled = false
-            w.否.enabled = true
-            w.下一步.enabled = true
-        })
-        w.否.click(() => {
-            结果 = false
-            w.否.enabled = false
-            w.是.enabled = true
-            w.下一步.enabled = true
-        })
-
-        ui.run(() => {
-            w.下一步.enabled = false
-        })
-
+        _是否(w)
         _浮动(w)
     } else {
         结果 = 操作()
