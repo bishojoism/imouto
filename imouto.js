@@ -476,18 +476,13 @@ function _视觉(text, schema) {
 
         const path = files.path('截图.png')
         global.shizuku(['shell', 'screencap', '-p', path])
-        const raw = images.read(path)
-        try {
-            const texts = ocr.recognizeText(path)
-            for (let i = 0; i < texts.length; i++) {
-                if (texts[i].indexOf(文本) !== -1) {
-                    return true
-                }
+        const texts = ocr.recognizeText(path)
+        for (let i = 0; i < texts.length; i++) {
+            if (texts[i].indexOf(文本) !== -1) {
+                return true
             }
-            return false
-        } finally {
-            raw.recycle()
         }
+        return false
     }
 
     let 结果
