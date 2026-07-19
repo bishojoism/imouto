@@ -55,6 +55,14 @@ function _视觉(text, schema) {
     if (!raw) {
         throw new Error('截图失败')
     }
+    const j = {
+        type: 'object',
+        properties: {
+            结果: schema
+        },
+        additionalProperties: false,
+        required: ['结果']
+    }
     try {
         const resized = images.resize(raw, [1000, 1000])
         try {
@@ -64,6 +72,10 @@ function _视觉(text, schema) {
                     const response = http.postJson(`${BASE_URL}/chat/completions`, {
                         model: MODEL,
                         messages: [
+                            {
+                                role: 'system',
+                                content: `必须输出JSON：${JSON.stringify(j)}`
+                            },
                             {
                                 role: 'user',
                                 content: [
@@ -79,22 +91,7 @@ function _视觉(text, schema) {
                                     }
                                 ]
                             }
-                        ],
-                        response_format: {
-                            type: 'json_schema',
-                            json_schema: {
-                                name: 'result',
-                                strict: true,
-                                schema: {
-                                    type: 'object',
-                                    properties: {
-                                        结果: schema
-                                    },
-                                    additionalProperties: false,
-                                    required: ['结果']
-                                }
-                            }
-                        }
+                        ]
                     }, {
                         headers: {
                             'Authorization': `Bearer ${API_KEY}`
@@ -299,6 +296,7 @@ function _有判断(xml, 手动, 操作) {
             minItems: 2,
             maxItems: 2,
         })
+        log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
     })
@@ -338,6 +336,7 @@ function _有判断(xml, 手动, 操作) {
         })
         if (!返回) return false
         const [x, y] = 返回
+        log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
         return true
@@ -369,6 +368,7 @@ function _有判断(xml, 手动, 操作) {
             minItems: 2,
             maxItems: 2,
         })
+        log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
 
@@ -398,7 +398,7 @@ function _有判断(xml, 手动, 操作) {
 
         const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
             type: 'array',
-            description: '坐标[x, y]',
+            description: '[x, y]',
             items: {
                 type: 'number',
                 minimum: 0,
@@ -407,6 +407,7 @@ function _有判断(xml, 手动, 操作) {
             minItems: 2,
             maxItems: 2,
         })
+        log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
         global.sleep(800)
 
@@ -563,45 +564,42 @@ ui.视觉模型.click(() => {
     视觉模型.put('API_KEY', API_KEY)
     视觉模型.put('BASE_URL', BASE_URL)
     视觉模型.put('MODEL', MODEL)
+    const j = {
+        type: 'object',
+        properties: {
+            结果: {
+                type: 'string'
+            }
+        },
+        additionalProperties: false,
+        required: ['结果']
+    }
     threads.start(() => {
         try {
             const response = http.postJson(`${BASE_URL}/chat/completions`, {
                 model: MODEL,
                 messages: [
                     {
+                        role: 'system',
+                        content: `必须输出JSON：${JSON.stringify(j)}`
+                    },
+                    {
                         role: 'user',
                         content: [
                             {
                                 type: 'text',
-                                text: '输出「成功」'
+                                text: '输出「成功」。'
                             }
                         ]
                     }
-                ],
-                response_format: {
-                    type: 'json_schema',
-                    json_schema: {
-                        name: 'result',
-                        strict: true,
-                        schema: {
-                            type: 'object',
-                            properties: {
-                                结果: {
-                                    type: 'string'
-                                }
-                            },
-                            additionalProperties: false,
-                            required: ['结果']
-                        }
-                    }
-                }
+                ]
             }, {
                 headers: {
                     'Authorization': `Bearer ${API_KEY}`
                 }
             })
             const json = response.body.json()
-            toastLog(json)
+            log(JSON.stringify(json))
             toastLog(JSON.parse(json.choices[0].message.content).结果)
         } catch (e) {
             toastLog(e.message)
