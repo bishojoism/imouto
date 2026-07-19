@@ -68,13 +68,14 @@ const 能力 = {}
     })
 
     let flag = true
-    while (flag) {
-        global.sleep(80)
-    }
 
     w.下一步.click(() => {
         flag = false
     })
+    
+    while (flag) {
+        global.sleep(80)
+    }
 }
 
 能力.进入主页 = (手动, 应用名, 包名) => {
@@ -123,13 +124,14 @@ const 能力 = {}
         })
 
         let flag = true
-        while (flag) {
-            global.sleep(80)
-        }
-
+    
         w.下一步.click(() => {
             flag = false
         })
+        
+        while (flag) {
+            global.sleep(80)
+        }
     } else {
         操作()
     }
@@ -180,13 +182,14 @@ const 能力 = {}
         })
 
         let flag = true
-        while (flag) {
-            global.sleep(80)
-        }
-
+    
         w.下一步.click(() => {
             flag = false
         })
+        
+        while (flag) {
+            global.sleep(80)
+        }
     } else {
         操作()
     }
@@ -237,13 +240,14 @@ const 能力 = {}
         })
 
         let flag = true
-        while (flag) {
-            global.sleep(80)
-        }
-
+    
         w.下一步.click(() => {
             flag = false
         })
+        
+        while (flag) {
+            global.sleep(80)
+        }
     } else {
         操作()
     }
@@ -323,9 +327,9 @@ const 能力 = {}
                     w.否.disabled = true
                     w.是.disabled = false
                 }
-                ui.下一步.disabled = false
                 ui.run(() => {
                     ui.尝试自动操作.disabled = false
+                    ui.下一步.disabled = false
                 })
             })
         })
@@ -362,13 +366,14 @@ const 能力 = {}
         })
 
         let flag = true
-        while (flag) {
-            global.sleep(80)
-        }
 
         w.下一步.click(() => {
             flag = false
         })
+        
+        while (flag) {
+            global.sleep(80)
+        }
     } else {
         结果 = 操作()
     }
@@ -473,13 +478,14 @@ const 能力 = {}
         })
 
         let flag = true
-        while (flag) {
-            global.sleep(80)
-        }
-
+    
         w.下一步.click(() => {
             flag = false
         })
+        
+        while (flag) {
+            global.sleep(80)
+        }
     } else {
         操作()
     }
@@ -583,9 +589,9 @@ const 能力 = {}
                     w.否.disabled = true
                     w.是.disabled = false
                 }
-                ui.下一步.disabled = false
                 ui.run(() => {
                     ui.尝试自动操作.disabled = false
+                    ui.下一步.disabled = false
                 })
             })
         })
@@ -622,13 +628,14 @@ const 能力 = {}
         })
 
         let flag = true
-        while (flag) {
-            global.sleep(80)
-        }
-
+    
         w.下一步.click(() => {
             flag = false
         })
+        
+        while (flag) {
+            global.sleep(80)
+        }
     } else {
         结果 = 操作()
     }
@@ -724,9 +731,9 @@ const 能力 = {}
                     w.否.disabled = true
                     w.是.disabled = false
                 }
-                ui.下一步.disabled = false
                 ui.run(() => {
                     ui.尝试自动操作.disabled = false
+                    ui.下一步.disabled = false
                 })
             })
         })
@@ -763,13 +770,14 @@ const 能力 = {}
         })
 
         let flag = true
-        while (flag) {
-            global.sleep(80)
-        }
-
+    
         w.下一步.click(() => {
             flag = false
         })
+        
+        while (flag) {
+            global.sleep(80)
+        }
     } else {
         结果 = 操作()
     }
@@ -877,13 +885,14 @@ const 能力 = {}
         })
 
         let flag = true
-        while (flag) {
-            global.sleep(80)
-        }
-
+    
         w.下一步.click(() => {
             flag = false
         })
+        
+        while (flag) {
+            global.sleep(80)
+        }
     } else {
         操作()
     }
