@@ -83,13 +83,14 @@ function _视觉(text, schema) {
                         response_format: {
                             type: 'json_schema',
                             json_schema: {
-                                name: '结果',
+                                name: 'result',
                                 strict: true,
                                 schema: {
                                     type: 'object',
                                     properties: {
                                         结果: schema
                                     },
+                                    additionalProperties: false,
                                     required: ['结果']
                                 }
                             }
@@ -321,7 +322,7 @@ function _有判断(xml, 手动, 操作) {
             anyOf: [
                 {
                     type: 'array',
-                    description: '坐标[x, y]',
+                    description: '[x, y]',
                     items: {
                         type: 'number',
                         minimum: 0,
@@ -332,7 +333,6 @@ function _有判断(xml, 手动, 操作) {
                 },
                 {
                     type: 'null',
-                    description: '否'
                 },
             ],
         })
@@ -581,7 +581,7 @@ ui.视觉模型.click(() => {
                 response_format: {
                     type: 'json_schema',
                     json_schema: {
-                        name: '结果',
+                        name: 'result',
                         strict: true,
                         schema: {
                             type: 'object',
@@ -590,6 +590,7 @@ ui.视觉模型.click(() => {
                                     type: 'string'
                                 }
                             },
+                            additionalProperties: false,
                             required: ['结果']
                         }
                     }
@@ -599,7 +600,9 @@ ui.视觉模型.click(() => {
                     'Authorization': `Bearer ${API_KEY}`
                 }
             })
-            toastLog(JSON.parse(response.body.json().choices[0].message.content).结果)
+            const json = response.body.json()
+            toastLog(json)
+            toastLog(JSON.parse(json.choices[0].message.content).结果)
         } catch (e) {
             toastLog(e.message)
         }
