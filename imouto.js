@@ -1,3 +1,5 @@
+'ui'
+
 const 能力 = {}
 
 function _浮动(w) {
@@ -741,4 +743,6 @@ const 脚本 = {}
     }
 }
 
-脚本.快手收妹妹(true)
+threads.start(() => {
+    脚本.快手收妹妹(true)
+})
