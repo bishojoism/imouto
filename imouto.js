@@ -5,6 +5,8 @@ let API_KEY = 视觉模型.get('API_KEY')
 let BASE_URL = 视觉模型.get('BASE_URL')
 let MODEL = 视觉模型.get('MODEL')
 
+const 记忆 = storages.create('记忆')
+
 const 能力 = {}
 
 function _浮动(w) {
@@ -277,7 +279,7 @@ function _有判断(xml, 手动, 操作) {
     })
 }
 
-能力.点击 = (手动, 元素) => {
+能力.点击 = (手动, 元素, 页面) => {
     _没判断(<vertical id="root" bg="white" padding="24">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。`}</text>
@@ -287,19 +289,29 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
-            type: 'array',
-            description: '[x, y]',
-            items: {
-                type: 'number',
-                minimum: 0,
-                maximum: 1000,
-            },
-            minItems: 2,
-            maxItems: 2,
-        })
-        log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
-        global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
+        const key = `${页面}-${元素}`
+        let point = 记忆.get(key), rx, ry
+        if (point) {
+            rx = point[0]
+            ry = point[1]
+        } else {
+            const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
+                type: 'array',
+                description: '[x, y]',
+                items: {
+                    type: 'number',
+                    minimum: 0,
+                    maximum: 1000,
+                },
+                minItems: 2,
+                maxItems: 2,
+            })
+            rx = Math.floor(x * device.width / 1000)
+            ry = Math.floor(y * device.height / 1000)
+            记忆.put([rx, ry])
+        }
+        log(`${rx} ${ry}`)
+        global.shizuku(`input tap ${rx} ${rx}`)
         global.sleep(1000)
     })
 }
@@ -359,19 +371,29 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
-            type: 'array',
-            description: '[x, y]',
-            items: {
-                type: 'number',
-                minimum: 0,
-                maximum: 1000,
-            },
-            minItems: 2,
-            maxItems: 2,
-        })
-        log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
-        global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
+        const key = `${页面}-${元素}`
+        let point = 记忆.get(key), rx, ry
+        if (point) {
+            rx = point[0]
+            ry = point[1]
+        } else {
+            const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
+                type: 'array',
+                description: '[x, y]',
+                items: {
+                    type: 'number',
+                    minimum: 0,
+                    maximum: 1000,
+                },
+                minItems: 2,
+                maxItems: 2,
+            })
+            rx = Math.floor(x * device.width / 1000)
+            ry = Math.floor(y * device.height / 1000)
+            记忆.put([rx, ry])
+        }
+        log(`${rx} ${ry}`)
+        global.shizuku(`input tap ${rx} ${rx}`)
         global.sleep(1000)
 
         const path = files.path('截图.png')
@@ -398,19 +420,29 @@ function _有判断(xml, 手动, 操作) {
     </vertical>, 手动, () => {
         global.setClip(文本)
 
-        const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
-            type: 'array',
-            description: '[x, y]',
-            items: {
-                type: 'number',
-                minimum: 0,
-                maximum: 1000,
-            },
-            minItems: 2,
-            maxItems: 2,
-        })
-        log(`${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
-        global.shizuku(`input tap ${Math.floor(x * device.width / 1000)} ${Math.floor(y * device.height / 1000)}`)
+        const key = `${页面}-${元素}`
+        let point = 记忆.get(key), rx, ry
+        if (point) {
+            rx = point[0]
+            ry = point[1]
+        } else {
+            const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
+                type: 'array',
+                description: '[x, y]',
+                items: {
+                    type: 'number',
+                    minimum: 0,
+                    maximum: 1000,
+                },
+                minItems: 2,
+                maxItems: 2,
+            })
+            rx = Math.floor(x * device.width / 1000)
+            ry = Math.floor(y * device.height / 1000)
+            记忆.put([rx, ry])
+        }
+        log(`${rx} ${ry}`)
+        global.shizuku(`input tap ${rx} ${rx}`)
         global.sleep(1000)
 
         global.shizuku(`input keyevent KEYCODE_PASTE`)
@@ -427,19 +459,20 @@ const 脚本 = {}
 
 脚本.快手收妹妹 = (手动) => {
     能力.进入主页(手动, '快手', 'com.smile.gifmaker')
-    能力.点击之后输入(手动, '右上角搜索图标', '收妹妹处兄妹')
+    能力.点击之后输入(手动, '右上角搜索图标', '收妹妹处兄妹', '快手主页')
     翻作品: for (; ;) {
-        能力.点击(手动, '右上角搜索按钮')
-        能力.点击(手动, '第一条作品')
-        能力.点击(手动, '右侧评论区图标')
-        能力.点击(手动, '评论条数标签')
-        能力.点击(手动, '按最新排序按钮')
+        能力.点击(手动, '右上角搜索按钮', '快手搜索页')
+        能力.点击(手动, '第一条作品区域内左上角', '快手搜索结果页')
+        能力.点击(手动, '右侧评论区图标', '快手作品页')
+        能力.点击(手动, '评论条数标签', '快手评论区')
+        能力.点击(手动, '按最新排序按钮', '快手评论排序')
         翻评论区: for (; ;) {
             if (能力.检查若是则先点击(手动, '有评论要哥哥的', '用户头像')) {
-                if (能力.检查若是则先点击(手动, '未关注', '关注按钮')) {
-                    能力.点击(手动, '发私信按钮')
-                    能力.点击之后输入(手动, '底部消息输入框', '我想收一些妹妹，你能当我妹妹吗')
-                    if (能力.点击之后看见(手动, '右下角发送图标', '上限')) {
+                if (能力.检查(手动, '未关注')) {
+                    能力.点击(手动, '关注按钮', '快手用户主页')
+                    能力.点击(手动, '发私信按钮', '快手用户主页')
+                    能力.点击之后输入(手动, '底部消息输入框', '我想收一些妹妹，你能当我妹妹吗', '快手私信页')
+                    if (能力.点击之后看见(手动, '右下角发送图标', '上限', '快手私信页')) {
                         能力.完成(手动)
                     }
                     能力.回到上一页(手动, '用户主页')
