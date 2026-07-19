@@ -365,7 +365,7 @@ function _有判断(xml, 手动, 操作) {
 能力.点击之后输入 = (手动, 元素, 文本) => {
     _没判断(<vertical>
         <text id="拖动">✥</text>
-        <text>{`请您：点击「${元素}」。`}</text>
+        <text>{`请您：点击「${元素}」。然后输入「${文本}」。`}</text>
         <button id="自动操作" text="自动操作" />
         <button id="下一步" text="下一步" />
         <button id="跳出" text="跳出" />
