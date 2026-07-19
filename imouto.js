@@ -224,7 +224,7 @@ function _有判断(xml, 手动, 操作) {
         </horizontal>
     </vertical>, 手动, () => {
         global.shizuku(`sh am force-stop ${JSON.stringify(包名)}`)
-        global.shizuku(`sh monkey -p ${包名} -c android.intent.category.LAUNCHER 1`)
+        global.shizuku(`sh monkey -p ${JSON.stringify(包名)} -c android.intent.category.LAUNCHER 1`)
         global.sleep(800)
     })
 }
