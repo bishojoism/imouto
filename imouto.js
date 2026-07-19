@@ -85,8 +85,8 @@ const 能力 = {}
 
 能力.进入主页 = (手动, 应用名, 包名) => {
     const 操作 = () => {
-        shizuku.cmd(['shell', 'am', 'force-stop', 包名])
-        shizuku.cmd(['shell', 'monkey', '-p', 包名, '-c', 'android.intent.category.LAUNCHER', '1'])
+        global.shizuku(['shell', 'am', 'force-stop', 包名])
+        global.shizuku(['shell', 'monkey', '-p', 包名, '-c', 'android.intent.category.LAUNCHER', '1'])
         global.sleep(800)
     }
 
@@ -101,11 +101,11 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            w.尝试自动操作.disabled = true
+            w.尝试自动操作.enabled = false
             threads.start(() => {
                 操作()
                 ui.run(() => {
-                    w.尝试自动操作.disabled = false
+                    w.尝试自动操作.enabled = true
                 })
             })
         })
@@ -146,7 +146,7 @@ const 能力 = {}
 
 能力.回到上一页 = (手动, 页名) => {
     const 操作 = () => {
-        shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
+        global.shizuku(['shell', 'input', 'keyevent', 'KEYCODE_BACK'])
         global.sleep(800)
     }
 
@@ -161,11 +161,11 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            w.尝试自动操作.disabled = true
+            w.尝试自动操作.enabled = false
             threads.start(() => {
                 操作()
                 ui.run(() => {
-                    w.尝试自动操作.disabled = false
+                    w.尝试自动操作.enabled = true
                 })
             })
         })
@@ -206,7 +206,7 @@ const 能力 = {}
 
 能力.向下滚动 = (手动) => {
     const 操作 = () => {
-        shizuku.cmd(['shell', 'input', 'swipe', device.width * 0.5, device.height * 0.6, device.width * 0.5, device.height * 0.4, 1000])
+        global.shizuku(['shell', 'input', 'swipe', device.width * 0.5, device.height * 0.6, device.width * 0.5, device.height * 0.4, 1000])
         global.sleep(800)
     }
 
@@ -221,11 +221,11 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            w.尝试自动操作.disabled = true
+            w.尝试自动操作.enabled = false
             threads.start(() => {
                 操作()
                 ui.run(() => {
-                    w.尝试自动操作.disabled = false
+                    w.尝试自动操作.enabled = true
                 })
             })
         })
@@ -267,7 +267,7 @@ const 能力 = {}
 能力.检查 = (手动, 内容) => {
     const 操作 = () => {
         const path = files.path('截图.png')
-        shizuku.cmd(['shell', 'screencap', '-p', path])
+        global.shizuku(['shell', 'screencap', '-p', path])
         let err
         for (let i = 0; i < 5; i++) {
             try {
@@ -323,39 +323,39 @@ const 能力 = {}
                     <button id="否" text="否" />
                 </horizontal>
                 <button id="尝试自动操作" text="尝试自动操作" />
-                <button id="下一步" text="下一步" disabled />
+                <button id="下一步" text="下一步" />
             </vertical>
         )
 
         w.尝试自动操作.click(() => {
-            w.尝试自动操作.disabled = true
+            w.尝试自动操作.enabled = false
             threads.start(() => {
                 结果 = 操作()
                 if (结果) {
-                    w.是.disabled = true
-                    w.否.disabled = false
+                    w.是.enabled = false
+                    w.否.enabled = true
                 } else {
-                    w.否.disabled = true
-                    w.是.disabled = false
+                    w.否.enabled = false
+                    w.是.enabled = true
                 }
                 ui.run(() => {
-                    w.尝试自动操作.disabled = false
-                    w.下一步.disabled = false
+                    w.尝试自动操作.enabled = true
+                    w.下一步.enabled = true
                 })
             })
         })
 
         w.是.click(() => {
             结果 = true
-            w.是.disabled = true
-            w.否.disabled = false
-            w.下一步.disabled = false
+            w.是.enabled = false
+            w.否.enabled = true
+            w.下一步.enabled = true
         })
         w.否.click(() => {
             结果 = false
-            w.否.disabled = true
-            w.是.disabled = false
-            w.下一步.disabled = false
+            w.否.enabled = false
+            w.是.enabled = true
+            w.下一步.enabled = true
         })
 
         let x = 0, y = 0, wx, wy
@@ -378,6 +378,9 @@ const 能力 = {}
 
         let flag = true
 
+        ui.run(() => {
+            w.下一步.enabled = false
+        })
         w.下一步.click(() => {
             flag = false
         })
@@ -397,7 +400,7 @@ const 能力 = {}
 能力.点击 = (手动, 元素) => {
     const 操作 = () => {
         const path = files.path('截图.png')
-        shizuku.cmd(['shell', 'screencap', '-p', path])
+        global.shizuku(['shell', 'screencap', '-p', path])
         let err
         for (let i = 0; i < 5; i++) {
             try {
@@ -442,7 +445,7 @@ const 能力 = {}
                     }
                 })
                 const [x, y] = JSON.parse(response.body.json().choices[0].message.content)
-                shizuku.cmd(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+                global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
                 global.sleep(800)
                 return
             } catch (e) {
@@ -463,11 +466,11 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            w.尝试自动操作.disabled = true
+            w.尝试自动操作.enabled = false
             threads.start(() => {
                 操作()
                 ui.run(() => {
-                    w.尝试自动操作.disabled = false
+                    w.尝试自动操作.enabled = true
                 })
             })
         })
@@ -509,7 +512,7 @@ const 能力 = {}
 能力.检查若是则先点击 = (手动, 内容, 元素) => {
     const 操作 = () => {
         const path = files.path('截图.png')
-        shizuku.cmd(['shell', 'screencap', '-p', path])
+        global.shizuku(['shell', 'screencap', '-p', path])
         let err
         for (let i = 0; i < 5; i++) {
             try {
@@ -568,7 +571,7 @@ const 能力 = {}
                 const point = JSON.parse(response.body.json().choices[0].message.content)
                 if (!point) return false
                 const [x, y] = point
-                shizuku.cmd(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+                global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
                 global.sleep(800)
                 return true
             } catch (e) {
@@ -589,39 +592,39 @@ const 能力 = {}
                     <button id="否" text="否" />
                 </horizontal>
                 <button id="尝试自动操作" text="尝试自动操作" />
-                <button id="下一步" text="下一步" disabled />
+                <button id="下一步" text="下一步" />
             </vertical>
         )
 
         w.尝试自动操作.click(() => {
-            w.尝试自动操作.disabled = true
+            w.尝试自动操作.enabled = false
             threads.start(() => {
                 结果 = 操作()
                 if (结果) {
-                    w.是.disabled = true
-                    w.否.disabled = false
+                    w.是.enabled = false
+                    w.否.enabled = true
                 } else {
-                    w.否.disabled = true
-                    w.是.disabled = false
+                    w.否.enabled = false
+                    w.是.enabled = true
                 }
                 ui.run(() => {
-                    w.尝试自动操作.disabled = false
-                    w.下一步.disabled = false
+                    w.尝试自动操作.enabled = true
+                    w.下一步.enabled = true
                 })
             })
         })
 
         w.是.click(() => {
             结果 = true
-            w.是.disabled = true
-            w.否.disabled = false
-            w.下一步.disabled = false
+            w.是.enabled = false
+            w.否.enabled = true
+            w.下一步.enabled = true
         })
         w.否.click(() => {
             结果 = false
-            w.否.disabled = true
-            w.是.disabled = false
-            w.下一步.disabled = false
+            w.否.enabled = false
+            w.是.enabled = true
+            w.下一步.enabled = true
         })
 
         let x = 0, y = 0, wx, wy
@@ -644,6 +647,9 @@ const 能力 = {}
 
         let flag = true
 
+        ui.run(() => {
+            w.下一步.enabled = false
+        })
         w.下一步.click(() => {
             flag = false
         })
@@ -663,7 +669,7 @@ const 能力 = {}
 能力.点击之后看见 = (手动, 元素, 文本) => {
     const 操作 = () => {
         const path = files.path('截图.png')
-        shizuku.cmd(['shell', 'screencap', '-p', path])
+        global.shizuku(['shell', 'screencap', '-p', path])
         let err
         for (let i = 0; i < 5; i++) {
             try {
@@ -708,7 +714,7 @@ const 能力 = {}
                     }
                 })
                 const [x, y] = JSON.parse(response.body.json().choices[0].message.content)
-                shizuku.cmd(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+                global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
                 global.sleep(800)
                 const texts = ocr.recognizeText(path)
                 for (let i = 0; i < texts.length; i++) {
@@ -733,39 +739,39 @@ const 能力 = {}
                     <button id="否" text="否" />
                 </horizontal>
                 <button id="尝试自动操作" text="尝试自动操作" />
-                <button id="下一步" text="下一步" disabled />
+                <button id="下一步" text="下一步" />
             </vertical>
         )
 
         w.尝试自动操作.click(() => {
-            w.尝试自动操作.disabled = true
+            w.尝试自动操作.enabled = false
             threads.start(() => {
                 结果 = 操作()
                 if (结果) {
-                    w.是.disabled = true
-                    w.否.disabled = false
+                    w.是.enabled = false
+                    w.否.enabled = true
                 } else {
-                    w.否.disabled = true
-                    w.是.disabled = false
+                    w.否.enabled = false
+                    w.是.enabled = true
                 }
                 ui.run(() => {
-                    w.尝试自动操作.disabled = false
-                    w.下一步.disabled = false
+                    w.尝试自动操作.enabled = true
+                    w.下一步.enabled = true
                 })
             })
         })
 
         w.是.click(() => {
             结果 = true
-            w.是.disabled = true
-            w.否.disabled = false
-            w.下一步.disabled = false
+            w.是.enabled = false
+            w.否.enabled = true
+            w.下一步.enabled = true
         })
         w.否.click(() => {
             结果 = false
-            w.否.disabled = true
-            w.是.disabled = false
-            w.下一步.disabled = false
+            w.否.enabled = false
+            w.是.enabled = true
+            w.下一步.enabled = true
         })
 
         let x = 0, y = 0, wx, wy
@@ -788,6 +794,9 @@ const 能力 = {}
 
         let flag = true
 
+        ui.run(() => {
+            w.下一步.enabled = false
+        })
         w.下一步.click(() => {
             flag = false
         })
@@ -807,7 +816,7 @@ const 能力 = {}
 能力.点击之后输入 = (手动, 元素, 文本) => {
     const 操作 = () => {
         const path = files.path('截图.png')
-        shizuku.cmd(['shell', 'screencap', '-p', path])
+        global.shizuku(['shell', 'screencap', '-p', path])
         let err
         for (let i = 0; i < 5; i++) {
             try {
@@ -852,10 +861,10 @@ const 能力 = {}
                     }
                 })
                 const [x, y] = JSON.parse(response.body.json().choices[0].message.content)
-                shizuku.cmd(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
+                global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
                 global.sleep(800)
                 global.setClip(文本)
-                shizuku.cmd(['shell', 'input', 'keyevent', 'KEYCODE_PASTE'])
+                global.shizuku(['shell', 'input', 'keyevent', 'KEYCODE_PASTE'])
                 global.sleep(800)
                 return
             } catch (e) {
@@ -876,11 +885,11 @@ const 能力 = {}
         )
 
         w.尝试自动操作.click(() => {
-            w.尝试自动操作.disabled = true
+            w.尝试自动操作.enabled = false
             threads.start(() => {
                 操作()
                 ui.run(() => {
-                    w.尝试自动操作.disabled = false
+                    w.尝试自动操作.enabled = true
                 })
             })
         })
