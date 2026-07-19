@@ -50,7 +50,6 @@ function _视觉(text, schema) {
     try {
         const resized = images.resize(raw, [1000, 1000])
         try {
-
             let err
             for (let i = 0; i < 5; i++) {
                 try {
@@ -475,12 +474,19 @@ function _视觉(text, schema) {
         global.shizuku(['shell', 'input', 'tap', Math.floor(x * device.width / 1000), Math.floor(y * device.height / 1000)])
         global.sleep(800)
 
+        const path = files.path('截图.png')
         global.shizuku(['shell', 'screencap', '-p', path])
-        const texts = ocr.recognizeText(path)
-        for (let i = 0; i < texts.length; i++) {
-            if (texts[i].indexOf(文本) !== -1) {
-                return true
+        const raw = images.read(path)
+        try {
+            const texts = ocr.recognizeText(path)
+            for (let i = 0; i < texts.length; i++) {
+                if (texts[i].indexOf(文本) !== -1) {
+                    return true
+                }
             }
+            return false
+        } finally {
+            raw.recycle()
         }
     }
 
