@@ -1,5 +1,10 @@
 'ui'
 
+const 视觉模型 = storages.create('视觉模型')
+let API_KEY = 视觉模型.get('API_KEY')
+let BASE_URL = 视觉模型.get('BASE_URL')
+let MODEL = 视觉模型.get('MODEL')
+
 const 能力 = {}
 
 function _浮动(w) {
@@ -490,10 +495,10 @@ ui.layout(
                 </vertical>
                 <vertical>
                     <text textSize="30sp">视觉模型</text>
-                    <input id="API_KEY" hint="API_KEY" />
+                    <input id="API_KEY" hint="API_KEY" text={API_KEY} />
                     <input id="BASE_URL" hint="BASE_URL" />
                     <input id="MODEL" hint="MODEL" />
-                    <button id="视觉模型" text="检查" />
+                    <button id="视觉模型" text="保存并检查" />
                 </vertical>
             </vertical>
         </vertical>
@@ -548,6 +553,56 @@ ui.Shizuku.click(() => {
     threads.start(() => {
         try {
             toastLog(global.shizuku('sh -c "echo 成功"').result.split('\n')[0])
+        } catch (e) {
+            toastLog(e.message)
+        }
+    })
+})
+
+ui.视觉模型.click(() => {
+    API_KEY = ui.API_KEY.getText()
+    BASE_URL = ui.BASE_URL.getText()
+    MODEL = ui.MODEL.getText()
+    视觉模型.put('API_KEY', API_KEY)
+    视觉模型.put('BASE_URL', BASE_URL)
+    视觉模型.put('MODEL', MODEL)
+    threads.start(() => {
+        try {
+            const response = http.postJson(`${BASE_URL}/chat/completions`, {
+                model: MODEL,
+                messages: [
+                    {
+                        role: 'user',
+                        content: [
+                            {
+                                type: 'text',
+                                text: '输出「成功」'
+                            }
+                        ]
+                    }
+                ],
+                response_format: {
+                    type: 'json_schema',
+                    json_schema: {
+                        name: '结果',
+                        strict: true,
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                结果: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['结果']
+                        }
+                    }
+                }
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${API_KEY}`
+                }
+            })
+            return JSON.parse(response.body.json().choices[0].message.content).结果
         } catch (e) {
             toastLog(e.message)
         }
