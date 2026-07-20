@@ -1,11 +1,12 @@
 'ui'
 
 const 视觉模型 = storages.create('视觉模型')
-let API_KEY = 视觉模型.get('API_KEY')
-let BASE_URL = 视觉模型.get('BASE_URL')
-let MODEL = 视觉模型.get('MODEL')
+let API_KEY = 视觉模型.get('API_KEY', "")
+let BASE_URL = 视觉模型.get('BASE_URL', "")
+let MODEL = 视觉模型.get('MODEL', "")
 
-const 记忆 = storages.create('记忆')
+const 缓存 = storages.create('缓存')
+storages.create('记忆').clear()
 
 const 能力 = {}
 
@@ -189,7 +190,7 @@ function _有判断(xml, 手动, 操作) {
 能力.完成 = (手动) => {
     if (手动) {
         _浮动(floaty.window(
-            <vertical id="root" bg="white" padding="24">
+            <vertical id="root" bg="white" padding="25">
                 <text id="拖动" textSize="40">✥</text>
                 <horizontal>
                     <button id="下一步" text="完成" />
@@ -202,11 +203,11 @@ function _有判断(xml, 手动, 操作) {
     throw new Error('完成')
 }
 
-能力.安装注册登录 = (应用名) => {
+能力.安装注册登录 = (平台) => {
     _浮动(floaty.window(
-        <vertical id="root" bg="white" padding="24">
+        <vertical id="root" bg="white" padding="25">
             <text id="拖动" textSize="40">✥</text>
-            <text>{`请您：安装、注册、登录「${应用名}」。`}</text>
+            <text>{`请您：安装、注册、登录「${平台}」。`}</text>
             <horizontal>
                 <button id="下一步" text="下一步" />
                 <button id="跳出" text="跳出" />
@@ -215,10 +216,10 @@ function _有判断(xml, 手动, 操作) {
     ))
 }
 
-能力.进入主页 = (手动, 应用名, 包名) => {
-    _没判断(<vertical id="root" bg="white" padding="24">
+能力.进入主页 = (手动, 平台, 包名) => {
+    _没判断(<vertical id="root" bg="white" padding="25">
         <text id="拖动" textSize="40">✥</text>
-        <text>{`请您：进入「${应用名}」主页。`}</text>
+        <text>{`请您：进入「${平台}」主页。`}</text>
         <button id="自动操作" text="自动操作" />
         <horizontal>
             <button id="下一步" text="下一步" />
@@ -232,7 +233,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.回到上一页 = (手动, 页名) => {
-    _没判断(<vertical id="root" bg="white" padding="24">
+    _没判断(<vertical id="root" bg="white" padding="25">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：返回「${页名}」。`}</text>
         <button id="自动操作" text="自动操作" />
@@ -247,7 +248,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.向下滚动 = (手动) => {
-    _没判断(<vertical id="root" bg="white" padding="24">
+    _没判断(<vertical id="root" bg="white" padding="25">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：向下滚动。`}</text>
         <button id="自动操作" text="自动操作" />
@@ -262,7 +263,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.检查 = (手动, 内容) => {
-    return _有判断(<vertical id="root" bg="white" padding="24">
+    return _有判断(<vertical id="root" bg="white" padding="25">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请问：是否「${内容}」？`}</text>
         <horizontal>
@@ -279,8 +280,8 @@ function _有判断(xml, 手动, 操作) {
     })
 }
 
-能力.点击 = (手动, 元素, 页面) => {
-    _没判断(<vertical id="root" bg="white" padding="24">
+能力.点击 = (手动, 元素, 页面, 平台) => {
+    _没判断(<vertical id="root" bg="white" padding="25">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。`}</text>
         <button id="自动操作" text="自动操作" />
@@ -289,8 +290,9 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        const key = `${页面}-${元素}`
-        let point = 记忆.get(key), rx, ry
+        const key = JSON.stringify([页面, 元素])
+        const 平台缓存 = 缓存.get(平台, {})
+        let point = 平台缓存[key], rx, ry
         if (point) {
             rx = point[0]
             ry = point[1]
@@ -308,7 +310,8 @@ function _有判断(xml, 手动, 操作) {
             })
             rx = Math.floor(x * device.width / 1000)
             ry = Math.floor(y * device.height / 1000)
-            记忆.put(key, [rx, ry])
+            平台缓存[key] = [rx, ry]
+            缓存.put(平台, 平台缓存)
         }
         log(`${rx} ${ry}`)
         global.shizuku(`input tap ${rx} ${ry}`)
@@ -317,7 +320,7 @@ function _有判断(xml, 手动, 操作) {
 }
 
 能力.检查若是则先点击 = (手动, 内容, 元素) => {
-    return _有判断(<vertical id="root" bg="white" padding="24">
+    return _有判断(<vertical id="root" bg="white" padding="25">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请问：是否「${内容}」？若是，则请您先：点击「${元素}」`}</text>
         <horizontal>
@@ -357,8 +360,8 @@ function _有判断(xml, 手动, 操作) {
     })
 }
 
-能力.点击之后看见 = (手动, 元素, 文本, 页面) => {
-    return _有判断(<vertical id="root" bg="white" padding="24">
+能力.点击之后看见 = (手动, 元素, 文本, 页面, 平台) => {
+    return _有判断(<vertical id="root" bg="white" padding="25">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。然后立刻判断：是否看见「${文本}」这几个字？`}</text>
         <horizontal>
@@ -371,8 +374,9 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        const key = `${页面}-${元素}`
-        let point = 记忆.get(key), rx, ry
+        const key = JSON.stringify([页面, 元素])
+        const 平台缓存 = 缓存.get(平台, {})
+        let point = 平台缓存[key], rx, ry
         if (point) {
             rx = point[0]
             ry = point[1]
@@ -390,7 +394,8 @@ function _有判断(xml, 手动, 操作) {
             })
             rx = Math.floor(x * device.width / 1000)
             ry = Math.floor(y * device.height / 1000)
-            记忆.put(key, [rx, ry])
+            平台缓存[key] = [rx, ry]
+            缓存.put(平台, 平台缓存)
         }
         log(`${rx} ${ry}`)
         global.shizuku(`input tap ${rx} ${ry}`)
@@ -408,8 +413,8 @@ function _有判断(xml, 手动, 操作) {
     })
 }
 
-能力.点击之后输入 = (手动, 元素, 文本, 页面) => {
-    _没判断(<vertical id="root" bg="white" padding="24">
+能力.点击之后输入 = (手动, 元素, 文本, 页面, 平台) => {
+    _没判断(<vertical id="root" bg="white" padding="25">
         <text id="拖动" textSize="40">✥</text>
         <text>{`请您：点击「${元素}」。然后输入「${文本}」。`}</text>
         <button id="自动操作" text="自动操作" />
@@ -420,8 +425,9 @@ function _有判断(xml, 手动, 操作) {
     </vertical>, 手动, () => {
         global.setClip(文本)
 
-        const key = `${页面}-${元素}`
-        let point = 记忆.get(key), rx, ry
+        const key = JSON.stringify([页面, 元素])
+        const 平台缓存 = 缓存.get(平台, {})
+        let point = 平台缓存[key], rx, ry
         if (point) {
             rx = point[0]
             ry = point[1]
@@ -439,7 +445,8 @@ function _有判断(xml, 手动, 操作) {
             })
             rx = Math.floor(x * device.width / 1000)
             ry = Math.floor(y * device.height / 1000)
-            记忆.put(key, [rx, ry])
+            平台缓存[key] = [rx, ry]
+            缓存.put(平台, 平台缓存)
         }
         log(`${rx} ${ry}`)
         global.shizuku(`input tap ${rx} ${ry}`)
@@ -459,20 +466,20 @@ const 脚本 = {}
 
 脚本.快手收妹妹 = (手动) => {
     能力.进入主页(手动, '快手', 'com.smile.gifmaker')
-    能力.点击之后输入(手动, '右上角搜索图标', '收妹妹处兄妹', '快手主页')
+    能力.点击之后输入(手动, '右上角搜索图标', '收妹妹处兄妹', '主页', '快手')
     翻作品: for (; ;) {
-        能力.点击(手动, '右上角搜索按钮', '快手搜索页')
-        能力.点击(手动, '第一条作品区域内左上角', '快手搜索结果页')
-        能力.点击(手动, '右侧评论区图标', '快手作品页')
-        能力.点击(手动, '评论条数标签', '快手评论区')
-        能力.点击(手动, '按最新排序按钮', '快手评论排序')
+        能力.点击(手动, '右上角搜索按钮', '搜索页', '快手')
+        能力.点击(手动, '第一条作品区域内左上角', '搜索结果页', '快手')
+        能力.点击(手动, '右侧评论区图标', '作品页', '快手')
+        能力.点击(手动, '评论条数标签', '评论区', '快手')
+        能力.点击(手动, '按最新排序按钮', '评论排序', '快手')
         翻评论区: for (; ;) {
             if (能力.检查若是则先点击(手动, '有评论要哥哥的', '用户头像')) {
                 if (能力.检查(手动, '未关注')) {
-                    能力.点击(手动, '关注按钮', '快手用户主页')
-                    能力.点击(手动, '发私信按钮', '快手用户主页')
-                    能力.点击之后输入(手动, '底部消息输入框', '我想收一些妹妹，你能当我妹妹吗', '快手私信页')
-                    if (能力.点击之后看见(手动, '右下角发送图标', '上限', '快手私信页')) {
+                    能力.点击(手动, '关注按钮', '用户主页', '快手')
+                    能力.点击(手动, '发私信按钮', '用户主页', '快手')
+                    能力.点击之后输入(手动, '底部消息输入框', '我想收一些妹妹，你能当我妹妹吗', '私信页', '快手')
+                    if (能力.点击之后看见(手动, '右下角发送图标', '上限', '私信页', '快手')) {
                         能力.完成(手动)
                     }
                     能力.回到上一页(手动, '用户主页')
@@ -542,10 +549,12 @@ ui.layout(
             <horizontal>
                 <text textSize="35">## 平台</text>
                 <button id="收起展开平台" text="展开" />
-                <button id="失忆" text="失忆" />
             </horizontal>
             <vertical id="平台" visibility="gone">
-                <text textSize="30">### 快手</text>
+                <horizontal>
+                    <text textSize="30">### 快手</text>
+                    <button id="管理快手缓存" text="管理缓存" />
+                </horizontal>
                 <horizontal>
                     <text textSize="25">准备：</text>
                     <button id="准备快手" text="手动" />
@@ -578,10 +587,6 @@ ui.收起展开平台.click(() => {
         ui.平台.attr('visibility', 'gone')
         ui.收起展开平台.setText('展开')
     }
-})
-
-ui.失忆.click(() => {
-    记忆.clear()
 })
 
 ui.Shizuku.click(() => {
@@ -646,6 +651,41 @@ ui.视觉模型.click(() => {
         }
         ui.run(() => ui.视觉模型.enabled = true)
     })
+})
+
+function 管理缓存(平台) {
+    const 平台缓存 = 缓存.get(平台, {})
+    const memo = () => Object.entries(平台缓存).map(([键, [x, y]]) => ({ 键, x, y }))
+    const w = floaty.window(
+        <vertical bg="white" padding="25">
+            <button text="关闭" id="关闭" />
+            <list id="list">
+                <vertical>
+                    <text textSize="15" id="键" text="{{键}}" />
+                    <horizontal>
+                        <text id="x" text="x：{{x}}" marginRight="15"/>
+                        <text id="y" text="y：{{y}}" />
+                    </horizontal>
+                    <button id="删除" text="删除" />
+                </vertical>
+            </list>
+        </vertical>
+    )
+    w.list.setDataSource(memo())
+    w.list.on('item_bind', (view, holder) => {
+        view.删除.on('click', () => {
+            delete 平台缓存[holder.item.键]
+            缓存.put(平台, 平台缓存)
+            w.list.setDataSource(memo())
+        })
+    })
+    w.关闭.click(() => {
+        w.close()
+    })
+}
+
+ui.管理快手缓存.click(() => {
+    管理缓存('快手')
 })
 
 ui.准备快手.click(() => {
