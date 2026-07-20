@@ -296,6 +296,7 @@ function _有判断(xml, 手动, 操作) {
         if (point) {
             rx = point[0]
             ry = point[1]
+            global.sleep(1000)
         } else {
             const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
                 type: 'array',
@@ -380,6 +381,7 @@ function _有判断(xml, 手动, 操作) {
         if (point) {
             rx = point[0]
             ry = point[1]
+            global.sleep(1000)
         } else {
             const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
                 type: 'array',
@@ -431,6 +433,7 @@ function _有判断(xml, 手动, 操作) {
         if (point) {
             rx = point[0]
             ry = point[1]
+            global.sleep(1000)
         } else {
             const [x, y] = _视觉(`请问：「${元素}」坐标？`, {
                 type: 'array',
