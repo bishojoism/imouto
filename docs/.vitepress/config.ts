@@ -6,7 +6,7 @@ export default defineConfig({
     themeConfig: {
         sidebar: [
             {
-                text: '小红书处兄妹标准作业程序',
+                text: '网上处兄妹标准作业程序',
                 link: '/',
             },
             {
