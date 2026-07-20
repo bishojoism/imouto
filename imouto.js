@@ -290,9 +290,12 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        const key = JSON.stringify([页面, 元素])
-        const 平台缓存 = 缓存.get(平台, {})
-        let point = 平台缓存[key], rx, ry
+        let key, 平台缓存, point, rx, ry
+        if (页面 && 平台) {
+            key = JSON.stringify([页面, 元素])
+            平台缓存 = 缓存.get(平台, {})
+            point = 平台缓存[key]
+        }
         if (point) {
             rx = point[0]
             ry = point[1]
@@ -311,8 +314,10 @@ function _有判断(xml, 手动, 操作) {
             })
             rx = Math.floor(x * device.width / 1000)
             ry = Math.floor(y * device.height / 1000)
-            平台缓存[key] = [rx, ry]
-            缓存.put(平台, 平台缓存)
+            if (key) {
+                平台缓存[key] = [rx, ry]
+                缓存.put(平台, 平台缓存)
+            }
         }
         log(`${rx} ${ry}`)
         global.shizuku(`input tap ${rx} ${ry}`)
@@ -375,9 +380,12 @@ function _有判断(xml, 手动, 操作) {
             <button id="跳出" text="跳出" />
         </horizontal>
     </vertical>, 手动, () => {
-        const key = JSON.stringify([页面, 元素])
-        const 平台缓存 = 缓存.get(平台, {})
-        let point = 平台缓存[key], rx, ry
+        let key, 平台缓存, point, rx, ry
+        if (页面 && 平台) {
+            key = JSON.stringify([页面, 元素])
+            平台缓存 = 缓存.get(平台, {})
+            point = 平台缓存[key]
+        }
         if (point) {
             rx = point[0]
             ry = point[1]
@@ -396,8 +404,10 @@ function _有判断(xml, 手动, 操作) {
             })
             rx = Math.floor(x * device.width / 1000)
             ry = Math.floor(y * device.height / 1000)
-            平台缓存[key] = [rx, ry]
-            缓存.put(平台, 平台缓存)
+            if (key) {
+                平台缓存[key] = [rx, ry]
+                缓存.put(平台, 平台缓存)
+            }
         }
         log(`${rx} ${ry}`)
         global.shizuku(`input tap ${rx} ${ry}`)
@@ -426,10 +436,12 @@ function _有判断(xml, 手动, 操作) {
         </horizontal>
     </vertical>, 手动, () => {
         global.setClip(文本)
-
-        const key = JSON.stringify([页面, 元素])
-        const 平台缓存 = 缓存.get(平台, {})
-        let point = 平台缓存[key], rx, ry
+        let key, 平台缓存, point, rx, ry
+        if (页面 && 平台) {
+            key = JSON.stringify([页面, 元素])
+            平台缓存 = 缓存.get(平台, {})
+            point = 平台缓存[key]
+        }
         if (point) {
             rx = point[0]
             ry = point[1]
@@ -448,8 +460,10 @@ function _有判断(xml, 手动, 操作) {
             })
             rx = Math.floor(x * device.width / 1000)
             ry = Math.floor(y * device.height / 1000)
-            平台缓存[key] = [rx, ry]
-            缓存.put(平台, 平台缓存)
+            if (key) {
+                平台缓存[key] = [rx, ry]
+                缓存.put(平台, 平台缓存)
+            }
         }
         log(`${rx} ${ry}`)
         global.shizuku(`input tap ${rx} ${ry}`)
@@ -477,7 +491,7 @@ const 脚本 = {}
     翻作品: for (; ;) {
         能力.点击(手动, '第一条作品', '搜索结果页', '快手')
         能力.点击(手动, '右侧评论区图标', '作品页', '快手')
-        能力.点击(手动, '评论条数标签', '评论区', '快手')
+        能力.点击(手动, '评论条数标签')
         能力.点击(手动, '按最新排序按钮', '评论排序', '快手')
         翻评论区: for (; ;) {
             if (能力.检查若是则先点击(手动, '有一天内评论要哥哥的', '用户头像')) {
