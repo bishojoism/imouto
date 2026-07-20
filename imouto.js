@@ -116,7 +116,7 @@ function _视觉(text, schema) {
     }
 }
 
-function _自动操作(w, 动作) {
+function _自动操作(w, 手动, 动作) {
     w.自动操作.click(() => {
         w.root.attr('visibility', 'gone')
         threads.start(() => {
@@ -130,6 +130,11 @@ function _自动操作(w, 动作) {
             })
         })
     })
+    if (手动 === -1) {
+        ui.run(() => {
+            w.自动操作.enabled = false
+        })
+    }
 
     _浮动(w)
 }
@@ -138,7 +143,7 @@ function _没判断(xml, 手动, 操作) {
     if (手动) {
         const w = floaty.window(xml)
 
-        _自动操作(w, () => {
+        _自动操作(w, 手动, () => {
             操作()
         })
     } else {
@@ -167,7 +172,7 @@ function _有判断(xml, 手动, 操作) {
             w.下一步.enabled = false
         })
 
-        _自动操作(w, () => {
+        _自动操作(w, 手动, () => {
             结果 = 操作()
             ui.run(() => {
                 if (结果) {
@@ -482,7 +487,7 @@ const 脚本 = {}
 }
 
 脚本.快手收妹妹 = (手动) => {
-    能力.进入主页(手动, '快手', 'com.smile.gifmaker')
+    能力.进入主页(-1, '快手', 'com.smile.gifmaker')
     能力.点击之后输入(手动, '右上角搜索图标', '收妹妹处兄妹', '主页', '快手')
     能力.点击(手动, '右上角搜索按钮', '搜索页', '快手')
     能力.点击(手动, '右上角漏斗图标', '搜索结果页', '快手')
