@@ -6,28 +6,23 @@ export default defineConfig({
     themeConfig: {
         sidebar: [
             {
-                text: '平台',
-                items: [
-                    {
-                        text: '快手',
-                        link: '/平台/快手',
-                    },
-                ]
+                text: '小红书处兄妹标准作业程序',
+                link: '/',
             },
             {
-                text: '操作员',
+                text: '脚本',
                 items: [
                     {
-                        text: '界面',
-                        link: '/操作员/界面',
+                        text: '准备小红书',
+                        link: '/脚本/准备小红书',
                     },
                     {
-                        text: '应用',
-                        link: '/操作员/应用',
+                        text: '触达潜在妹妹',
+                        link: '/脚本/触达潜在妹妹',
                     },
                     {
-                        text: '手机',
-                        link: '/操作员/手机',
+                        text: '确定兄妹关系',
+                        link: '/脚本/确定兄妹关系',
                     },
                 ]
             },
