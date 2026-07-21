@@ -34,8 +34,8 @@ export default defineConfig({
                 text: '规范',
                 items: [
                     {
-                        text: '线上对话',
-                        link: '/规范/线上对话',
+                        text: '发消息',
+                        link: '/规范/发消息',
                     },
                 ]
             },
