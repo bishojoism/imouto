@@ -34,19 +34,6 @@ export default defineConfig({
                     },
                 ]
             },
-            {
-                text: '规范',
-                items: [
-                    {
-                        text: '发消息',
-                        link: '/规范/发消息',
-                    },
-                    {
-                        text: '寄手写贺卡',
-                        link: '/规范/寄手写贺卡',
-                    },
-                ]
-            },
         ]
     }
 })
