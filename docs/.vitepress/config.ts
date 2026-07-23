@@ -7,6 +7,10 @@ export default defineConfig({
     themeConfig: {
         sidebar: [
             {
+                text: '为什么处兄妹？',
+                link: '/为什么处兄妹？',
+            },
+            {
                 text: '快速开始',
                 link: '/快速开始',
             },
