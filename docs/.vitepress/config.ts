@@ -2,12 +2,13 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
     lang: 'zh-CN',
-    title: 'by浅仓朔弥',
+    title: '妹谱',
+    description: '网上处兄妹完全指南',
     themeConfig: {
         sidebar: [
             {
-                text: '网上处兄妹标准作业程序',
-                link: '/',
+                text: '快速开始',
+                link: '/快速开始',
             },
             {
                 text: '任务',
