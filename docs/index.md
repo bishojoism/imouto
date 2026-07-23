@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-    name: 《妹谱》
+    name: 妹谱
     text: 网上处兄妹完全指南
     tagLine: 
     actions:
