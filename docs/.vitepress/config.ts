@@ -39,6 +39,9 @@ export default defineConfig({
                     },
                 ]
             },
-        ]
+        ],
+        editLink: {
+            pattern: 'https://github.com/bishojoism/imouto/edit/main/docs/:path'
+        }
     }
 })
